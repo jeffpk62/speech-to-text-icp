@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018
-lastupdated: "2018-09-16"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -59,13 +59,13 @@ curl -X POST -u "apikey:{api_key}"
 
 You can specify both a custom language model and a custom acoustic model with any recognition request. If a custom language model contains OOV words from the domain of the audio that is being recognized, you can use it with a custom acoustic model during speech recognition to improve transcription accuracy. The improvements can occur regardless of whether you trained the custom acoustic model with the custom language model. Using both during training improves the quality of the custom acoustic model. Using both during speech recognition improves the quality of transcription.
 
-The following example passes both types of model to the HTTP `POST /v1/recognize` method. Pass the GUID of the custom acoustic model with the `acoustic_customization_id` parameter and the GUID of the custom language model with the `customization_id` parameter.
+The following example passes both types of model to the HTTP `POST /v1/recognize` method. Pass the GUID of the custom acoustic model with the `acoustic_customization_id` parameter and the GUID of the custom language model with the `language_customization_id` parameter.
 
 ```bash
 curl -X POST -u "apikey:{api_key}"
 --header "Content-Type: audio/flac"
 --data-binary @audio-file1.flac
-"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?acoustic_customization_id={customization_id}&customization_id={customization_id}"
+"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?acoustic_customization_id={customization_id}&language_customization_id={customization_id}"
 ```
 {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-16"
+lastupdated: "2018-10-13"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-09-16"
 # The WebSocket interface
 {: #websockets}
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [known limitations for version 1.0.1](/docs/services/speech-to-text-icp/release-notes.html#v101-limitations) in the release notes for information about working around this limitation.
+**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
 
 The WebSocket interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the `/v1/recognize` method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage the recognition requests.
 {: shortdesc}
@@ -84,7 +84,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
     </td>
   </tr>
   <tr>
-    <td style="text-align:left"><code>customization_id</code>
+    <td style="text-align:left"><code>language_customization_id</code>
       <br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
@@ -278,7 +278,7 @@ After it returns the final result for the transcription to the client, the servi
 
 While the WebSocket connection remains active, the client can continue to use the connection to send further recognition requests with new audio. By default, the service continues to use the parameters that were sent with the previous `start` message for all subsequent requests that are sent over the same connection.
 
-To change the parameters for subsequent requests, the client can send another `start` message with the new parameters after it receives the final recognition results and `{"state":"listening"}` message from the service. The client can change any parameters except for those parameters that are specified when the connection is opened (`model`, `customization_id`, and so on).
+To change the parameters for subsequent requests, the client can send another `start` message with the new parameters after it receives the final recognition results and `{"state":"listening"}` message from the service. The client can change any parameters except for those parameters that are specified when the connection is opened (`model`, `language_customization_id`, and so on).
 
 The following example sends a `start` message with new parameters for subsequent recognition requests that are sent over the connection. The message specifies the same `content-type` as the previous example, but it directs the service to return confidence measures and timestamps for the words of the transcription.
 

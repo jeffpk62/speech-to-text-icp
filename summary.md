@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-21"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -169,56 +169,13 @@ A required audio format (MIME type) that specifies the format of the audio data 
   </tr>
 </table>
 
-## customization_id
-
-An optional customization ID for a custom language model that includes terminology from your domain. By default, no custom model is used. See [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
-
-<table>
-  <caption>Table 4. The customization_id parameter</caption>
-  <tr>
-    <th>Language availability and interface usage</th>
-    <th style="vertical-align:bottom">Description</th>
-  </tr>
-  <tr>
-    <td style="text-align:left; width:30%">
-      **Availability**
-    </td>
-    <td style="text-align:left">
-      Generally available for all languages
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left">
-      **WebSocket**
-    </td>
-    <td style="text-align:left">
-      Query parameter of <code>/v1/recognize</code> connection request
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left">
-      **HTTP**
-    </td>
-    <td style="text-align:left">
-      Query parameter of <code>POST /v1/recognize</code> method
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:left">
-      **HTTP asynchronous**
-    </td>
-    <td style="text-align:left">
-      Query parameter of <code>POST /v1/recognitions</code> method
-    </td>
-  </tr>
-</table>
 
 ## customization_weight
 
 An optional double between 0.0 and 1.0 that indicates the relative weight that the service gives to words from a custom language model versus words from the base vocabulary. The default is 0.3 unless a different weight was specified when the custom language model was trained. See [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
 
 <table>
-  <caption>Table 5. The customization_weight parameter</caption>
+  <caption>Table 4. The customization_weight parameter</caption>
   <tr>
     <th>Language availability and interface usage</th>
     <th style="vertical-align:bottom">Description</th>
@@ -262,7 +219,7 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
 An optional integer that specifies the number of seconds for the service's inactivity timeout; use `-1` to indicate infinity. The default is 30 seconds. See [Inactivity timeout](/docs/services/speech-to-text-icp/input.html#timeouts).
 
 <table>
-  <caption>Table 6. The inactivity_timeout parameter</caption>
+  <caption>Table 5. The inactivity_timeout parameter</caption>
   <tr>
     <th>Language availability and interface usage</th>
     <th style="vertical-align:bottom">Description</th>
@@ -306,7 +263,7 @@ An optional integer that specifies the number of seconds for the service's inact
 An optional boolean that directs the service to return intermediate hypotheses that are likely to change before the final transcript. By default (`false`), interim results are not returned. See [Interim results](/docs/services/speech-to-text-icp/output.html#interim).
 
 <table>
-  <caption>Table 7. The interim_results parameter</caption>
+  <caption>Table 6. The interim_results parameter</caption>
   <tr>
     <th>Language availability and interface usage</th>
     <th style="vertical-align:bottom">Description</th>
@@ -350,7 +307,7 @@ An optional boolean that directs the service to return intermediate hypotheses t
 An optional array of keyword strings that the service spots in the input audio. By default, keyword spotting is not performed. See [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
 <table>
-  <caption>Table 8. The keywords parameter</caption>
+  <caption>Table 7. The keywords parameter</caption>
   <tr>
     <th>Language availability and interface usage</th>
     <th style="vertical-align:bottom">Description</th>
@@ -394,7 +351,7 @@ An optional array of keyword strings that the service spots in the input audio. 
 An optional double between 0.0 and 1.0 that indicates the minimum threshold for a positive keyword match. By default, keyword spotting is not performed. See [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
 <table>
-  <caption>Table 9. The keywords_threshold parameter</caption>
+  <caption>Table 8. The keywords_threshold parameter</caption>
   <tr>
     <th>Language availability and interface usage</th>
     <th style="vertical-align:bottom">Description</th>
@@ -413,6 +370,50 @@ An optional double between 0.0 and 1.0 that indicates the minimum threshold for 
     </td>
     <td style="text-align:left">
       Parameter of JSON <code>start</code> message
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognize</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **HTTP asynchronous**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+</table>
+
+## language_customization_id
+
+An optional customization ID for a custom language model that includes terminology from your domain. By default, no custom model is used. See [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
+
+<table>
+  <caption>Table 9. The language_customization_id parameter</caption>
+  <tr>
+    <th>Language availability and interface usage</th>
+    <th style="vertical-align:bottom">Description</th>
+  </tr>
+  <tr>
+    <td style="text-align:left; width:30%">
+      **Availability**
+    </td>
+    <td style="text-align:left">
+      Generally available for all languages
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **WebSocket**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>/v1/recognize</code> connection request
     </td>
   </tr>
   <tr>
