@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-19"
+lastupdated: "2018-10-16"
 
 ---
 
@@ -93,16 +93,6 @@ You specify the following parameters of multipart speech recognition as request 
   </tr>
   <tr>
     <td>
-      <code>Content-Type</code>
-      <br/><em>Header</em>
-      <br/><em>String</em>
-    </td>
-    <td>
-      <em>Required.</em> Specify `multipart/form-data`.
-    </td>
-  </tr>
-  <tr>
-    <td>
       <code>metadata</code>
       <br/><em>Form data</em>
       <br/><em>Object</em>
@@ -152,7 +142,7 @@ You specify the following parameters of multipart speech recognition as request 
   </tr>
   <tr>
     <td>
-      <code>customization_id</code>
+      <code>language_customization_id</code>
       <br/><em>Query</em>
       <br/><em>String</em>
     </td>

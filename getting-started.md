@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -42,6 +42,14 @@ curl -u "apikey:{api_key}"
 You can also log into your IBM Cloud Private cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see  [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
 
 **Note:** The examples use cURL to call methods of the HTTP interface. Install the version for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+
+**Note:** When you enter a command, replace `{api_key}` with your actual API key. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
+
+```bash
+curl -X POST --user "apikey:icp-L_HALhLVIksh1b73l97LSs6R_3gLo4xkujAaxm7i"
+. . .
+```
+{:pre}
 
 ## Step 1: Transcribe audio with no options
 {: #transcribe}

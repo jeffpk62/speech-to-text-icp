@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-09-16"
+lastupdated: "2018-10-12"
 
 ---
 
@@ -139,7 +139,7 @@ For example, the following HTTP request specifies that the older version of the 
 curl -X POST -u "apikey:{api_key}"
 --header "Content-Type: audio/flac"
 --data-binary @{path}audio-file.flac
-"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?model=en-US_BroadbandModel&base_model_version=en-US_BroadbandModel.v07-06082016.06202016&customization_id={customization_id}"
+"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?model=en-US_BroadbandModel&base_model_version=en-US_BroadbandModel.v07-06082016.06202016&language_customization_id={customization_id}"
 ```
 {: pre}
 

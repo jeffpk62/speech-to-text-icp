@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-10-13"
 
 ---
 
@@ -41,14 +41,14 @@ You can learn the API key for your cluster by using either of the following appr
 
     ```bash
     API_KEY_$(kubectl -n kube-system get secret \
-    ibm-wc-speech-to-text-gdpr-data-deletion-serviceid-secret \
+    speech-to-text-serviceid-secret \
     -o go-template='{{ index .data "api_key" | base64decode }}')
     ```
     {: pre}
 
 -   *From a browser,* access the following URL:
 
-    **https://{icp_cluster_host}:443/console/configuration/secrets/kube-system/ibm-wc-speech-to-text-gdpr-data-deletion-serviceid-secret**
+    **https://{icp_cluster_host}:443/console/configuration/secrets/kube-system/speech-to-text-serviceid-secret**
 
      On the page that is displayed, click the **unlock** icon under **api_key**. The API key is shown in the **Data** column in the field labeled **api_key**.
 
@@ -91,4 +91,4 @@ wss://{icp_cluster_host}/speech-to-text/api/v1/recognize
 
 where `{icp_cluster_host}` is required to specify the name or IP address of the host on which the cluster is deployed. For information about making authenticated requests to the WebSocket interface, see [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html).
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [known limitations for version 1.0.1](/docs/services/speech-to-text-icp/release-notes.html#v101-limitations) in the release notes for information about working around this limitation.
+**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
