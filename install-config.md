@@ -2,7 +2,7 @@
 
 Copyright:
   years: 2018
-lastupdated: "2018-09-20"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -28,7 +28,7 @@ The following sections provide information about installing and configuring {{si
 ## Using the IBM Cloud Private command-line interface
 {: #usingCLI}
 
-{{site.data.keyword.speechtotextshort}}: Customer Care supports use of the IBM Cloud Private command-line interface (CLI). You can log into your cluster from the CLI and perform many administrative operations from the CLI. You can also issue cURL commands against methods of the service's HTTP interface from the CLI.
+{{site.data.keyword.speechtotextshort}}: Customer Care supports use of the IBM Cloud Private command-line interface (CLI). You can log into your cluster from the CLI and perform many administrative operations from the CLI. You can also issue `curl` commands to call methods of the service's HTTP interface from the CLI.
 
 To use the command-line interface, you must install and configure `kubectl`, the Kubernetes command-line tool. For more information, see the following pages:
 
