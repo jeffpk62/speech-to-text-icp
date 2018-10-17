@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-12"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-10-12"
 # Getting started tutorial
 {: #gettingStarted}
 
-{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care transcribes audio to text to enable speech transcription capabilities for applications. This cURL-based tutorial can help you get started quickly with the service. The examples show you how to call the service's `POST /v1/recognize` method to request a transcript.
+{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care transcribes audio to text to enable speech transcription capabilities for applications. This curl-based tutorial can help you get started quickly with the service. The examples show you how to call the service's `POST /v1/recognize` method to request a transcript.
 {: shortdesc}
 
 ## Before you begin
@@ -29,9 +29,9 @@ lastupdated: "2018-10-12"
 
 Before you can you use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first install and configure IBM&reg; Cloud Private. You then deploy {{site.data.keyword.speechtotextshort}}: Customer Care on your IBM Cloud Private installation.
 
-You are now ready to call methods of the service's interface. The following cURL examples use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. To learn your API key, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
+You are now ready to call methods of the service's interface. The following `curl` examples use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. To learn your API key, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 
-You pass the value of the API key with the `-u` (`--user`) option of the cURL command. Replace `{api_key}` with the value of the API key for your cluster. (Do not include the braces when you specify the API key.)
+You pass the value of the API key with the `-u` (`--user`) option of the `curl` command. Replace `{api_key}` with the value of the API key for your cluster. (Do not include the braces when you specify the API key.)
 
 ```bash
 curl -u "apikey:{api_key}"
@@ -41,7 +41,7 @@ curl -u "apikey:{api_key}"
 
 You can also log into your IBM Cloud Private cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see  [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
 
-**Note:** The examples use cURL to call methods of the HTTP interface. Install the version for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+**Note:** The examples use the `curl` command to call methods of the HTTP interface. Install the version for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
 
 **Note:** When you enter a command, replace `{api_key}` with your actual API key. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
 

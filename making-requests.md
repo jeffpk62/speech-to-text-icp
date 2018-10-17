@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-13"
+lastupdated: "2018-10-17"
 
 ---
 
@@ -55,7 +55,7 @@ You can learn the API key for your cluster by using either of the following appr
 ## Making an authenticated HTTP request
 {: #httpRequest}
 
-The examples in the documentation use cURL to call methods of the {{site.data.keyword.speechtotextshort}}: Customer Care HTTP interface from the command line. You pass the same information when you make a request programmatically from an application. The basic format of an HTTP request includes the following components:
+The examples in the documentation use the `curl` command to call methods of the {{site.data.keyword.speechtotextshort}}: Customer Care HTTP interface from the command line. You pass the same information when you make a request programmatically from an application. The basic format of an HTTP request includes the following components:
 
 ```bash
 curl -X {http_method} -u "apikey:{api_key}"
@@ -65,7 +65,7 @@ curl -X {http_method} -u "apikey:{api_key}"
 
 The components provide the following information. The `{}` (braces) indicate variable strings that you must replace with literal values. Do not include the braces in the actual command.
 
--   `{http_method}` (optional) specifies the HTTP request method for the example: `POST`, `PUT`, `GET`, or `DELETE`. The request method is required with cURL if it is anything other than `GET`.
+-   `{http_method}` (optional) specifies the HTTP request method for the example: `POST`, `PUT`, `GET`, or `DELETE`. The request method is required with `curl` if it is anything other than `GET`.
 -   `{api_key}` (required) is the API key for the service instance in your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. See [Obtaining your API key](#apiKey).
 -   `{icp_cluster_host}` (required) is the name or IP address of the host on which the {{site.data.keyword.speechtotextshort}}: Customer Care cluster is deployed.
 -   `{:port}` (optional) is the port number at which the service listens for requests on the specified host. The default port number is `443`, which is used for secure communications by the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) interface on the host. You can omit the port number if your cluster uses the default value. Otherwise, you must specify the port number. If you specify a port number, you must precede it with a `:` (colon).
@@ -75,9 +75,9 @@ Many methods have longer names and include path parameters that you must specify
 
 You can also log into your IBM Cloud Private cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
 
-During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with cURL commands to bypass the tool's verification of SSL certificates.
+During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with `curl` commands to bypass the tool's verification of SSL certificates.
 
-**Note:** Install the version of cURL for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+**Note:** Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
 
 ## Making an authenticated WebSocket request
 {: #websocketRequest}
