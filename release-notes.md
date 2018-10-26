@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-16"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -28,14 +28,43 @@ The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.sp
 
 {{site.data.keyword.speechtotextshort}}: Customer Care has the following known limitation.
 
--   **[1.0.1, 1.0.2]** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. To work around this limitation, you can do the following:
+-   **[1.0.0 - 1.0.4]** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. To work around this limitation, you can do the following:
     -   Call the WebSocket interface from outside of a browser. You can call the interface from any language that supports WebSockets. Refer to information in [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html) for guidance when working with another language.
 
         The Watson SDKs provide the simplest way to call the WebSocket interface from another language. For information about using the WebSocket interface with the Node.js, Java, Python, and Ruby SDKs, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/speech-to-text-icp){: new_window}.
     -   Use the synchronous or asynchronous HTTP interfaces to perform speech recognition.
 
-## Version 1.0.2 (9 October 2018)
-{: #v102}
+## Version 1.0.4 (26 October 2018)
+{: #v104}
+
+-   The `Content-Type` header is now optional for speech recognition requests. The service now automatically detects the audio format (MIME type) of most audio. You must continue to specify the content type for the following formats:
+    -   `audio/basic`
+    -   `audio/l16`
+    -   `audio/mulaw`
+
+    Where indicated, the content type that you specify for these formats must include the sampling rate and can optionally include the number of channels and the endianness of the audio. For all other audio formats, you can omit the content type or specify a content type of `application/octet-stream` to have the service auto-detect the format.
+
+    **Important:** When you use the `curl` command to make a speech recognition request with the HTTP interface, you must specify the audio format with the `Content-Type` header, specify `"Content-Type: application/octet-stream"`, or specify `"Content-Type:"`. If you omit the header entirely, `curl` uses a default value of `application/x-www-form-urlencoded`. Most of the examples in this documentation continue to specify the format for speech recognition requests regardless of whether it's required.
+
+    This change applies to the following methods:
+    -   `/v1/recognize` for WebSocket requests. The `content-type` field of the text message that you send to initiate a request over an open WebSocket connection is now optional.
+    -   `POST /v1/recognize` for synchronous HTTP requests. The `Content-Type` header is now optional. (For multipart requests, the `part_content_type` field of the JSON metadata is also now optional.)
+    -   `POST /v1/recognitions` for asynchronous HTTP requests. The `Content-Type` header is now optional.
+
+    For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+-   The argument to the `-n` option of the `kubectl` command that you enter to learn your API key has changed. Because the {{site.data.keyword.speechtotextshort}}: Customer Care service now runs in its own namespace with its own instance of the Authorization module, you enter `speech-services` as the argument instead of `kube-system`:
+
+    ```bash
+    API_KEY_$(kubectl -n speech-services get secret \
+    speech-to-text-serviceid-secret \
+    -o go-template='{{ index .data "api_key" | base64decode }}')
+    ```
+    {: pre}
+
+    For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
+
+## Version 1.0.1 (9 October 2018)
+{: #v101}
 
 -   The name of the Kubernetes secret for {{site.data.keyword.speechtotextshort}}: Customer Care has changed. To learn the API key for your cluster, you now use the string `speech-to-text-serviceid-secret` instead of `ibm-wc-speech-to-text-gdpr-data-deletion-serviceid-secret`. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 -   The {{site.data.keyword.speechtotextshort}}: Customer Care and IBM Watson Assistant services no longer share a namespace on IBM Cloud Private. Therefore, they no longer share the Authentication module; it is installed independently and automatically for {{site.data.keyword.speechtotextshort}}: Customer Care. This issue was referred to only in the Helm chart **README.md** file for the service.
@@ -44,13 +73,13 @@ The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.sp
     -   `POST /v1/recognize` for synchronous HTTP requests (including multipart requests)
     -   `POST /v1/recognitions` for asynchronous HTTP requests
 
-## Version 1.0.1 (21 September 2018)
-{: #v101}
+## Version 1.0.0 (21 September 2018)
+{: #v100}
 
 The initial release of the product.
 
 ### Differences from IBM Speech to Text
-{: #v101-differences}
+{: #v100-differences}
 
 {{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud, see [About Speech to Text ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/services/speech-to-text/index.html#about){: new_window}.
 

@@ -1,8 +1,8 @@
 ---
 
-copyright:
+Copyright:
   years: 2015, 2018
-lastupdated: "2018-10-16"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-10-16"
 # About
 {: #about}
 
-**Service update:** *The {{site.data.keyword.speechtotextshort}}: Customer Care service was updated on October 9, 2018. The name of the Kubernetes secret that you use to learn the API key for your cluster has changed to `speech-to-text-serviceid-secret`. And for speech recognition requests, the `customization_id` parameter is now deprecated; to specify a custom language model for speech recognition, use the `language_customization_id` parameter instead. For more information, see [Version 1.0.2 (9 October 2018)](/docs/services/speech-to-text-icp/release-notes.html#v102) in the release notes.*
+**Service update:** *The {{site.data.keyword.speechtotextshort}}: Customer Care service was updated on October 26, 2018. You no longer need to specify the audio format for most speech recognition requests; the service now automatically detects the format of most audio. And the argument to the `-n` option of the `kubectl` command that you enter to learn your API key is now `speech-services`. For more information, see [Version 1.0.4 (26 October 2018)](/docs/services/speech-to-text-icp/release-notes.html#v104) in the release notes.*
 
 {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care provides speech recognition capabilities for your IBM&reg; Cloud Private solutions. The service leverages machine learning to combine knowledge of grammar, language structure, and the composition of audio and voice signals to accurately transcribe the human voice. It continuously updates and refines its transcription as it receives more speech.
 {: shortdesc}

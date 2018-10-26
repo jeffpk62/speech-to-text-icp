@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-13"
+lastupdated: "2018-10-23"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-10-13"
 # The WebSocket interface
 {: #websockets}
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
+**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
 
 The WebSocket interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the `/v1/recognize` method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage the recognition requests.
 {: shortdesc}
@@ -78,7 +78,8 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
     <td style="text-align:left">
       Specifies the language model to be used for transcription.
       If you do not specify a model, the service uses the
-      <code>en-US_BroadbandModel</code> model by default. See
+      <code>en-US_BroadbandModel</code> model by default. For more
+      information, see
       <a href="/docs/services/speech-to-text-icp/input.html#models">Languages
         and models</a>.
     </td>
@@ -92,8 +93,8 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       language model that is to be used for all requests that are sent
       over the connection. The base model of the custom language model
       must match the value of the <code>model</code> parameter. By
-      default, no custom language model is used. See
-      <a href="/docs/services/speech-to-text-icp/custom.html">The
+      default, no custom language model is used. For more information,
+      see <a href="/docs/services/speech-to-text-icp/custom.html">The
       customization interface</a>.
     </td>
   </tr>
@@ -106,8 +107,8 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       acoustic model that is to be used for all requests that are sent
       over the connection. The base model of the custom acoustic model
       must match the value of the <code>model</code> parameter. By
-      default, no custom acoustic model is used. See
-      <a href="/docs/services/speech-to-text-icp/custom.html">The
+      default, no custom acoustic model is used. For more information,
+      see <a href="/docs/services/speech-to-text-icp/custom.html">The
       customization interface</a>.
     </td>
   </tr>
@@ -120,7 +121,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       requests that are sent over the connection. The parameter is intended
       primarily for use with custom models that are upgraded for a new base
       model. The default value depends on whether the parameter is used
-      with or without a custom model. See
+      with or without a custom model. For more information, see
       <a href="/docs/services/speech-to-text-icp/input.html#version">Base model
       version</a>.
     </td>
@@ -136,7 +137,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       or generic string that is to be associated with the data. You must
       URL-encode the argument to the parameter, for example,
       `customer_id%3dmy_ID`. By default, no customer ID is associated
-      with the data. See
+      with the data. For more information, see
       <a href="/docs/services/speech-to-text-icp/information-security.html">Information
       security</a>.
     </td>
@@ -161,7 +162,7 @@ websocket.onerror = function(evt) { onError(evt) };
 ## Initiate a recognition request
 {: #WSstart}
 
-To initiate a recognition request, the client sends a JSON text message to the service over the established connection. The client must send this message before it sends any audio for transcription. The message must include the following two parameters.
+To initiate a recognition request, the client sends a JSON text message to the service over the established connection. The client must send this message before it sends any audio for transcription. The message must include the `action` parameter but can usually omit the `content-type` parameter.
 
 <table>
   <caption>Table 2. Parameters of the JSON text message</caption>
@@ -190,11 +191,12 @@ To initiate a recognition request, the client sends a JSON text message to the s
     </td>
   </tr>
   <tr>
-    <td style="text-align:left"><code>content-type</code><br/><em>Required</em></td>
+    <td style="text-align:left"><code>content-type</code><br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
       Identifies the format (MIME type) of the audio data for the request.
-      For more information about the available audio formats, see
+      For more information about the available audio formats and those for
+      which the parameter is required, see
       <a href="/docs/services/speech-to-text-icp/audio-formats.html">Audio
         formats</a>.
     </td>

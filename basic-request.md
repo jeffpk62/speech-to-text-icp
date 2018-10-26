@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-17"
+lastupdated: "2018-10-18"
 
 ---
 
@@ -20,11 +20,10 @@ lastupdated: "2018-10-17"
 # Making a recognition request
 {: #basic-request}
 
-{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers three interfaces for making a speech recognition request: a WebSocket interface, an HTTP interface, and an asynchronous HTTP interface. Each interface provides the same basic speech recognition capabilities. To make a recognition request, you must provide
+{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers three interfaces for making a speech recognition request: a WebSocket interface, an HTTP interface, and an asynchronous HTTP interface. Each interface provides the same basic speech recognition capabilities.
 {: shortdesc}
 
--   *The audio that is to be transcribed.* You can pass a maximum of 100 MB of audio data with any request. The audio must be in one of the [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html) that are supported by the service.
--   *The format of the audio.* You use the `Content-Type` parameter to specify the audio format.
+To make a recognition request, you need to provide only the audio that is to be transcribed. You can pass a maximum of 100 MB of audio data with any request. The audio must be in one of the formats that is supported by the service. For most audio, the service can automatically detect the format; for others, you must specify the format with the `Content-Type` or equivalent parameter. (The examples that follow specify the format with all requests.) For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
 The following sections show basic transcription requests, with no optional parameters, for each of the service's interfaces.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-17"
+lastupdated: "2018-10-18"
 
 ---
 
@@ -35,7 +35,7 @@ For information about all methods of the HTTP interface, see the [API reference 
 
 The HTTP `POST /v1/recognize` method provides a simple means of transcribing audio. You pass all audio via the body of the request and specify the parameters as request headers and query parameters. If your data consists of multiple audio files, the recommended means of submitting the audio is by sending multiple requests, one for each audio file. You can submit the requests in a loop, optionally with parallelism to improve performance.
 
-The following example sends a recognition request for a single FLAC file named `audio-file.flac`. The request omits the `model` query parameter to use the default language model, `en-US_BroadbandModel`.
+The following `curl` example sends a recognition request for a single FLAC file named `audio-file.flac`. The request omits the `model` query parameter to use the default language model, `en-US_BroadbandModel`.
 
 ```bash
 curl -X POST -u "apikey:{api_key}"
@@ -198,7 +198,7 @@ The JSON metadata that you pass with a multipart request can include the followi
 
 Only the following two parameters are specific to multipart requests:
 
--   The `part_content_type` field is *required*. Specify the format (MIME type) of the audio in the following parts of the request. All audio files must be in the same format.
+-   The `part_content_type` field is *optional* for most audio formats. It is required for the `audio/basic`, `audio/l16`, and `audio/mulaw` formats. It specifies the format of the audio in the following parts of the request. All audio files must be in the same format.
 -   The `data_parts_count` field is *optional*. You can specify the number of audio files that are sent with the request. The service applies end-of-stream detection to the last (and possibly the only) data part. If you omit the parameter, the service determines the number of parts from the request.
 
 All other parameters of the metadata are optional. For a summary of all available parameters, see [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
@@ -209,7 +209,7 @@ The following `curl` example shows how to pass a multipart recognition request w
 
 ```bash
 curl -X POST -u "apikey:{api_key}"
---form metadata="{\"part_content_type\":\"audio/flac\",
+--form metadata="{\"part_content_type\":\"application/octet-stream\",
   \"data_parts_count\":2,
   \"timestamps\":true,
   \"word_alternatives_threshold\":0.9,
