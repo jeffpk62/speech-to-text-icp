@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-12"
+lastupdated: "2018-10-18"
 
 ---
 
@@ -33,7 +33,7 @@ Consider the following basic requirements when you make a speech recognition req
 
 Also consider the following service-specific requirements:
 
--   You need to specify only the input audio and its format (`Content-Type`). All other parameters are optional.
+-   You need to specify only the input audio. All other parameters are optional.
 -   If you specify an invalid query parameter or JSON field as part of the input, the response includes a `warnings` field that describes the invalid argument. The request succeeds despite any warnings.
 
 ## acoustic_customization_id
@@ -126,7 +126,7 @@ An optional version of a base model. The parameter is intended primarily for use
 
 ## Content-Type
 
-A required audio format (MIME type) that specifies the format of the audio data that you pass to the service. See [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+An optional audio format (MIME type) that specifies the format of the audio data that you pass to the service. The service can automatically detect the format of most audio, so the parameter is optional for most formats. It is required for `audio/basic`, `audio/l16`, and `audio/mulaw`. See [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
 <table>
   <caption>Table 3. The Content-Type parameter</caption>

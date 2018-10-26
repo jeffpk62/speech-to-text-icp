@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-17"
+lastupdated: "2018-10-24"
 
 ---
 
@@ -40,7 +40,7 @@ You can learn the API key for your cluster by using either of the following appr
 -   *From a shell,* issue the following command:
 
     ```bash
-    API_KEY_$(kubectl -n kube-system get secret \
+    API_KEY_$(kubectl -n speech-services get secret \
     speech-to-text-serviceid-secret \
     -o go-template='{{ index .data "api_key" | base64decode }}')
     ```
