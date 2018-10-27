@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-09-16"
+lastupdated: "2018-10-27"
 
 ---
 
@@ -43,7 +43,7 @@ You can create multiple custom acoustic models for the same or different domains
 -   For the HTTP interface, use the `POST /v1/recognize` method. The specified custom model is used for that request.
 
     ```bash
-    curl -X POST -u "apikey:{api_key}"
+    curl -X POST -u "apikey:{apikey}"
     --header "Content-Type: audio/flac"
     --data-binary @audio-file1.flac
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?acoustic_customization_id={customization_id}"
@@ -54,7 +54,7 @@ You can create multiple custom acoustic models for the same or different domains
 -   For the asynchronous HTTP interface, use the `POST /v1/recognitions` method. The specified custom model is used for that request.
 
     ```bash
-    curl -X POST -u "apikey:{api_key}"
+    curl -X POST -u "apikey:{apikey}"
     --header "Content-Type: audio/flac"
     --data-binary @audio-file.flac
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognitions?acoustic_customization_id={customization_id}"

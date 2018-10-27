@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-24"
+lastupdated: "2018-20-27"
 
 ---
 
@@ -94,7 +94,7 @@ You use the `POST /v1/customizations` method to create a new custom language mod
 The following example creates a new custom language model named `Example model`. The model is created for the base model `en-US-BroadbandModel` and has the description `Example custom language model`. The `Content-Type` header specifies that JSON data is being passed to the method.
 
 ```bash
-curl -X POST -u "apikey:{api_key}"
+curl -X POST -u "apikey:{apikey}"
 --header "Content-Type: application/json"
 --data "{\"name\": \"Example model\",
   \"base_model_name\": \"en-US_BroadbandModel\",
@@ -132,7 +132,7 @@ You use the `POST /v1/customizations/{customization_id}/corpora/{corpus_name}` m
 The following example adds the corpus text file `healthcare.txt` to the custom model with the specified ID. The example names the corpus `healthcare`.
 
 ```bash
-curl -X POST -u "apikey:{api_key}"
+curl -X POST -u "apikey:{apikey}"
 --data-binary @healthcare.txt
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/corpora/healthcare"
 ```
@@ -152,7 +152,7 @@ The service returns a 201 response code if the corpus is valid. It then asynchro
 To determine the status of the analysis, use the `GET /v1/customizations/{customization_id}/corpora/{corpus_name}` method to poll the status of the corpus. The method accepts the ID of the model and the name of the corpus, as shown in the following example:
 
 ```bash
-curl -X GET -u "apikey:{api_key}"
+curl -X GET -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/corpora/corpus1"
 ```
 {: pre}
@@ -189,7 +189,7 @@ You can use the following methods to add words to a custom model:
 -   The `POST /v1/customizations/{customization_id}/words` method adds multiple words at one time. You pass a JSON object that provides information about each word via the body of the request. The following example adds two custom words, `HHonors` and `IEEE`, to the custom model with the specified ID. The `Content-Type` header specifies that JSON data is being passed to the method.
 
     ```bash
-    curl -X POST -u "apikey:{api_key}"
+    curl -X POST -u "apikey:{apikey}"
     --header "Content-Type: application/json"
     --data "{\"words\": [
       {\"word\": \"HHonors\", \"sounds_like\": [\"hilton honors\", \"H. honors\"], \"display_as\": \"HHonors\"},
@@ -213,7 +213,7 @@ You can use the following methods to add words to a custom model:
     The following command adds the words from the file:
 
     ```bash
-    curl -X POST -u "apikey:{api_key}"
+    curl -X POST -u "apikey:{apikey}"
     --header "Content-Type: application/json"
     --data-binary @words.json
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/words"
@@ -224,7 +224,7 @@ You can use the following methods to add words to a custom model:
 -   The `PUT /v1/customizations/{customization_id}/words/{word_name}` method adds individual words. You pass a JSON object that provides information about the word. The following example adds the word `NCAA` to the model with the specified ID. The `Content-Type` header again indicates that JSON data is being passed to the method.
 
     ```bash
-    curl -X PUT -u "apikey:{api_key}"
+    curl -X PUT -u "apikey:{apikey}"
     --header "Content-Type: application/json"
     --data "{\"sounds_like\": [\"N. C. A. A.\", \"N. C. double A.\"]}"
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/words/NCAA"
@@ -243,7 +243,7 @@ When you use the `POST /v1/customizations/{customization_id}/words` method, the 
 To determine the status of the request, use the `GET /v1/customizations/{customization_id}` method to poll the model's status. The method accepts the customization ID of the model and returns information that includes the model's status, as in the following example:
 
 ```bash
-curl -X GET -u "apikey:{api_key}"
+curl -X GET -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}"
 ```
 {: pre}
@@ -281,7 +281,7 @@ Once you populate a custom language model with new words, either by adding corpo
 You use the `POST /v1/customizations/{customization_id}/train` method to train a custom model. You pass the method the customization ID of the model that you want to train, as in the following example:
 
 ```bash
-curl -X POST -u "apikey:{api_key}"
+curl -X POST -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/train"
 ```
 {: pre}
@@ -303,7 +303,7 @@ The service returns a 200 response code if the training process is successfully 
 To determine the status of a training request, use the `GET /v1/customizations/{customization_id}` method to poll the model's status. The method accepts the customization ID of the model and returns information about the model.
 
 ```bash
-curl -X GET -u "apikey:{api_key}"
+curl -X GET -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}"
 ```
 {: pre}

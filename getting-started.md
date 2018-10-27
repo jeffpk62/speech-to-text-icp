@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-17"
+lastupdated: "2018-10-27"
 
 ---
 
@@ -31,10 +31,10 @@ Before you can you use {{site.data.keyword.speechtotextshort}}: Customer Care, y
 
 You are now ready to call methods of the service's interface. The following `curl` examples use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. To learn your API key, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 
-You pass the value of the API key with the `-u` (`--user`) option of the `curl` command. Replace `{api_key}` with the value of the API key for your cluster. (Do not include the braces when you specify the API key.)
+You pass the value of the API key with the `-u` (`--user`) option of the `curl` command. Replace `{apikey}` with the value of the API key for your cluster. (Do not include the braces when you specify the API key.)
 
 ```bash
-curl -u "apikey:{api_key}"
+curl -u "apikey:{apikey}"
 . . .
 ```
 {: pre}
@@ -43,7 +43,7 @@ You can also log into your IBM Cloud Private cluster by using the IBM Cloud Priv
 
 **Note:** The examples use the `curl` command to call methods of the HTTP interface. Install the version for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
 
-**Note:** When you enter a command, replace `{api_key}` with your actual API key. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
+**Note:** When you enter a command, replace `{apikey}` with your actual API key. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
 
 ```bash
 curl -X POST --user "apikey:icp-L_HALhLVIksh1b73l97LSs6R_3gLo4xkujAaxm7i"
@@ -58,11 +58,11 @@ Call the `POST /v1/recognize` method to request a basic transcript of a FLAC aud
 
 1.  Download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon" class="style-scope doc-content"></a>.
 1.  Issue the following command to call the service's `/v1/recognize` method for basic transcription with no parameters. The example uses the `Content-Type` header to indicate the type of the audio, `audio/flac`. The example uses the default language model, `en-US_BroadbandModel`, for transcription.
-    -   Replace `{api_key}` with the value of the API key for your service cluster.
+    -   Replace `{apikey}` with the value of the API key for your service cluster.
     -   Modify `{path_to_file}` to specify the location of the `audio-file.flac` file.
 
     ```bash
-    curl -X POST -u "apikey:{api_key}" \
+    curl -X POST -u "apikey:{apikey}" \
     --header "Content-Type: audio/flac" \
     --data-binary @{path_to_file}audio-file.flac \
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize"
@@ -97,11 +97,11 @@ Call the `POST /v1/recognize` method to transcribe the same FLAC audio file, but
 
 1.  If necessary, download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon" class="style-scope doc-content"></a>.
 1.  Issue the following command to call the service's `/v1/recognize` method with two extra parameters. Set the `timestamps` parameter to `true` to indicate the beginning and end of each word in the audio stream. Set the `max_alternatives` parameter to `3` to receive the three most likely alternatives for the transcription. The example uses the `Content-Type` header to indicate the type of the audio, `audio/flac`, and the request uses the default model, `en-US_BroadbandModel`.
-    -   Replace `{api_key}` with the value of the API key for your service cluster.
+    -   Replace `{apikey}` with the value of the API key for your service cluster.
     -   Modify `{path_to_file}` to specify the location of the `audio-file.flac` file.
 
     ```bash
-    curl -X POST -u "apikey:{api_key}" \
+    curl -X POST -u "apikey:{apikey}" \
     --header "Content-Type: audio/flac" \
     --data-binary @{path_to_file}audio-file.flac \
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?timestamps=true&max_alternatives=3"
