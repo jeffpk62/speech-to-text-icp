@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-09-16"
+lastupdated: "2018-10-27"
 
 ---
 
@@ -68,7 +68,7 @@ Additionally, the output includes a `progress` field that indicates the current 
 The following example includes the `language` query parameter to list all US English custom language models:
 
 ```bash
-curl -X GET -u "apikey:{api_key}"
+curl -X GET -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations?language=en-US"
 ```
 {: pre}
@@ -117,7 +117,7 @@ Two models exist. The first model is awaiting data or is being processed by the 
 The following example returns information about the custom model that has the specified customization ID:
 
 ```bash
-curl -X GET -u "apikey:{api_key}"
+curl -X GET -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}"
 ```
 {: pre}
@@ -153,7 +153,7 @@ Use the `POST /v1/customizations/{customization_id}/reset` method to reset a cus
 The following example resets the custom model with the specified customization ID:
 
 ```bash
-curl -X POST -u "apikey:{api_key}"
+curl -X POST -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}/reset"
 ```
 {: pre}
@@ -169,7 +169,7 @@ Use the `DELETE /v1/customizations/{customization_id}` method to delete a custom
 The following example deletes the custom model with the specified customization ID:
 
 ```bash
-curl -X DELETE -u "apikey:{api_key}"
+curl -X DELETE -u "apikey:{apikey}"
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/customizations/{customization_id}"
 ```
 {: pre}
