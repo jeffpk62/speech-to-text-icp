@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-10-31"
 
 ---
 
@@ -50,8 +50,8 @@ var wsURI = 'wss://{icp_cluster_host}/speech-to-text/api/v1/recognize'
 var websocket = new WebSocket(wsURI);
 
 websocket.send(JSON.stringify({
-  'action': 'start',
-  'content-type': 'audio/flac'
+  action: 'start',
+  content-type: 'audio/flac'
 }));
 websocket.send(blob);
 websocket.send(JSON.stringify({'action': 'stop'}));
