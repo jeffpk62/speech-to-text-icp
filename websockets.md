@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-31"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -69,6 +69,12 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       connection with the service. Once you establish a connection, you
       can keep it alive indefinitely. While the connection remains open,
       you do not need to pass a token with subsequent calls.
+      <br/><br/>
+      **Note:** You cannot use JavaScript to call the WebSocket interface
+      from a browser. The `watson-token` parameter does not accept API keys.
+      For more information about working around this limitation, see the
+      [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations)
+      in the release notes.
     </td>
   </tr>
   <tr>

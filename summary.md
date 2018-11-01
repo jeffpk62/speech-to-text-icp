@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-11-01"
 
 ---
 
@@ -744,7 +744,9 @@ An optional value of `chunked` that causes the audio to be streamed to the servi
 
 ## watson-token
 
-An optional authentication token that makes authenticated requests to the service without embedding your credentials in every call. By default, credentials must be passed with each request. See [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html).
+An optional authentication token that makes authenticated requests to the service without embedding your credentials in every call. By default, service credentials must be passed with each request.
+
+**Note:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
 
 <table>
   <caption>Table 17. The watson-token parameter</caption>
