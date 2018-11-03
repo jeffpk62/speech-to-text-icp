@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-11-03"
 
 ---
 
@@ -22,11 +22,11 @@ lastupdated: "2018-10-27"
 
 {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care on IBM&reg; Cloud Private offers three interfaces for making requests to the service:
 
--   *The synchronous HTTP interface*, which provides access to all of the service's functionality. The service accepts requests over the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol. All URLs for requests to the HTTP interface begin with the `https` protocol specification. See [Making an authenticated HTTP request](#httpRequest).
--   *The asynchronous HTTP interface*, which provides methods only for speech recognition. As with the synchronous interface, the service accepts requests over the SSL or TLS protocol by using the `https` protocol specification. See [Making an authenticated HTTP request](#httpRequest).
--   *The WebSocket interface*, which offers only speech recognition. The service accepts requests over the WebSocket Secure protocol. All URLs begin with the `wss` protocol specification. See [Making a WebSocket request](#websocketRequest).
+-   *The synchronous HTTP interface*, which provides access to all of the service's functionality. The service accepts requests over the Secure Sockets Layer (SSL) or Transport Layer Security (TLS) protocol. All URLs for requests to the HTTP interface begin with the `https` protocol specification.
+-   *The asynchronous HTTP interface*, which provides methods only for speech recognition. As with the synchronous interface, the service accepts requests over the SSL or TLS protocol by using the `https` protocol specification.
+-   *The WebSocket interface*, which offers only speech recognition. The service accepts requests over the WebSocket Secure protocol. All URLs begin with the `wss` protocol specification.
 
-Regardless of the interface that you use, you must use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster to make a secure request to the service. See [Obtaining your API key](#apiKey).
+Regardless of the interface that you use, you must use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster to make a secure request to the service.
 
 ## Obtaining your API key
 {: #apiKey}
@@ -78,6 +78,8 @@ You can also log into your IBM Cloud Private cluster by using the IBM Cloud Priv
 During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with `curl` commands to bypass the tool's verification of SSL certificates.
 
 **Note:** Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+
+**Note:** You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see  [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
 
 ## Making an authenticated WebSocket request
 {: #websocketRequest}
