@@ -31,8 +31,7 @@ lastupdated: "2018-11-05"
 
 For information about installing and configuring {{site.data.keyword.speechtotextshort}}: Customer Care on IBM Cloud Private, see [Installing and configuring the service](/docs/services/speech-to-text-icp/install-config.html).
 
-{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud, see [About Speech to Text ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/services/speech-to-text/index.html#about){: new_window}.
-{: note}
+**Note:** {{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud, see [About Speech to Text ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/services/speech-to-text/index.html#about){: new_window}.
 
 ## Supported interfaces
 {: #interfaces}
