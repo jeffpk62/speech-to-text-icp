@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-11-11"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-10-27"
 # Input features
 {: #input}
 
-{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers the following features to specify how the service is to perform the recognition request. All of the input parameters that are described in the following sections are optional. Only the input audio and its format are required.
+{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers the following features to specify how the service is to perform the recognition request. All of the input parameters that are described in the following sections are optional. Only the input audio is required.
 {: shortdesc}
 
 -   For more information about the supported audio formats, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
