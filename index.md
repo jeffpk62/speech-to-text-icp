@@ -2,7 +2,7 @@
 
 Copyright:
   years: 2015, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-11-05"
 # About
 {: #about}
 
-**Service update:** *The {{site.data.keyword.speechtotextshort}}: Customer Care service was updated on October 26, 2018. You no longer need to specify the audio format for most speech recognition requests; the service now automatically detects the format of most audio. And the argument to the `-n` option of the `kubectl` command that you enter to learn your API key is now `speech-services`. For more information, see [Version 1.0.4 (26 October 2018)](/docs/services/speech-to-text-icp/release-notes.html#v104) in the release notes.*
+**Service update:** *The {{site.data.keyword.speechtotextshort}}: Customer Care service was updated on November 12, 2018. The service now supports smart formatting as beta functionality for Japanese speech recognition. For more information, see [Version 1.0.4 (12 November 2018)](/docs/services/speech-to-text-icp/release-notes.html#v104b) in the release notes.*
 
 {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care provides speech recognition capabilities for your IBM&reg; Cloud Private solutions. The service leverages machine learning to combine knowledge of grammar, language structure, and the composition of audio and voice signals to accurately transcribe the human voice. It continuously updates and refines its transcription as it receives more speech.
 {: shortdesc}
@@ -46,7 +46,7 @@ The service also provides a [customization interface](/docs/services/speech-to-t
 
 -   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
 -   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
--   For an overview of application development with the service, see [Overview for developers](/docs/services/speech-to-text-icp/developer-overview.html).
+-   For a high-level description of application development with the service, see [Overview for developers](/docs/services/speech-to-text-icp/developer-overview.html).
 
 ## Input features
 {: #inputFeatures}
@@ -55,7 +55,7 @@ The service's interfaces share common input features for transcribing speech to 
 
 -   [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html) - You can transcribe Ogg or Web Media (WebM) audio with the Opus or Vorbis codec, MP3 (or MPEG), Waveform Audio File Format (WAV), Free Lossless Audio Codec (FLAC), Linear 16-bit Pulse-Code Modulation (PCM), mu-law (or u-law) audio, and basic audio.
 -   [Languages and models](/docs/services/speech-to-text-icp/input.html#models) - You can use transcribe audio by using broadband or narrowband models. Use broadband for audio that is sampled at a minimum rate of 16 kHz. Use narrowband for audio that is sampled at a minimum rate of 8 kHz.
--   [Audio transmission](/docs/services/speech-to-text-icp/input.html#transmission) - You can pass as much as 100 MB of audio to the service with a single request. You can pass the audio as a continuous stream of data chunks or as a one-shot delivery that passes all of the data at one time. With streaming, the service enforces [timeouts](/docs/services/speech-to-text-icp/input.html#timeouts) to preserve resources.
+-   [Audio transmission](/docs/services/speech-to-text-icp/input.html#transmission) - You can pass as much as 100 MB of audio to the service with a single request (you must send at least 100 bytes of audio). You can pass the audio as a continuous stream of data chunks or as a one-shot delivery that passes all of the data at one time. With streaming, the service enforces [timeouts](/docs/services/speech-to-text-icp/input.html#timeouts) to preserve resources.
 
 ## Output features
 {: #outputFeatures}
@@ -70,7 +70,7 @@ The interfaces also support the following common output features:
 -   [Word confidence](/docs/services/speech-to-text-icp/output.html#word_confidence) returns confidence levels for each word of a transcript.
 -   [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps) return timestamps for the start and end of each word of a transcript.
 -   [Profanity filtering](/docs/services/speech-to-text-icp/output.html#profanity_filter) censors profanity from US English transcripts.
--   [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting) converts dates, times, numbers, currency values, phone numbers, and internet addresses into more readable, conventional forms in final transcripts. You can also provide keyword phrases to include certain punctuation symbols in final transcripts. The feature is supported for US English audio. (Beta functionality.)
+-   [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting) converts dates, times, numbers, currency values, phone numbers, and internet addresses into more readable, conventional forms in final transcripts. You can also provide keyword phrases to include certain punctuation symbols in final transcripts. The feature is supported for US English and Japanese audio. (Beta functionality.)
 
 ## Language support
 {: #languages}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-18"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -315,7 +315,7 @@ For more information, see the Internet Engineering Task Force (IETF) [Request fo
       <code>channels</code><br/><em>Optional</em>
     </td>
     <td>
-      By default, the service assumes that the audio has a single channel.
+      By default, the service treats the audio as if it has a single channel.
       <em>If the audio has more than one channel,</em> you must specify
       an integer that identifies the number of channels. For example,
       specify the following parameter for two-channel audio data that is
@@ -415,7 +415,7 @@ If you omit the codec, the service automatically detects it from the input audio
 ## Data limits and compression
 {: #limits}
 
-The service imposes a limit of 100 MB on the audio data that you can transcribe with one request. When you recognize long continuous audio streams or large files, take the following steps to ensure that your audio does not exceed the 100 MB limit:
+The service accepts a maximum of 100 MB of audio data for transcription with a request. When you recognize long continuous audio streams or large files, take the following steps to ensure that your audio does not exceed the 100 MB limit:
 
 -   Use a sampling rate no greater than 16 kHz (for broadband models) or 8 kHz (for narrowband models), and use 16 bits per sample. The service converts audio recorded at a sampling rate that is higher than the target model (16 kHz or 8 kHz) to the rate of the model. So larger frequencies do not result in enhanced recognition accuracy, but they do increase the size of the audio stream.
 -   Encode your audio in a format that offers data compression. By encoding your data more efficiently, you can send far more audio without exceeding the 100 MB data limit. Audio formats such as `audio/ogg` and `audio/mp3` significantly reduce the size of your audio stream. You can use these formats to send greater amounts of audio with a single request.

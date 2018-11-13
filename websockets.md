@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-05"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -22,7 +22,7 @@ lastupdated: "2018-11-05"
 # The WebSocket interface
 {: #websockets}
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
+**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
 
 The WebSocket interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the `/v1/recognize` method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage the recognition requests.
 {: shortdesc}
@@ -66,11 +66,11 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       <br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
-      Passes a valid authentication token instead of passing credentials
-      with the call. You pass a token only to establish an authenticated
-      connection with the service. Once you establish a connection, you
-      can keep it alive indefinitely. While the connection remains open,
-      you do not need to pass a token with subsequent calls.
+      Passes a valid authentication token instead of passing service
+      credentials with the call. You pass a token only to establish an
+      authenticated connection with the service. Once you establish a
+      connection, you can keep it alive indefinitely. While the connection
+      remains open, you do not need to pass a token with subsequent calls.
       <br/><br/>
       **Note:** You cannot use JavaScript to call the WebSocket interface
       from a browser. The `watson-token` parameter does not accept API keys.
@@ -187,13 +187,14 @@ To initiate a recognition request, the client sends a JSON text message to the s
       <ul style="margin-left:20px; padding:0px;">
         <li style="margin:10px 0px; line-height:120%;">
           <code>start</code> starts a recognition request or specifies
-          new parameters for subsequent requests. See
+          new parameters for subsequent requests. For more information, see
           <a href="#WSmore">Send additional requests and modify request
             parameters</a>.
         </li>
         <li style="margin:10px 0px; line-height:120%;">
           <code>stop</code> signals that all audio for a request has
-          been sent. See <a href="#WSstop">End a recognition request</a>.
+          been sent. For more information, see
+          <a href="#WSstop">End a recognition request</a>.
         </li>
       </ul>
     </td>
@@ -242,7 +243,7 @@ If the client specifies an invalid query parameter or JSON field for the recogni
 
 After it sends the initial `start` message, the client can begin sending audio data to the service. The client does not need to wait for the service to respond to the `start` message with the `listening` message. The service returns the results of the transcription asynchronously in the same format as it returns results for the HTTP API.
 
-The client must send the audio as binary data. The client can stream a maximum of 100 MB of audio data with a single utterance (per `send` request). The client can send multiple utterances over a single WebSocket connection.
+The client must send the audio as binary data. The client can stream a maximum of 100 MB of audio data with a single utterance (per `send` request). It must send at least 100 bytes of audio for any request. The client can send multiple utterances over a single WebSocket connection.
 
 The WebSocket interface imposes a maximum frame size of 4 MB. The client can set the maximum frame size to less than 4 MB. If it is not practical to set the frame size, the client can set the maximum message size to less than 4 MB and send the audio data as a sequence of messages.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -125,7 +125,7 @@ In both cases, you can include the `results_ttl` query parameter to specify the 
 
 In addition to the previous parameters, which are specific to the asynchronous interface, the `POST /v1/recognitions` method supports most of the same parameters as the WebSocket and HTTP REST interfaces. For more information, see [Input features](/docs/services/speech-to-text-icp/input.html) and [Output features](/docs/services/speech-to-text-icp/output.html).
 
-The asynchronous interface does not support interim results, and it imposes a data size limit of 100 MB on the audio that you submit with the request. For more information about audio formats and about using compression to increase the amount of audio that you can send with a request, see [Audio Formats](/docs/services/speech-to-text-icp/audio-formats.html).
+Submit a maximum of 100 MB and a minimum of 100 bytes of audio with a request. For more information about audio formats and about using compression to increase the amount of audio that you can send with a request, see [Audio Formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
 ### Callback notifications
 {: #notifications}
