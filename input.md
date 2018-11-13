@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-11"
+lastupdated: "2018-11-13"
 
 ---
 
@@ -24,7 +24,7 @@ lastupdated: "2018-11-11"
 {: shortdesc}
 
 -   For more information about the supported audio formats, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
--   For examples of simple requests and responses for each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
+-   For examples of simple requests for each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
 -   For an alphabetized list of all available parameters, including their status (generally available or beta) and supported languages, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
 
 ## Languages and models
