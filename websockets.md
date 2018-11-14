@@ -8,9 +8,10 @@ lastupdated: "2018-11-13"
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
-{:note: .note}
-{:important: .important}
 {:tip: .tip}
+{:note: .note}
+{:deprecated: .deprecated}
+{:important: .important}
 {:pre: .pre}
 {:codeblock: .codeblock}
 {:screen: .screen}

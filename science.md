@@ -9,6 +9,9 @@ lastupdated: "2018-09-16"
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
 {:tip: .tip}
+{:note: .note}
+{:deprecated: .deprecated}
+{:important: .important}
 {:pre: .pre}
 {:codeblock: .codeblock}
 {:screen: .screen}
