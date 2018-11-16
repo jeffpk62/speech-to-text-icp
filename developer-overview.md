@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-04"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -40,7 +40,7 @@ The interfaces generally provide the same speech recognition capabilities, but y
 -   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
 -   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
 -   For descriptions of all available speech recognition parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
--   For descriptions of all methods and their parameters, along with examples, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/speech-to-text-icp){: new_window}.
+-   For descriptions of all methods and their parameters, along with examples, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
 ## Advantages of the WebSocket interface
 {: #advantages}
@@ -77,7 +77,7 @@ For instance, a web page that is loaded from a server in {{site.data.keyword.Blu
 SDKs are available for the {{site.data.keyword.speechtotextshort}}: Customer Care service to simplify the development of speech applications. {{site.data.keyword.watson}} SDKs are available for many popular programming languages and platforms.
 
 -   For a complete list of SDKs and links to the SDKs on GitHub, see [Using SDKs](/docs/services/watson/getting-started-sdks.html).
--   For detailed information about all methods of the Node, Java, Python, and Ruby SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/speech-to-text-icp){: new_window}.
+-   For detailed information about all methods of the Node, Java, Python, and Ruby SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
 ## Considerations for application development
 {: #consider}

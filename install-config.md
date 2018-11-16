@@ -23,7 +23,7 @@ lastupdated: "2018-10-17"
 # Installing and configuring the service
 {: #install-config}
 
-{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is supported on IBM&reg; Cloud Private version 2.1.0.3 with Kubernetes version 1.10.0 or later. You must install and configure IBM Cloud Private before installing and configuring {{site.data.keyword.speechtotextshort}}: Customer Care. For more information, see the [IBM&reg; Cloud Private v2.1.0.3 documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www-03preprod.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/kc_welcome_containers.html){: new_window}.
+{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is supported on IBM&reg; Cloud Private version 2.1.0.3 with Kubernetes version 1.10.0 or later. You must install and configure IBM Cloud Private before installing and configuring {{site.data.keyword.speechtotextshort}}: Customer Care. For more information, see the [IBM&reg; Cloud Private v2.1.0.3 documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/kc_welcome_containers.html){: new_window}.
 {: shortdesc}
 
 The following sections provide information about installing and configuring {{site.data.keyword.speechtotextshort}}: Customer Care on IBM Cloud Private. The final section provides information about modifying an existing configuration.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -34,7 +34,7 @@ The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.sp
 -   **[1.0.0 - 1.0.4]** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. To work around this limitation, you can do the following:
     -   Call the WebSocket interface from outside of a browser. You can call the interface from any language that supports WebSockets. Refer to information in [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html) for guidance when working with another language.
 
-        The Watson SDKs provide the simplest way to call the WebSocket interface from another language. For information about using the WebSocket interface with the Node.js, Java, Python, and Ruby SDKs, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/speech-to-text-icp){: new_window}.
+        The Watson SDKs provide the simplest way to call the WebSocket interface from another language. For information about using the WebSocket interface with the Node.js, Java, Python, and Ruby SDKs, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
     -   Use the synchronous or asynchronous HTTP interfaces to perform speech recognition.
 
 ## Version 1.0.4 (12 November 2018)
@@ -91,7 +91,7 @@ The service now supports smart formatting for Japanese speech recognition. Previ
 
 The initial release of the service.
 
-{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud, see [About Speech to Text ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/docs/services/speech-to-text/index.html#about){: new_window}.
+{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud, see [About Speech to Text ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
 
 {{site.data.keyword.speechtotextshort}}: Customer Care on IBM&reg; Cloud Private differs from the public {{site.data.keyword.speechtotextfull}} service in the following ways. You might find this information helpful if you are already familiar with the {{site.data.keyword.speechtotextshort}} service on the public IBM Cloud.
 
