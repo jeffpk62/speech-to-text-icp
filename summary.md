@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-11-13"
 # Parameter summary
 {: #summary}
 
-A summary follows of all of the parameters available for speech recognition. Each parameter includes a link to its description in [Input features](/docs/services/speech-to-text-icp/input.html) or [Output features](/docs/services/speech-to-text-icp/output.html). For more information about all methods of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://console.bluemix.net/apidocs/speech-to-text-icp){: new_window}.
+A summary follows of all of the parameters available for speech recognition. Each parameter includes a link to its description in [Input features](/docs/services/speech-to-text-icp/input.html) or [Output features](/docs/services/speech-to-text-icp/output.html). For more information about all methods of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 {: shortdesc}
 
 Consider the following basic requirements when you make a speech recognition request:
