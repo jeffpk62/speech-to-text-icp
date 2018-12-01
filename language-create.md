@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-20-27"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -34,7 +34,8 @@ Follow these steps to create a custom language model for {{site.data.keyword.ibm
 
 The steps for creating a custom language model are iterative. You can add corpora, add words, and train or retrain a model as often as needed. The recommended approach is to add corpora to the model, since providing sentences allows the service to learn the words in context. You can then augment or modify the model's words individually. Training a model only on individual words as opposed to words added from corpora is more time-consuming and can produce less effective results.
 
-> **Note:** Language model customization is generally available for all languages; see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+Language model customization is generally available for all languages; see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+{: note}
 
 ## Create a custom language model
 {: #createModel}
