@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -87,7 +87,8 @@ curl -X POST -u "apikey:{apikey}"
 ## Custom models
 {: #custom}
 
-> **Note:** Language and acoustic model customization are available at different levels of support (generally available or beta). For more information, see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+Language and acoustic model customization are available at different levels of support (generally available or beta). For more information, see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+{: note}
 
 All interfaces accept a custom model for use in a recognition request:
 

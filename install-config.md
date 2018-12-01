@@ -2,7 +2,7 @@
 
 Copyright:
   years: 2018
-lastupdated: "2018-10-17"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -54,7 +54,8 @@ After installing the product, you can determine the optimal deployment configura
 
 You can scale your {{site.data.keyword.speechtotextshort}}: Customer Care deployment in two dimensions: *vertical* and *horizontal*. Both vertical and horizontal scaling require increasing the number of cores that are used by the deployment, and both scales increase linearly. For information about VPCs, see the [IBM Cloud Private licensing documentation ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/manage_cluster/licensing.html){: new_window}.
 
-**Note:** Throughput and concurrency estimates are based on internal testing. Throughput in a production environment depends on multiple factors, including other workloads on the same IBM Cloud Private cluster, latencies between the client application and the IBM Cloud Private cluster, and other environmental conditions.
+Throughput and concurrency estimates are based on internal testing. Throughput in a production environment depends on multiple factors, including other workloads on the same IBM Cloud Private cluster, latencies between the client application and the IBM Cloud Private cluster, and other environmental conditions.
+{: note}
 
 -   *Vertical* scaling increases the throughput in minutes per month. Vertical scaling options include the following configurations.
 

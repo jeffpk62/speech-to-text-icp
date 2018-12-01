@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-03"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -80,9 +80,11 @@ You can also log into your IBM Cloud Private cluster by using the IBM Cloud Priv
 
 During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with `curl` commands to bypass the tool's verification of SSL certificates.
 
-**Note:** Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+{: note}
 
-**Note:** You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see  [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
+You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the IBM Cloud Private command-line interface and issue commands from there. For more information, see  [Using the IBM Cloud Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
+{: note}
 
 ## Making an authenticated WebSocket request
 {: #websocketRequest}
@@ -96,4 +98,5 @@ wss://{icp_cluster_host}/speech-to-text/api/v1/recognize
 
 where `{icp_cluster_host}` is required to specify the name or IP address of the host on which the cluster is deployed. For information about making authenticated requests to the WebSocket interface, see [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html).
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys, and you cannot pass request headers from JavaScript. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
+You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
+{: important}

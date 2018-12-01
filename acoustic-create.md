@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -37,7 +37,8 @@ Follow these steps to create a custom acoustic model for {{site.data.keyword.ibm
 
 The steps for creating a custom acoustic model are iterative. You can add or delete audio and train or retrain a model as often as needed. You must retrain a model for any changes to its audio to take effect. When you retrain a model, all audio data is used in the training (not just the new data). So the training time is commensurate with the total amount of audio that is contained in the model.
 
-> **Note:** Acoustic model customization is available as beta functionality for all languages; see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+Acoustic model customization is available as beta functionality for all languages; see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+{: note}
 
 ## Create a custom acoustic model
 {: #createModel}

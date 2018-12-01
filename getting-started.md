@@ -46,7 +46,8 @@ To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first co
 
 You are now ready to call methods of the service's interface.
 
-**Note:** The tutorial uses the `curl` command to call methods of the service's HTTP interface. Install the version of curl for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+The tutorial uses the `curl` command to call methods of the service's HTTP interface. Install the version of curl for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
+{: note}
 
 ## Step 1: Transcribe audio with no options
 {: #transcribe}

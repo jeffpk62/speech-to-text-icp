@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-11-15"
 
 ---
 
@@ -53,7 +53,8 @@ Learn more about IBM's own GDPR readiness journey and our GDPR capabilities and 
 
 By default, no customer ID is associated with data.
 
-**Note:** Experimental and beta features are not intended for use with a production environment and therefore are not guaranteed to function as expected when labeling and deleting data. Experimental and beta features should not be used when implementing a solution that requires the labeling and deletion of data.
+Experimental and beta features are not intended for use with a production environment and therefore are not guaranteed to function as expected when labeling and deleting data. Experimental and beta features should not be used when implementing a solution that requires the labeling and deletion of data.
+{: note}
 
 ### Specifying a customer ID
 {: #specify-customer-id}

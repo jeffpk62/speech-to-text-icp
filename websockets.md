@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-13"
+lastupdated: "2018-11-16"
 
 ---
 
@@ -23,7 +23,8 @@ lastupdated: "2018-11-13"
 # The WebSocket interface
 {: #websockets}
 
-**Important:** You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
+You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
+{: important}
 
 The WebSocket interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the `/v1/recognize` method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage the recognition requests.
 {: shortdesc}
@@ -40,7 +41,8 @@ The recognition request and response cycle has the following steps:
 
 When the client sends data to the service, it *must* pass all JSON messages as text messages and all audio data as binary messages.
 
-**Note:** The snippets of example code that follow are written in JavaScript and are based on the HTML5 WebSocket API. For more information about the WebSocket protocol, see the Internet Engineering Task Force (IETF) [Request for Comment (RFC) 6455 ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455){: new_window}.
+The snippets of example code that follow are written in JavaScript and are based on the HTML5 WebSocket API. For more information about the WebSocket protocol, see the Internet Engineering Task Force (IETF) [Request for Comment (RFC) 6455 ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455){: new_window}.
+{: note}
 
 ## Open a connection
 {: #WSopen}
@@ -73,7 +75,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       connection, you can keep it alive indefinitely. While the connection
       remains open, you do not need to pass a token with subsequent calls.
       <br/><br/>
-      **Note:** You cannot use JavaScript to call the WebSocket interface
+      **Important:** You cannot use JavaScript to call the WebSocket interface
       from a browser. The `watson-token` parameter does not accept API keys.
       For more information about working around this limitation, see the
       [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations)

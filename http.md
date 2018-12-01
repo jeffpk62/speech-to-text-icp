@@ -35,7 +35,8 @@ Submit a maximum of 100 MB and a minimum of 100 bytes of audio with a request.
 -   For information about tailoring recognition requests to suit your application's needs, see [Input features](/docs/services/speech-to-text-icp/input.html) and [Output features](/docs/services/speech-to-text-icp/output.html).
 -   For information about all methods of the HTTP interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
-**Note:** The HTTP interface also provides the `GET /v1/models` and `GET /v1/models/{model_id}` methods to list the languages and models that are available for speech recognition. For more information, see [Languages and models](/docs/services/speech-to-text-icp/input.html#models).
+The HTTP interface also provides the `GET /v1/models` and `GET /v1/models/{model_id}` methods to list the languages and models that are available for speech recognition. For more information, see [Languages and models](/docs/services/speech-to-text-icp/input.html#models).
+{: tip}
 
 ## Making a basic HTTP request
 {: #HTTP-basic}
