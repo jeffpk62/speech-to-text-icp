@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-08"
 
 ---
 
@@ -23,26 +23,22 @@ lastupdated: "2018-11-15"
 # Output features
 {: #output}
 
-{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers the following features to indicate the information that the service is to include in its transcription. All output parameters are optional.
+{{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care offers the following features to indicate the information that the service is to include in its transcription results for a speech recognition request. All output parameters are optional.
 {: shortdesc}
 
--   For examples of speech recognition responses, see [Understanding recognition results](/docs/services/speech-to-text-icp/basic-response.html).
--   For an alphabetized list of all available parameters, including their status (generally available or beta) and supported languages, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
-
-The service returns all JSON response content in the UTF-8 character set.
+-   For examples of simple speech recognition requests for each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
+-   For examples and descriptions of speech recognition responses, see [Understanding recognition results](/docs/services/speech-to-text-icp/basic-response.html). The service returns all JSON response content in the UTF-8 character set.
+-   For an alphabetized list of all available speech recognition parameters, including their status (generally available or beta), supported languages, and supported interfaces, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
 
 ## Speaker labels
 {: #speaker_labels}
 
-The speaker labels feature is beta functionality that is available for US English and Japanese.
+The speaker labels feature is beta functionality that is available for US English, Japanese, and Spanish.
 {: note}
 
 Speaker labels identify which individuals spoke which words in a multi-participant exchange. (Labeling who spoke and when is sometimes referred to as *speaker diarization*.) You can use the information to develop a person-by-person transcript of an audio stream, such as contact to a call center. Or you can use it to animate an exchange with a conversational robot or avatar. For best performance, use audio that is at least a minute long.
 
-Speaker labels are optimized for two-speaker scenarios. They work best for telephone conversations that involve two people in an extended exchange. They can handle up to six speakers, but more than two speakers can result in variable performance. Two-person exchanges are typically conducted over narrowband media, but you can use speaker labels with the following models:
-
--   `en-US_NarrowbandModel` and `en-US_BroadbandModel`
--   `ja-JP_NarrowbandModel` and `ja-JP_BroadbandModel`
+Speaker labels are optimized for two-speaker scenarios. They work best for telephone conversations that involve two people in an extended exchange. They can handle up to six speakers, but more than two speakers can result in variable performance. Two-person exchanges are typically conducted over narrowband media, but you can use speaker labels with both narrowband and broadband models.
 
 To use the feature, you set the `speaker_labels` parameter to `true` for a recognition request; the parameter is `false` by default. The service identifies speakers by individual words of the audio. It relies on a word's start and end time to identify its speaker. Therefore, enabling speaker labels also forces the `timestamps` parameter to be `true` (see [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps)).
 
@@ -143,7 +139,7 @@ curl -X POST -u "apikey:{apikey}"
 ```
 {: codeblock}
 
-The `transcript` field shows the final transcript of the audio, which lists the words as they were spoken by all participants. By comparing the speaker labels with the timestamps, you can reassemble the conversation as it occurred.
+The `transcript` field shows the final transcript of the audio, which lists the words as they were spoken by all participants. By comparing and synchronizing the speaker labels with the timestamps, you can reassemble the conversation as it occurred.
 
 <table style="width:50%">
   <caption>Table 1. Speaker labels example</caption>
@@ -250,14 +246,15 @@ The service sends final results when the audio stream is complete or in response
 ### Performance considerations for speaker labels
 {: #speakerLabelsPerformance}
 
-As noted previously, the speaker labels feature is optimized for two-person conversations, such as communications with a call center. Because of this optimization, you need to consider the following potential issues with the feature's performance:
+As noted previously, the speaker labels feature is optimized for two-person conversations, such as communications with a call center. Therefore, you need to consider the following potential performance issues:
 
 -   Performance for audio with a single speaker can be poor. Variations in audio quality or in the speaker's voice can cause the service to identify extra speakers who are not present. Such speakers are referred to as hallucinations.
 -   Similarly, performance for audio with a dominant speaker, such as a podcast, can be poor. The service tends to miss speakers who talk for shorter amounts of time, and it can also produce hallucinations.
--   Performance for short utterances can be less accurate than for long utterances. The service produces better results when participants speak for longer amounts of time.
+-   Performance for audio with more than six speakers is undefined. The feature can handle a maximum of six speakers.
+-   Performance for short utterances can be less accurate than for long utterances. The service produces better results when participants speak for longer amounts of time, at least 30 seconds per speaker. The relative amount of audio that is available for each speaker can also affect performance.
 -   Performance can degrade for the first 30 seconds of speech. It usually improves to a reasonable level after 1 minute of audio.
 
-As with all transcription, performance can also be affected by audio noise, a person's manner of speech, overlapping speakers, and other aspects of the audio.
+As with all transcription, performance can also be affected by poor audio quality, background noise, a person's manner of speech, overlapping speakers, and other aspects of the audio.
 
 ## Keyword spotting
 {: #keyword_spotting}
@@ -734,6 +731,456 @@ severe thunderstorms swept through Colorado on Sunday "
 ```
 {: codeblock}
 
+## Smart formatting
+{: #smart_formatting}
+
+The smart formatting feature is beta functionality that is available for US English, Japanese, and Spanish.
+{: note}
+
+The `smart_formatting` parameter directs the service to convert the following strings into more conventional representations:
+
+-   Dates
+-   Times
+-   Series of digits and numbers
+-   Phone numbers
+-   Currency values
+-   Internet email and web addresses
+
+You set the `smart_formatting` parameter to `true` to enable smart formatting. By default, the service does not perform smart formatting.
+
+The service applies smart formatting only to the final transcript of a recognition request. It applies smart formatting just before it returns the results to the client, when text normalization is complete. The conversion makes the transcript more readable and enables better post-processing of the transcription results.
+
+### Punctuation (US English)
+{: #smartFormattingPunctuation}
+
+For US English, the feature also directs the service to substitute punctuation symbols for the following spoken keyword strings in the audio.
+
+<table style="width:50%">
+  <caption>Table 2. Smart formatting punctuation keywords</caption>
+  <tr>
+    <th style="width:45%; text-align:left">Keyword string</th>
+    <th style="text-align:center">Resulting punctuation</th>
+  </tr>
+  <tr>
+    <td>
+      Comma
+    </td>
+    <td style="text-align:center">
+      <code>,</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Period
+    </td>
+    <td style="text-align:center">
+      <code>.</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Question mark
+    </td>
+    <td style="text-align:center">
+      <code>?</code>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Exclamation point
+    </td>
+    <td style="text-align:center">
+      <code>!</code>
+    </td>
+  </tr>
+</table>
+
+The service converts these keyword strings to symbols only in appropriate places. For example, the service converts the spoken phrase
+
+```
+the warranty period is short period
+```
+{: codeblock}
+
+to the following text in a transcript
+
+```
+the warranty period is short.
+```
+{: codeblock}
+
+### Language differences
+{: #smartFormattingDifferences}
+
+Smart formatting is based on the presence of obvious keywords in the transcript. The supported languages handle smart formatting slightly differently.
+
+#### US English and Spanish
+{: #smartFormattingEnglishSpanish}
+
+-   Times are identified by keywords such as `AM`, `PM`, or `EST`.
+-   Military times are converted if they are identified by the keyword `hours`.
+-   Phone numbers must be either `911` or a number with 10 or 11 digits that starts with the number `1`.
+
+#### Japanese
+{: #smartFormattingJapanese}
+
+-   Internet email and web addresses are not converted.
+-   Phone numbers must be 10 or 11 digits and begin with valid prefixes for telephone numbers in Japan. For example, valid prefixes include `03` and `090`.
+-   English words are converted to ASCII (*hankaku*) characters. For example, <code>&#65321;&#65314;&#65325;</code> is converted to `IBM`.
+-   Ambiguous terms might not be converted if sufficient context is unavailable. For example, it is unclear whether <code>&#19968;&#26178;</code> and <code>&#21313;&#20998;</code> refer to times.
+-   Punctuation is handled the same with or without smart formatting. For example, based on probability calculations, one of <code>&#12459;&#12531;&#12510;</code> or `,` is selected.
+
+### Smart formatting example
+{: #smartFormattingExample}
+
+The following example requests smart formatting with a recognition request by setting the `smart_formatting` parameter to `true`. The following sections show the effects of smart formatting on the results of a request.
+
+```bash
+curl -X POST -u "apikey:{apikey}"
+--header "Content-Type: audio/flac"
+--data-binary @{path}audio-file.flac
+"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?smart_formatting=true"
+```
+{: pre}
+
+### Smart formatting results
+{: #smartFormattingResults}
+
+The following table shows examples of final transcripts both with and without smart formatting. The transcripts are based on US English audio.
+
+<table summary="Each heading row is followed by multiple rows of examples that show the effect of smart formatting for the element that is identified in the heading.">
+  <caption>Table 3. Smart formatting example transcripts</caption>
+  <tr>
+    <th id="without_formatting" style="width:45%; text-align:left">Without
+      smart formatting</th>
+    <th id="with_formatting" style="text-align:left">With smart
+      formatting</th>
+  </tr>
+  <tr>
+    <th id="Dates" colspan="2">
+      <strong>Dates</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Dates without_formatting">
+      I was born on ten oh six nineteen seventy
+    </td>
+    <td headers="Dates with_formatting">
+      I was born on 10/6/1970
+    </td>
+  </tr>
+  <tr>
+    <td headers="Dates without_formatting">
+      I was born on the ninth of December nineteen hundred
+    </td>
+    <td headers="Dates with_formatting">
+      I was born on 12/9/1900
+    </td>
+  </tr>
+  <tr>
+    <td headers="Dates without_formatting">
+      Today is June sixth
+    </td>
+    <td headers="Dates with_formatting">
+      Today is June 6
+    </td>
+  </tr>
+  <tr>
+    <th id="Times" colspan="2">
+      <strong>Times</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Times without_formatting">
+      The meeting starts at nine thirty AM
+    </td>
+    <td headers="Times with_formatting">
+      The meeting starts at 9:30 AM
+    </td>
+  </tr>
+  <tr>
+    <td headers="Times without_formatting">
+      I am available at seven EST
+    </td>
+    <td headers="Times with_formatting">
+      I am available at 7:00 EST
+    </td>
+  </tr>
+  <tr>
+    <td headers="Times without_formatting">
+      We meet at oh seven hundred hours
+    </td>
+    <td headers="Times with_formatting">
+      We meet at 0700 hours
+    </td>
+  </tr>
+  <tr>
+    <th id="Numbers" colspan="2">
+      <strong>Numbers</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Numbers without_formatting">
+      The quantity is one million one hundred and one
+    </td>
+    <td headers="Numbers with_formatting">
+      The quantity is 1000101
+    </td>
+  </tr>
+  <tr>
+    <td headers="Numbers without_formatting">
+      One point five is between one and two
+    </td>
+    <td headers="Numbers with_formatting">
+      1.5 is between 1 and 2
+    </td>
+  </tr>
+  <tr>
+    <th id="phone_numbers" colspan="2">
+      <strong>Phone numbers</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="phone_numbers without_formatting">
+      Call me at nine one four two three seven one thousand
+    </td>
+    <td headers="phone_numbers with_formatting">
+      Call me at 914-237-1000
+    </td>
+  </tr>
+  <tr>
+    <td headers="phone_numbers without_formatting">
+      Call me at one nine one four nine oh nine twenty six forty five
+    </td>
+    <td headers="phone_numbers with_formatting">
+      Call me at 1-914-909-2645
+    </td>
+  </tr>
+  <tr>
+    <th id="currency_values" colspan="2">
+      <strong>Currency values</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="currency_values without_formatting">
+      You owe me three thousand two hundred two dollars and sixty six
+      cents
+    </td>
+    <td headers="currency_values with_formatting">
+      You owe me $3202.66
+    </td>
+  </tr>
+  <tr>
+    <td headers="currency_values without_formatting">
+      The dollar rose to one hundred and nine point seven nine yen from
+      one hundred and nine point seven two yen
+    </td>
+    <td headers="currency_values with_formatting">
+      The dollar rose to 109.79 yen from 109.72 yen
+    </td>
+  </tr>
+  <tr>
+    <th id="internet_addresses" colspan="2">
+      <strong>Internet email and web addresses</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="internet_addresses without_formatting">
+      My email address is john dot doe at foo dot com
+    </td>
+    <td headers="internet_addresses with_formatting">
+      My email address is john.doe at foo.com
+    </td>
+  </tr>
+  <tr>
+    <td headers="internet_addresses without_formatting">
+      I saw the story on yahoo dot com
+    </td>
+    <td headers="internet_addresses with_formatting">
+      I saw the story on yahoo.com
+    </td>
+  </tr>
+  <tr>
+    <th id="Combinations" colspan="2">
+      <strong>Combinations</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Combinations without_formatting">
+      The code is zero two four eight one and the date of service
+      is May fifth two thousand and one
+    </td>
+    <td headers="Combinations with_formatting">
+      The code is 02481 and the date of service is 5/5/2001
+    </td>
+  </tr>
+  <tr>
+    <td headers="Combinations without_formatting">
+      There are forty seven links on Yahoo dot com now
+    </td>
+    <td headers="Combinations with_formatting">
+      There are 47 links on Yahoo.com now
+    </td>
+  </tr>
+</table>
+
+### Example transcripts with long pauses
+{: #smartFormattingLongPauses}
+
+In cases where an utterance contains long enough silences, the service can split the transcript into two or more final chunks. This affects the results of the formatting, as shown in the following examples.
+
+<table>
+  <caption>Table 4. Smart formatting example transcripts for long pauses</caption>
+  <tr>
+    <th style="width:45%; text-align:left">Audio speech</th>
+    <th style="text-align:left">Formatted transcription results</th>
+  </tr>
+  <tr>
+    <td>
+      My phone number is nine one four five five seven three
+      three nine two
+    </td>
+    <td>
+      "My phone number is 914-557-3392"
+    </td>
+  </tr>
+  <tr>
+    <td>
+      My phone number is nine one four <em>&lt;pause&gt;</em> five five
+      seven three three nine two
+    </td>
+    <td>
+      "My phone number is 914"<br/>
+      "5573392"
+    </td>
+  </tr>
+</table>
+
+## Numeric redaction
+{: #redaction}
+
+The numeric redaction feature is beta functionality that is available for US English, Japanese, and Korean.
+{: note}
+
+The `redaction` parameter directs the service to redact, or mask, numeric data from final transcripts. The feature redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is intended to redact sensitive numeric data, such as credit card numbers.
+
+By default, the service does not redact numeric data. Set the `redaction` parameter to `true` to enable numeric redaction. When you enable redaction, the service automatically enables smart formatting, regardless of whether you explicitly disable that feature. To ensure maximum security, the service also enforces the following parameter values when you enable redaction:
+
+-   The service disables keyword spotting, regardless of whether you specify values for the `keywords` and `keywords_threshold` parameters.
+-   The service disables interim results, regardless of whether you set the `interim_results` parameter of the WebSocket interface to `true`.
+-   The service returns only a single, final transcript, regardless of whether you specify a value for the `maximum_alternatives` parameter.
+
+The design of the feature parallels the existing smart formatting feature. The service applies redaction only to the final transcript of a recognition request, just before it returns the results to the client and after text normalization is complete.
+
+Future versions of the feature might expand redaction to mask all telephone numbers, street addresses, bank accounts, social security numbers, and other sensitive numeric data.
+{: note}
+
+### Language differences
+{: #redactionDifferences}
+
+The feature works exactly as described for US English models but has the following differences for Japanese and Korean models.
+
+#### Japanese
+{: #redactionJapanese}
+
+Japanese redaction has the following differences:
+
+-   In addition to masking strings of three or more consecutive digits, redaction also masks street addresses and numbers, regardless of whether they contain fewer than three digits.
+-   Similarly, redaction also masks date information in Japanese-style birth dates. In Japanese, date information is usually presented in Latin *Anno Domini* format but sometimes follows Japanese style, particularly for birth dates. In this case, the year and month are masked even though they contain just one or two digits. For example, numeric redaction changes the following string as shown.
+
+    <table style="width:50%">
+      <caption>Table 5. Example redaction of Japanese-style birth date</caption>
+      <tr>
+        <th style="text-align:left">Without redaction</th>
+        <th style="text-align:left">With redaction</th>
+      </tr>
+      <tr>
+        <td>
+          &#24179;&#25104; 30&#24180; 2&#26376;
+        </td>
+        <td>
+          &#24179;&#25104; XX&#24180; X&#26376;
+        </td>
+      </tr>
+    </table>
+
+#### Korean
+{: #redactionKorean}
+
+Korean redaction has the following differences:
+
+-   The smart formatting feature is not supported. The service still performs numeric redaction for Korean, but it performs no other smart formatting.
+-   Isolated digit characters are reduced, but possible digit characters that are included as part of Korean phrases are not. For example, the character <code>&#51060;</code> in the following phrase is not replaced by an `X` because it is adjacent to the following character:
+
+    <code>&#51060;&#51077;&#45768;&#45796;</code>
+
+    If the <code>&#51060;</code> character were separated from the following character by a space, it would be replaced by an `X`, as described in [Numeric redaction results](#redactionResults).
+
+### Numeric redaction example
+{: #redactionExample}
+
+The following example requests numeric redaction with a recognition request by setting the `redaction` parameter to `true`. Because the request enables redaction, the service implicitly enables smart formatting with the request. The service effectively disables the other parameters of the request so that they have no effect: The service returns a single final transcript and recognizes no keywords. The following section shows the effects of redaction.
+
+```bash
+curl -X POST -u "apikey:{apikey}"
+--header "Content-Type: audio/wav"
+--data-binary @{path}audio-file.wav
+"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?&redaction=true&max_alternatives=3&keywords=%22birth%22%2C%22birthday%22&keywords_threshold=0.5"
+```
+{: pre}
+
+### Numeric redaction results
+{: #redactionResults}
+
+The following table shows examples of final transcripts both with and without numeric redaction in each supported language.
+
+<table style="width:90%" summary="Each heading row identifies a language and is followed by a single row that shows the same transcript both without and with numeric redaction enabled.">
+  <caption>Table 6. Numeric redaction example transcripts</caption>
+  <tr>
+    <th id="without_redaction" style="text-align:left">Without redaction</th>
+    <th id="with_redaction" style="text-align:left">With redaction</th>
+  </tr>
+  <tr>
+    <th id="US_English" colspan="2">
+      <strong>US English</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="US_English without_redaction">
+      my credit card number is four one four seven two
+    </td>
+    <td headers="US_English with_redaction">
+      my credit card number is XXXXX
+    </td>
+  </tr>
+  <tr>
+    <th id="Japanese" colspan="2">
+      <strong>Japanese</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Japanese without_redaction">
+      &#31169; &#12398;&#12463;&#12524;&#12472;&#12483;&#12488; &#12459;&#12540;&#12489; &#30058;&#21495; &#12399; &#22235; &#19968; &#22235; &#19971; &#20108;&#12391;&#12377;
+    </td>
+    <td headers="Japanese with_redaction">
+      &#31169; &#12398;&#12463;&#12524;&#12472;&#12483;&#12488; &#12459;&#12540;&#12489; &#30058;&#21495; &#12399; XXXXX &#12391;&#12377;
+    </td>
+  </tr>
+  <tr>
+    <th id="Korean" colspan="2">
+      <strong>Korean</strong>
+    </th>
+  </tr>
+  <tr>
+    <td headers="Korean without_redaction">
+      &#45236; &#49888;&#50857; &#52852;&#46300; &#48264;&#54840;&#45716; &#49324; &#51068; &#49324; &#52832; &#51060; &#48264;&#51077;&#45768;&#45796;
+    </td>
+    <td headers="Korean with_redaction">
+      &#45236; &#49888;&#50857; &#52852;&#46300; &#48264;&#54840;&#45716; XXXXX &#48264;&#51077;&#45768;&#45796;
+    </td>
+  </tr>
+</table>
+
 ## Profanity filtering
 {: #profanity_filter}
 
@@ -804,328 +1251,3 @@ curl -X POST -u "apikey:{apikey}"
 }
 ```
 {: codeblock}
-
-## Smart formatting
-{: #smart_formatting}
-
-The smart formatting feature is beta functionality that is available for US English and Japanese only.
-{: note}
-
-The `smart_formatting` parameter directs the service to convert the following strings into more conventional representations:
-
--   Dates
--   Times
--   Series of digits and numbers
--   Phone numbers
--   Currency values
--   Internet email and web addresses
-
-You set the `smart_formatting` parameter to `true` to enable smart formatting. By default, the service does not perform smart formatting.
-
-The service applies smart formatting only to the final transcript of a recognition request. It applies smart formatting just before it returns the results to the client, when text normalization is complete. The conversion makes the transcript more readable and enables better post-processing of the transcription results.
-
-### Punctuation (US English)
-{: #smartFormattingPunctuation}
-
-For US English, the feature also directs the service to substitute punctuation symbols for the following spoken keyword strings in the audio.
-
-<table>
-  <caption>Table 2. Smart formatting punctuation keywords</caption>
-  <tr>
-    <th style="width:45%; text-align:left">Keyword string</th>
-    <th style="text-align:center">Resulting punctuation</th>
-  </tr>
-  <tr>
-    <td>
-      Comma
-    </td>
-    <td style="text-align:center">
-      <code>,</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Period
-    </td>
-    <td style="text-align:center">
-      <code>.</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Question mark
-    </td>
-    <td style="text-align:center">
-      <code>?</code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Exclamation point
-    </td>
-    <td style="text-align:center">
-      <code>!</code>
-    </td>
-  </tr>
-</table>
-
-The service converts these keyword strings to symbols only in appropriate places. For example, the service converts the spoken phrase
-
-```
-the warranty period is short period
-```
-{: codeblock}
-
-to the following text in a transcript
-
-```
-the warranty period is short.
-```
-{: codeblock}
-
-### Language differences
-{: #smartFormattingDifferences}
-
-Smart formatting is based on the presence of obvious keywords in the transcript. The supported languages handle smart formatting slightly differently.
-
-#### US English
-{: #smartFormattingEnglishSpanish}
-
--   Times are identified by keywords such as `AM`, `PM`, or `EST`.
--   Military times are converted if they are identified by the keyword `hours`.
--   Phone numbers must be either `911` or a number with 10 or 11 digits that starts with the number `1`.
-
-#### Japanese
-{: #smartFormattingJapanese}
-
--   Internet email and web addresses are not converted.
--   Phone numbers must be 10 or 11 digits and begin with valid prefixes for telephone numbers in Japan. For example, valid prefixes include `03` and `090`.
--   English words are converted to ASCII (hankaku) characters. For example, <code>&#65321;&#65314;&#65325;</code> is converted to `IBM`.
--   Ambiguous terms might not be converted if sufficient context is unavailable. For example, it is unclear whether <code>&#19968;&#26178;</code> and <code>&#21313;&#20998;</code> refer to times.
--   Punctuation is handled the same with or without smart formatting. For example, based on probability calculations, one of <code>&#12459;&#12531;&#12510;</code> or `,` is selected.
-
-### Smart formatting example
-{: #smartFormattingExample}
-
-The following example requests smart formatting with a recognition request by setting the `smart_formatting` parameter to `true`. The following sections show the effects of smart formatting on the results of a request.
-
-```bash
-curl -X POST -u "apikey:{apikey}"
---header "Content-Type: audio/flac"
---data-binary @{path}audio-file.flac
-"https://stream.watsonplatform.net/speech-to-text/api/v1/recognize?smart_formatting=true"
-```
-{: pre}
-
-### Smart formatting results
-{: #smartFormattingResults}
-
-The following table shows examples of final transcription results both with and without smart formatting. The transcripts are based on US English audio.
-
-<table summary="Each heading row is followed by multiple rows of examples that show the effect of smart formatting for the element that is identified in the heading.">
-  <caption>Table 3. Smart formatting example transcripts</caption>
-  <tr>
-    <th id="withoutFormatting" style="width:45%; text-align:left">Without
-      smart formatting</th>
-    <th id="withFormatting" style="text-align:left">With smart
-      formatting</th>
-  </tr>
-  <tr>
-    <th id="Dates" colspan="2">
-      <strong>Dates</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="Dates withoutFormatting">
-      I was born on ten oh six nineteen seventy
-    </td>
-    <td headers="Dates withFormatting">
-      I was born on 10/6/1970
-    </td>
-  </tr>
-  <tr>
-    <td headers="Dates withoutFormatting">
-      I was born on the ninth of December nineteen hundred
-    </td>
-    <td headers="Dates withFormatting">
-      I was born on 12/9/1900
-    </td>
-  </tr>
-  <tr>
-    <td headers="Dates withoutFormatting">
-      Today is June sixth
-    </td>
-    <td headers="Dates withFormatting">
-      Today is June 6
-    </td>
-  </tr>
-  <tr>
-    <th id="Times" colspan="2">
-      <strong>Times</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="Times withoutFormatting">
-      The meeting starts at nine thirty AM
-    </td>
-    <td headers="Times withFormatting">
-      The meeting starts at 9:30 AM
-    </td>
-  </tr>
-  <tr>
-    <td headers="Times withoutFormatting">
-      I am available at seven EST
-    </td>
-    <td headers="Times withFormatting">
-      I am available at 7:00 EST
-    </td>
-  </tr>
-  <tr>
-    <td headers="Times withoutFormatting">
-      We meet at oh seven hundred hours
-    </td>
-    <td headers="Times withFormatting">
-      We meet at 0700 hours
-    </td>
-  </tr>
-  <tr>
-    <th id="Numbers" colspan="2">
-      <strong>Numbers</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="Numbers withoutFormatting">
-      The quantity is one million one hundred and one
-    </td>
-    <td headers="Numbers withFormatting">
-      The quantity is 1000101
-    </td>
-  </tr>
-  <tr>
-    <td headers="Numbers withoutFormatting">
-      One point five is between one and two
-    </td>
-    <td headers="Numbers withFormatting">
-      1.5 is between 1 and 2
-    </td>
-  </tr>
-  <tr>
-    <th id="PhoneNumbers" colspan="2">
-      <strong>Phone numbers</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="PhoneNumbers withoutFormatting">
-      Call me at nine one four two three seven one thousand
-    </td>
-    <td headers="PhoneNumbers withFormatting">
-      Call me at 914-237-1000
-    </td>
-  </tr>
-  <tr>
-    <td headers="PhoneNumbers withoutFormatting">
-      Call me at one nine one four nine oh nine twenty six forty five
-    </td>
-    <td headers="PhoneNumbers withFormatting">
-      Call me at 1-914-909-2645
-    </td>
-  </tr>
-  <tr>
-    <th id="CurrencyValues" colspan="2">
-      <strong>Currency values</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="CurrencyValues withoutFormatting">
-      You owe me three thousand two hundred two dollars and sixty six
-      cents
-    </td>
-    <td headers="CurrencyValues withFormatting">
-      You owe me $3202.66
-    </td>
-  </tr>
-  <tr>
-    <td headers="CurrencyValues withoutFormatting">
-      The dollar rose to one hundred and nine point seven nine yen from
-      one hundred and nine point seven two yen
-    </td>
-    <td headers="CurrencyValues withFormatting">
-      The dollar rose to 109.79 yen from 109.72 yen
-    </td>
-  </tr>
-  <tr>
-    <th id="InternetAddresses" colspan="2">
-      <strong>Internet email and web addresses</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="InternetAddresses withoutFormatting">
-      My email address is john dot doe at foo dot com
-    </td>
-    <td headers="InternetAddresses withFormatting">
-      My email address is john.doe at foo.com
-    </td>
-  </tr>
-  <tr>
-    <td headers="InternetAddresses withoutFormatting">
-      I saw the story on yahoo dot com
-    </td>
-    <td headers="InternetAddresses withFormatting">
-      I saw the story on yahoo.com
-    </td>
-  </tr>
-  <tr>
-    <th id="Combinations" colspan="2">
-      <strong>Combinations</strong>
-    </th>
-  </tr>
-  <tr>
-    <td headers="Combinations withoutFormatting">
-      The CPT code is zero two four eight one and the date of service
-      is May fifth two thousand and one
-    </td>
-    <td headers="Combinations withFormatting">
-      The CPT code is 02481 and the date of service is 5/5/2001
-    </td>
-  </tr>
-  <tr>
-    <td headers="Combinations withoutFormatting">
-      There are forty seven links on Yahoo dot com now
-    </td>
-    <td headers="Combinations withFormatting">
-      There are 47 links on Yahoo.com now
-    </td>
-  </tr>
-</table>
-
-### Example transcripts with long pauses
-{: #smartFormattingLongPauses}
-
-In cases where an utterance contains long enough silences, the service can split the transcript into two or more final chunks. This affects the results of the formatting, as shown in the following examples.
-
-<table>
-  <caption>Table 4. Smart formatting example transcripts for long pauses</caption>
-  <tr>
-    <th style="width:45%; text-align:left">Audio speech</th>
-    <th style="text-align:left">Formatted transcription results</th>
-  </tr>
-  <tr>
-    <td>
-      My phone number is nine one four five five seven three
-      three nine two
-    </td>
-    <td>
-      "My phone number is 914-557-3392"
-    </td>
-  </tr>
-  <tr>
-    <td>
-      My phone number is nine one four <em>&lt;pause&gt;</em> five five
-      seven three three nine two
-    </td>
-    <td>
-      "My phone number is 914"<br/>
-      "5573392"
-    </td>
-  </tr>
-</table>

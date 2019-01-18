@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-02"
 
 ---
 
@@ -20,7 +20,7 @@ lastupdated: "2018-11-15"
 {:python: .ph data-hd-programlang='python'}
 {:swift: .ph data-hd-programlang='swift'}
 
-# The HTTP interface
+# The synchronous HTTP interface
 {: #http}
 
 The synchronous HTTP interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care provides a single `POST /v1/recognize` method for requesting speech recognition with the service. This method is the simplest means of obtaining a transcript. It offers two ways of submitting a speech recognition request:
@@ -29,14 +29,7 @@ The synchronous HTTP interface of {{site.data.keyword.ibmwatson}} {{site.data.ke
 -   The first sends all of the audio in a single stream via the body of the request. You specify the parameters of the operation as request headers and query parameters. For more information, see [Making a basic HTTP request](#HTTP-basic).
 -   The second sends the audio as a multipart request. You specify the parameters of the request as a combination of request headers, query parameters, and JSON metadata. For more information, see [Making a multipart HTTP request](#HTTP-multi).
 
-Submit a maximum of 100 MB and a minimum of 100 bytes of audio with a request.
-
--   For information about audio formats and about using compression to increase the amount of audio that you can send with a request, see [Audio Formats](/docs/services/speech-to-text-icp/audio-formats.html).
--   For information about tailoring recognition requests to suit your application's needs, see [Input features](/docs/services/speech-to-text-icp/input.html) and [Output features](/docs/services/speech-to-text-icp/output.html).
--   For information about all methods of the HTTP interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
-
-The HTTP interface also provides the `GET /v1/models` and `GET /v1/models/{model_id}` methods to list the languages and models that are available for speech recognition. For more information, see [Languages and models](/docs/services/speech-to-text-icp/input.html#models).
-{: tip}
+Submit a maximum of 100 MB and a minimum of 100 bytes of audio with a request. For information about all methods of the HTTP interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
 ## Making a basic HTTP request
 {: #HTTP-basic}
@@ -127,6 +120,18 @@ You specify the following parameters of multipart speech recognition as request 
   </tr>
   <tr>
     <td>
+      <code>Content-Type</code>
+      <br/><em>Header</em>
+      <br/><em>String</em>
+    </td>
+    <td>
+      <em>Required.</em> Specify `multipart/form-data` to indicate how
+      data is passed to the method. You specify the content type of the
+      audio with the JSON `part_content_type` parameter.
+    </td>
+  </tr>
+  <tr>
+    <td>
       <code>Transfer-Encoding</code>
       <br/><em>Header</em>
       <br/><em>String</em>
@@ -182,7 +187,7 @@ You specify the following parameters of multipart speech recognition as request 
   </tr>
 </table>
 
-For more information about the query parameters, see [Input features](/docs/services/speech-to-text-icp/input.html).
+For more information about the query parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
 
 ### JSON metadata for multipart requests
 {: #multipartJSON}
@@ -202,13 +207,15 @@ The JSON metadata that you pass with a multipart request can include the followi
 -   `profanity_filter` (boolean)
 -   `smart_formatting` (boolean)
 -   `speaker_labels` (boolean)
+-   `grammar_name` (string)
+-   `redaction` (boolean)
 
 Only the following two parameters are specific to multipart requests:
 
 -   The `part_content_type` field is *optional* for most audio formats. It is required for the `audio/basic`, `audio/l16`, and `audio/mulaw` formats. It specifies the format of the audio in the following parts of the request. All audio files must be in the same format.
 -   The `data_parts_count` field is *optional*. You can specify the number of audio files that are sent with the request. The service applies end-of-stream detection to the last (and possibly the only) data part. If you omit the parameter, the service determines the number of parts from the request.
 
-All other parameters of the metadata are optional. For a summary of all available parameters, see [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
+All other parameters of the metadata are optional. For descriptions of all available parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
 
 ### Example multipart request
 
@@ -216,16 +223,18 @@ The following `curl` example shows how to pass a multipart recognition request w
 
 ```bash
 curl -X POST -u "apikey:{apikey}"
+--header "Content-Type: multipart/form-data"
 --form metadata="{\"part_content_type\":\"application/octet-stream\",
   \"data_parts_count\":2,
   \"timestamps\":true,
   \"word_alternatives_threshold\":0.9,
   \"keywords\":[\"colorado\",\"tornado\",\"tornadoes\"],
   \"keywords_threshold\":0.5}"
---form upload="@audio-file1.flac"
---form upload="@audio-file2.flac"
+--form upload="@{path}audio-file1.flac"
+--form upload="@{path}audio-file2.flac"
 "https://{icp_cluster_host}{:port}speech-to-text/api/v1/recognize"
 ```
+{: pre}
 
 The example returns the following transcript for the audio files. The service returns the results for the two files in the order in which they are sent. (The example output abbreviates the results for the second file.)
 
@@ -419,3 +428,4 @@ possible tornadoes is approaching Colorado on Sunday "
    "result_index": 0
 }
 ```
+{: codeblock}

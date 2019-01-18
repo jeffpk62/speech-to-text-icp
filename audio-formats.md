@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-07"
 
 ---
 
@@ -25,10 +25,13 @@ lastupdated: "2018-11-15"
 
 The {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care service can extract speech from audio in many different formats.
 
--   If you are unfamiliar with audio and how it is described and specified, start with [Audio characteristics and terminology](#terminology) to help you get started.
+-   If you are unfamiliar with audio and how it is described and specified, begin with [Audio characteristics and terminology](#terminology) to help you get started.
 -   If you already understand how to use audio, jump to [Supported audio formats](#formats) for detailed information about the formats that the service supports.
 
 The final sections, [Data limits and compression](#limits) and [Audio conversion](#conversion), can help you get the most from your use of the service.
+
+How you record audio can make a big difference in the service's results. Speech recognition can be very sensitive to input audio quality. When you experiment with the service, try to ensure that the input audio quality is as good as possible. To obtain the best possible accuracy, use a close, speech-oriented microphone (such as a headset) whenever possible and adjust the microphone settings if necessary. Try to avoid using a system's built-in microphone.
+{: tip}
 
 ## Audio characteristics and terminology
 {: #terminology}
@@ -53,12 +56,12 @@ In theory, you can send 44 kHz audio with a broadband or narrowband model, but t
 **Notes about audio formats**
 
 -   For the `audio/l16` and `audio/mulaw` formats, you must specify the rate of your audio.
--   For the `audio/basic` format, the service supports only narrowband audio.
+-   For the `audio/basic` and `audio/g729` formats, the service supports only narrowband audio.
 
 **More information**
 
 -   For more information about sampling rates, see [en.wikipedia.org/wiki/Sampling ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://en.wikipedia.org/wiki/Sampling){: new_window}. Select *Sampling (signal processing)*.
--   For more information about the models that the service offers for each supported language, see [Languages and models](/docs/services/speech-to-text-icp/input.html#models).
+-   For more information about the models that the service offers for each supported language, see [Languages and models](/docs/services/speech-to-text-icp/models.html).
 
 ### Bit rate
 {: #bitRate}
@@ -134,11 +137,14 @@ With {{site.data.keyword.speechtotextshort}}: Customer Care, you can safely use 
 
 Table 1 provides a summary of the audio formats that the service supports.
 
--   *Audio format and compression* identifies each format and indicates its supported compression. You can send a maximum of 100 MB of audio to the service with a single request. By using a format that supports compression, you can reduce the size of your audio to maximize the amount of data that you can pass to the service. For more information, see [Data limits and compression](#limits).
--   *Content-type specification* indicates whether you must use the `Content-Type` header or equivalent parameter to specify the format (MIME type) of the audio that you send to the service. You can specify the audio format for any request, but that's not always necessary:
+-   *Audio format and compression* identifies each format and indicates its supported compression. You can send a maximum of 100 MB of audio to the service with a single request (for the batch-processing interfaces, with a single file). By using a format that supports compression, you can reduce the size of your audio to maximize the amount of data that you can pass to the service. For more information, see [Data limits and compression](#limits).
+-   *Content-type specification* indicates whether you must use the `Content-Type` header or equivalent parameter to specify the format (MIME type) of the audio that you send to the service. You can always specify the audio format for any request, but that's not always necessary:
     -   For most formats, the content type is optional. You can omit the content type or specify `application/octet-stream` to have the service automatically detect the format.
     -   For others, the content type is required. These formats do not provide the information, such as the sampling rate, that the service needs to auto-detect their format.
 -   The final columns identify additional *Required parameters* and *Optional parameters* for each format. The following sections provide more information about these parameters.
+
+The batch-processing interface accepts audio files in multiple formats with a single request. You use the `Content-Type` header to specify `multipart/form-data`, not the content types of the audio files. However, the service accepts only audio from which it can derive the format and its characteristics. For more information, see [Supported audio formats](/docs/services/speech-to-text-icp/batch.html#batchAudioSupported) for the batch-processing interface.
+{: note}
 
 <table>
   <caption>Table 1. Summary of supported audio formats</caption>
@@ -173,6 +179,20 @@ Table 1 provides a summary of the audio formats that the service supports.
   <tr>
     <td style="text-align:left">
       [audio/flac](#flac)<br/>Lossless
+    </td>
+    <td style="text-align:center">
+      Optional
+    </td>
+    <td style="text-align:center">
+      None
+    </td>
+    <td style="text-align:center">
+      None
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      [audio/g729](#g729)<br/>Lossy
     </td>
     <td style="text-align:center">
       Optional
@@ -273,13 +293,13 @@ Table 1 provides a summary of the audio formats that the service supports.
   </tr>
 </table>
 
-When you use the `curl` command to make a speech recognition request with the HTTP interface, you must specify the audio format with the `Content-Type` header, specify `"Content-Type: application/octet-stream"`, or specify `"Content-Type:"`. If you omit the header entirely, `curl` uses a default value of `application/x-www-form-urlencoded`.
+When you use the `curl` command to make a speech recognition request with the synchronous or asynchronous HTTP interface, you must either specify the audio format with the `Content-Type` header, specify `"Content-Type: application/octet-stream"`, or specify `"Content-Type:"`. If you omit the header entirely, `curl` uses a default value of `application/x-www-form-urlencoded`.
 {: important}
 
 ### audio/basic format
 {: #basic}
 
-*Basic audio* (`audio/basic`) is a single-channel, lossy audio format that is encoded by using 8-bit u-law (or mu-law) data that is sampled at 8 kHz. This format provides a lowest-common denominator for indicating the media type of audio. The service supports the use of files in `audio/basic` format only with narrowband models.
+*Basic audio* (`audio/basic`) is a single-channel, lossy audio format that is encoded by using 8-bit u-law (or mu-law) data that is sampled at 8 kHz. This format provides a lowest-common denominator for indicating the media type of audio. The service supports the use of files in `audio/basic` format only with narrowband models. (The batch-processing interface does not accept files in `audio/basic` format.)
 
 For more information, see the Internet Engineering Task Force (IETF) [Request for Comment (RFC) 2046 ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://tools.ietf.org/html/rfc2046){: new_window} and [iana.org/assignments/media-types/audio/basic ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://www.iana.org/assignments/media-types/audio/basic){: new_window}.
 
@@ -288,10 +308,15 @@ For more information, see the Internet Engineering Task Force (IETF) [Request fo
 
 *Free Lossless Audio Codec (FLAC)* (`audio/flac`) is a lossless audio format. For more information, see [en.wikipedia.org/wiki/FLAC ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://en.wikipedia.org/wiki/FLAC){: new_window}.
 
+### audio/g729 format
+{: #g729}
+
+*G.729* (`audio/g729`) is a lossy audio format that supports data that is encoded at 8 kHz. The service supports only G.729 Annex D, not Annex J. The service supports the use of files in `audio/g729` format only with narrowband models. For more information, see [en.wikipedia.org/wiki/G.729 ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://en.wikipedia.org/wiki/G.729){: new_window}.
+
 ### audio/l16 format
 {: #l16}
 
-*Linear 16-bit Pulse-Code Modulation (PCM)* (`audio/l16`) is an uncompressed audio format. Use this format to pass a raw PCM file. Linear PCM audio can also be carried inside of a container Waveform Audio File Format (WAV) file. When you use the `audio/l16` format, the service accepts extra required and optional parameters on the format specification.
+*Linear 16-bit Pulse-Code Modulation (PCM)* (`audio/l16`) is an uncompressed audio format. Use this format to pass a raw PCM file. Linear PCM audio can also be carried inside of a container Waveform Audio File Format (WAV) file. When you use the `audio/l16` format, the service accepts extra required and optional parameters on the format specification. (The batch-processing interface does not accept files in `audio/l16` format.)
 
 <table>
   <caption>Table 2. Parameters for `audio/l16` format</caption>
@@ -360,7 +385,7 @@ For more information, see the IETF [Request for Comment (RFC) 2586 ![External li
 ### audio/mulaw format
 {: #mulaw}
 
-*Mu-law* (`audio/mulaw`) is a single-channel, lossy audio format. The data is encoded by using the u-law (or mu-law) algorithm. When you use this format, the service requires an extra parameter on the format specification.
+*Mu-law* (`audio/mulaw`) is a single-channel, lossy audio format. The data is encoded by using the u-law (or mu-law) algorithm. When you use this format, the service requires an extra parameter on the format specification. (The batch-processing interface does not accept files in `audio/mulaw` format.)
 
 <table>
   <caption>Table 3. Parameter for `audio/mulaw` format</caption>
@@ -420,7 +445,7 @@ For JavaScript code that shows how to capture audio from a microphone in a Chrom
 ## Data limits and compression
 {: #limits}
 
-The service accepts a maximum of 100 MB of audio data for transcription with a request. When you recognize long continuous audio streams or large files, take the following steps to ensure that your audio does not exceed the 100 MB limit:
+The service accepts a maximum of 100 MB of audio data for transcription with a request (for the batch-processing interface, this is a per-file maximum). When you recognize long continuous audio streams or large files, take the following steps to ensure that your audio does not exceed the 100 MB limit:
 
 -   Use a sampling rate no greater than 16 kHz (for broadband models) or 8 kHz (for narrowband models), and use 16 bits per sample. The service converts audio recorded at a sampling rate that is higher than the target model (16 kHz or 8 kHz) to the rate of the model. So larger frequencies do not result in enhanced recognition accuracy, but they do increase the size of the audio stream.
 -   Encode your audio in a format that offers data compression. By encoding your data more efficiently, you can send far more audio without exceeding the 100 MB data limit. Audio formats such as `audio/ogg` and `audio/mp3` significantly reduce the size of your audio stream. You can use these formats to send greater amounts of audio with a single request.

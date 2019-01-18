@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-14"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-11-15"
 # Parameter summary
 {: #summary}
 
-A summary follows of all of the parameters available for speech recognition. Each parameter includes a link to its description in [Input features](/docs/services/speech-to-text-icp/input.html) or [Output features](/docs/services/speech-to-text-icp/output.html). For more information about all methods of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
+A summary follows of all of the parameters available for speech recognition. For more information about all methods of the {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 {: shortdesc}
 
 Consider the following basic requirements when you make a speech recognition request:
@@ -46,7 +46,7 @@ An optional customization ID for a custom acoustic model that is adapted for the
 <table>
   <caption>Table 1. The acoustic_customization_id parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -67,7 +67,7 @@ An optional customization ID for a custom acoustic model that is adapted for the
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -75,10 +75,18 @@ An optional customization ID for a custom acoustic model that is adapted for the
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -90,7 +98,7 @@ An optional version of a base model. The parameter is intended primarily for use
 <table>
   <caption>Table 2. The base_model_version parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -111,7 +119,7 @@ An optional version of a base model. The parameter is intended primarily for use
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -119,22 +127,30 @@ An optional version of a base model. The parameter is intended primarily for use
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
 
 ## Content-Type
 
-An optional audio format (MIME type) that specifies the format of the audio data that you pass to the service. The service can automatically detect the format of most audio, so the parameter is optional for most formats. It is required for `audio/basic`, `audio/l16`, and `audio/mulaw`. For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+An optional audio format (MIME type) that specifies the format of the audio data that you pass to the service. The service can automatically detect the format of most audio, so the parameter is optional for most formats. It is required for `audio/basic`, `audio/l16`, and `audio/mulaw`. (For the batch-processing interface, the header must be the value `multipart/form-data`.) For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
 <table>
   <caption>Table 3. The Content-Type parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -156,7 +172,7 @@ An optional audio format (MIME type) that specifies the format of the audio data
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Request header of <code>POST /v1/recognize</code> method
@@ -164,14 +180,22 @@ An optional audio format (MIME type) that specifies the format of the audio data
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Request header of <code>POST /v1/recognitions</code> method
     </td>
   </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Request header of <code>POST /v1/batches</code> method that
+      specifies the value <code>multipart/form-data</code>
+    </td>
+  </tr>
 </table>
-
 
 ## customization_weight
 
@@ -180,7 +204,7 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
 <table>
   <caption>Table 4. The customization_weight parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -201,7 +225,7 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -209,10 +233,70 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
+    </td>
+  </tr>
+</table>
+
+## grammar_name
+
+An optional string that identifies a grammar that is to be used for speech recognition. The service recognizes only strings that are defined by the grammar. You must specify both the name of the grammar and the customization ID of the custom language model for which the grammar is defined. For more information, see [Grammars](/docs/services/speech-to-text-icp/input.html#grammars).
+
+<table>
+  <caption>Table 5. The grammar_name parameter</caption>
+  <tr>
+    <th>Availability and usage</th>
+    <th style="vertical-align:bottom">Description</th>
+  </tr>
+  <tr>
+    <td style="text-align:left; width:30%">
+      **Availability**
+    </td>
+    <td style="text-align:left">
+      Beta for all languages
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **WebSocket**
+    </td>
+    <td style="text-align:left">
+      Parameter of JSON <code>start</code> message
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Synchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognize</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Asynchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -222,9 +306,9 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
 An optional integer that specifies the number of seconds for the service's inactivity timeout; use `-1` to indicate infinity. The default is 30 seconds. For more information, see [Inactivity timeout](/docs/services/speech-to-text-icp/input.html#timeouts).
 
 <table>
-  <caption>Table 5. The inactivity_timeout parameter</caption>
+  <caption>Table 6. The inactivity_timeout parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -245,7 +329,7 @@ An optional integer that specifies the number of seconds for the service's inact
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -253,10 +337,18 @@ An optional integer that specifies the number of seconds for the service's inact
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -266,9 +358,9 @@ An optional integer that specifies the number of seconds for the service's inact
 An optional boolean that directs the service to return intermediate hypotheses that are likely to change before the final transcript. By default (`false`), interim results are not returned. For more information, see [Interim results](/docs/services/speech-to-text-icp/output.html#interim).
 
 <table>
-  <caption>Table 6. The interim_results parameter</caption>
+  <caption>Table 7. The interim_results parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -289,7 +381,7 @@ An optional boolean that directs the service to return intermediate hypotheses t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Not supported
@@ -297,7 +389,15 @@ An optional boolean that directs the service to return intermediate hypotheses t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
     </td>
     <td style="text-align:left">
       Not supported
@@ -310,9 +410,9 @@ An optional boolean that directs the service to return intermediate hypotheses t
 An optional array of keyword strings that the service spots in the input audio. By default, keyword spotting is not performed. For more information, see [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
 <table>
-  <caption>Table 7. The keywords parameter</caption>
+  <caption>Table 8. The keywords parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -333,7 +433,7 @@ An optional array of keyword strings that the service spots in the input audio. 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -341,10 +441,18 @@ An optional array of keyword strings that the service spots in the input audio. 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -354,9 +462,9 @@ An optional array of keyword strings that the service spots in the input audio. 
 An optional double between 0.0 and 1.0 that indicates the minimum threshold for a positive keyword match. By default, keyword spotting is not performed. For more information, see [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
 <table>
-  <caption>Table 8. The keywords_threshold parameter</caption>
+  <caption>Table 9. The keywords_threshold parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -377,7 +485,7 @@ An optional double between 0.0 and 1.0 that indicates the minimum threshold for 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -385,10 +493,18 @@ An optional double between 0.0 and 1.0 that indicates the minimum threshold for 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -398,9 +514,9 @@ An optional double between 0.0 and 1.0 that indicates the minimum threshold for 
 An optional customization ID for a custom language model that includes terminology from your domain. By default, no custom model is used. For more information, see [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
 
 <table>
-  <caption>Table 9. The language_customization_id parameter</caption>
+  <caption>Table 10. The language_customization_id parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -421,7 +537,7 @@ An optional customization ID for a custom language model that includes terminolo
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -429,10 +545,18 @@ An optional customization ID for a custom language model that includes terminolo
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -442,9 +566,9 @@ An optional customization ID for a custom language model that includes terminolo
 An optional integer that specifies the maximum number of alternative hypotheses that the service returns. By default, the service returns a single final hypothesis. For more information, see [Maximum alternatives](/docs/services/speech-to-text-icp/output.html#max_alternatives).
 
 <table>
-  <caption>Table 10. The max_alternatives parameter</caption>
+  <caption>Table 11. The max_alternatives parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -465,7 +589,7 @@ An optional integer that specifies the maximum number of alternative hypotheses 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -473,22 +597,30 @@ An optional integer that specifies the maximum number of alternative hypotheses 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
 
 ## model
 
-An optional model that specifies the language in which the audio is spoken and the rate at which it was sampled: broadband or narrowband. By default, `en-US_BroadbandModel` is used. For more information, see [Languages and models](/docs/services/speech-to-text-icp/input.html#models).
+An optional model that specifies the language in which the audio is spoken and the rate at which it was sampled: broadband or narrowband. By default, `en-US_BroadbandModel` is used. For more information, see [Languages and models](/docs/services/speech-to-text-icp/models.html).
 
 <table>
-  <caption>Table 11. The model parameter</caption>
+  <caption>Table 12. The model parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -509,7 +641,7 @@ An optional model that specifies the language in which the audio is spoken and t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -517,10 +649,18 @@ An optional model that specifies the language in which the audio is spoken and t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -530,9 +670,9 @@ An optional model that specifies the language in which the audio is spoken and t
 An optional boolean that indicates whether the service censors profanity from a transcript. By default (`true`), profanity is filtered from the transcript. For more information, see [Profanity filtering](/docs/services/speech-to-text-icp/output.html#profanity_filter).
 
 <table>
-  <caption>Table 12. The profanity_filter parameter</caption>
+  <caption>Table 13. The profanity_filter parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -553,7 +693,7 @@ An optional boolean that indicates whether the service censors profanity from a 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -561,10 +701,70 @@ An optional boolean that indicates whether the service censors profanity from a 
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
+    </td>
+  </tr>
+</table>
+
+## redaction
+
+An optional boolean that indicates whether the service redacts numeric data with three or more consecutive digits from a transcript. If you set the `redaction` parameter to `true`, the service automatically forces the `smart_formatting` parameter to be `true`. By default (`false`), numeric data is not redacted. For more information, see [Numeric redaction](/docs/services/speech-to-text-icp/output.html#redaction).
+
+<table>
+  <caption>Table 14. The redaction parameter</caption>
+  <tr>
+    <th>Availability and usage</th>
+    <th style="vertical-align:bottom">Description</th>
+  </tr>
+  <tr>
+    <td style="text-align:left; width:30%">
+      **Availability**
+    </td>
+    <td style="text-align:left">
+      Beta for US English, Japanese, and Korean
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **WebSocket**
+    </td>
+    <td style="text-align:left">
+      Parameter of JSON <code>start</code> message
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Synchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognize</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Asynchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -574,9 +774,9 @@ An optional boolean that indicates whether the service censors profanity from a 
 An optional boolean that indicates whether the service converts dates, times, numbers, currency, and similar values into more conventional representations in the final transcript. For US English, the feature also converts certain keyword phrases into punctuation symbols. By default (`false`), smart formatting is not performed. For more information, see [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting).
 
 <table>
-  <caption>Table 13. The smart_formatting parameter</caption>
+  <caption>Table 15. The smart_formatting parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -584,7 +784,7 @@ An optional boolean that indicates whether the service converts dates, times, nu
       **Availability**
     </td>
     <td style="text-align:left">
-      Beta for US English and Japanese
+      Beta for US English, Japanese, and Spanish
     </td>
   </tr>
   <tr>
@@ -597,7 +797,7 @@ An optional boolean that indicates whether the service converts dates, times, nu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -605,22 +805,30 @@ An optional boolean that indicates whether the service converts dates, times, nu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
 
 ## speaker_labels
 
-An optional boolean that indicates whether the service identifies which individuals spoke which words in a multi-participant exchange. By default (`false`), speaker labels are not returned. For more information, see [Speaker labels](/docs/services/speech-to-text-icp/output.html#speaker_labels).
+An optional boolean that indicates whether the service identifies which individuals spoke which words in a multi-participant exchange. If you set the `speaker_labels` parameter to `true`, the service automatically forces the `timestamps` parameter to be `true`. By default (`false`), speaker labels are not returned. For more information, see [Speaker labels](/docs/services/speech-to-text-icp/output.html#speaker_labels).
 
 <table>
-  <caption>Table 14. The speaker_labels parameter</caption>
+  <caption>Table 16. The speaker_labels parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -628,7 +836,7 @@ An optional boolean that indicates whether the service identifies which individu
       **Availability**
     </td>
     <td style="text-align:left">
-      Beta for US English and Japanese
+      Beta for US English, Japanese, and Spanish
     </td>
   </tr>
   <tr>
@@ -641,7 +849,7 @@ An optional boolean that indicates whether the service identifies which individu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -649,10 +857,71 @@ An optional boolean that indicates whether the service identifies which individu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method<br/>
+      Always enabled (`true`) for the current release
+    </td>
+  </tr>
+</table>
+
+## speech_analytics
+
+An optional boolean that indicates whether the service is to produce speech analytics results for the input audio. The service further analyzes its speech recognition results to produce detailed information about the topics of overall conversation and the tone, sentiment, keywords, and topics of individual speakers. If you set the `speech_analytics` parameter to `true`, the service automatically forces the `speaker_labels` parameter to be `true`. By default (`false`), speech analytics are not returned. For more information, see [Speech analytics](/docs/services/speech-to-text-icp/analytics.html).
+
+<table>
+  <caption>Table 17. The speech_analytics parameter</caption>
+  <tr>
+    <th>Availability and usage</th>
+    <th style="vertical-align:bottom">Description</th>
+  </tr>
+  <tr>
+    <td style="text-align:left; width:30%">
+      **Availability**
+    </td>
+    <td style="text-align:left">
+      Generally available for US English
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **WebSocket**
+    </td>
+    <td style="text-align:left">
+      Not supported
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Synchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Asynchronous HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -662,9 +931,9 @@ An optional boolean that indicates whether the service identifies which individu
 An optional boolean that indicates whether the service produces timestamps for the words of the transcript. By default (`false`), timestamps are not returned. For more information, see [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps).
 
 <table>
-  <caption>Table 15. The timestamps parameter</caption>
+  <caption>Table 18. The timestamps parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -685,7 +954,7 @@ An optional boolean that indicates whether the service produces timestamps for t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -693,10 +962,19 @@ An optional boolean that indicates whether the service produces timestamps for t
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method<br/>
+      Always enabled (`true`) for the current release
     </td>
   </tr>
 </table>
@@ -706,9 +984,9 @@ An optional boolean that indicates whether the service produces timestamps for t
 An optional value of `chunked` that causes the audio to be streamed to the service. By default, audio is sent all at once as a one-shot delivery. For more information, see [Audio transmission](/docs/services/speech-to-text-icp/input.html#transmission).
 
 <table>
-  <caption>Table 16. The Transfer-Encoding parameter</caption>
+  <caption>Table 19. The Transfer-Encoding parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -729,7 +1007,7 @@ An optional value of `chunked` that causes the audio to be streamed to the servi
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Request header of <code>POST /v1/recognize</code> method
@@ -737,10 +1015,18 @@ An optional value of `chunked` that causes the audio to be streamed to the servi
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Request header of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not applicable; never streamed
     </td>
   </tr>
 </table>
@@ -753,9 +1039,9 @@ You cannot use JavaScript to call the WebSocket interface from a browser. The `w
 {: important}
 
 <table>
-  <caption>Table 17. The watson-token parameter</caption>
+  <caption>Table 20. The watson-token parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -776,18 +1062,26 @@ You cannot use JavaScript to call the WebSocket interface from a browser. The `w
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
-      Not supported.
+      Not supported
     </td>
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
-      Not supported.
+      Not supported
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -797,9 +1091,9 @@ You cannot use JavaScript to call the WebSocket interface from a browser. The `w
 An optional double between 0.0 and 1.0 that specifies the threshold at which the service reports acoustically similar alternatives for words of the input audio. By default, word alternatives are not returned. For more information, see [Word alternatives](/docs/services/speech-to-text-icp/output.html#word_alternatives).
 
 <table>
-  <caption>Table 18. The word_alternatives_threshold parameter</caption>
+  <caption>Table 21. The word_alternatives_threshold parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -820,7 +1114,7 @@ An optional double between 0.0 and 1.0 that specifies the threshold at which the
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -828,10 +1122,18 @@ An optional double between 0.0 and 1.0 that specifies the threshold at which the
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Not supported
     </td>
   </tr>
 </table>
@@ -841,9 +1143,9 @@ An optional double between 0.0 and 1.0 that specifies the threshold at which the
 An optional boolean that indicates whether the service provides confidence measures for the words of the transcript. By default (`false`), word confidence measures are not returned. For more information, see [Word confidence](/docs/services/speech-to-text-icp/output.html#word_confidence).
 
 <table>
-  <caption>Table 19. The word_confidence parameter</caption>
+  <caption>Table 22. The word_confidence parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -864,7 +1166,7 @@ An optional boolean that indicates whether the service provides confidence measu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognize</code> method
@@ -872,10 +1174,18 @@ An optional boolean that indicates whether the service provides confidence measu
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Query parameter of <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Query parameter of <code>POST /v1/batches</code> method
     </td>
   </tr>
 </table>
@@ -885,9 +1195,9 @@ An optional boolean that indicates whether the service provides confidence measu
 An optional string that associates a customer ID with data that is passed for recognition requests. The parameter accepts the argument `customer_id={id}`. By default, no customer ID is associated with the data. For more information, see [Information security](/docs/services/speech-to-text-icp/information-security.html).
 
 <table>
-  <caption>Table 20. The X-Watson-Metadata parameter</caption>
+  <caption>Table 23. The X-Watson-Metadata parameter</caption>
   <tr>
-    <th>Language availability and interface usage</th>
+    <th>Availability and usage</th>
     <th style="vertical-align:bottom">Description</th>
   </tr>
   <tr>
@@ -905,24 +1215,32 @@ An optional string that associates a customer ID with data that is passed for re
     <td style="text-align:left">
       <code>x-watson-metadata</code> query parameter of
       <code>/v1/recognize</code> connection request (You must URL-encode
-      the argument, for example, `customer_id%3dmy_ID`.)
+      the argument, for example, `customer_id%3dmy_customer_ID`.)
     </td>
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP**
+      **Synchronous HTTP**
     </td>
     <td style="text-align:left">
-      Request header of POST <code>/v1/recognize</code> request
+      Request header of POST <code>/v1/recognize</code> method
     </td>
   </tr>
   <tr>
     <td style="text-align:left">
-      **HTTP asynchronous**
+      **Asynchronous HTTP**
     </td>
     <td style="text-align:left">
       Request header of <code>POST /v1/register_callback</code> and
-      <code>POST /v1/recognitions</code> requests
+      <code>POST /v1/recognitions</code> method
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:left">
+      **Batch-processing HTTP**
+    </td>
+    <td style="text-align:left">
+      Request header of POST <code>/v1/batches</code> method
     </td>
   </tr>
 </table>

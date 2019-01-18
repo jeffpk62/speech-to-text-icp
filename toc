@@ -50,6 +50,7 @@ Speech to Text: Customer Care
         basic-request.md
         basic-response.md
         audio-formats.md
+        models.md
         input.md
         output.md
         summary.md
@@ -57,6 +58,8 @@ Speech to Text: Customer Care
     websockets.md
     http.md
     async.md
+    batch.md
+    analytics.md
     custom.md
 
     {: topicgroup}
@@ -77,6 +80,15 @@ Speech to Text: Customer Care
         acoustic-models.md
         acoustic-audio.md
 
+    {: topicgroup}
+    Grammars
+        grammar.md
+        grammar-understand.md
+        grammar-add.md
+        grammar-use.md
+        grammar-manage.md
+        grammar-examples.md
+
     custom-upgrade.md
 
     {: topicgroup}
@@ -88,10 +100,7 @@ Speech to Text: Customer Care
     {: .topicgroup}
     FAQs
         faq-basic-usage.md
-        faq-websockets.md
         faq-recognition.md
-        faq-speaker-labels.md
-        faq-smart-formatting.md
         faq-customization.md
 
     release-notes.md

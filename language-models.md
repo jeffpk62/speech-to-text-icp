@@ -2,16 +2,16 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-12-16"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
 {:tip: .tip}
+{:important: .important}
 {:note: .note}
 {:deprecated: .deprecated}
-{:important: .important}
 {:pre: .pre}
 {:codeblock: .codeblock}
 {:screen: .screen}
@@ -23,21 +23,18 @@ lastupdated: "2018-10-27"
 # Managing custom language models
 {: #manageLanguageModels}
 
-The customization interface offers the `POST /v1/customizations` method for creating a custom language model. For more information, see [Create a custom language model](/docs/services/speech-to-text-icp/language-create.html#createModel).
+The customization interface includes the `POST /v1/customizations` method for creating a custom language model. The interface also includes the `POST /v1/customizations/train` method for training a custom model on the latest data from its words resource. For more information, see the following documentation:
 {: shortdesc}
 
-The interface also offers the `POST /v1/customizations/train` method for training a custom model on the latest data from its words resource. For more information, see [Train the custom language model](/docs/services/speech-to-text-icp/language-create.html#trainModel).
+-   [Create a custom language model](/docs/services/speech-to-text-icp/language-create.html#createModel)
+-   [Train the custom language model](/docs/services/speech-to-text-icp/language-create.html#trainModel)
 
-In addition, the interface includes methods for
-
--   Listing information about custom language models
--   Resetting a custom language model to its initial state
--   Deleting a custom language model
+In addition, the interface includes the following methods for listing information about custom language models, resetting a custom model to its initial state, and deleting a custom model.
 
 ## Listing custom language models
 {: #listModels}
 
-The customization interface provides two methods for listing information about custom language models:
+The customization interface provides two methods for listing information about the custom language models that are owned by the specified service credentials:
 
 -   The `GET /v1/customizations` method lists information about all custom language models or about all custom language models for a specified language.
 -   The `GET /v1/customizations/{customization_id}` method lists information about a specified custom language model. Use this method to poll the service about the status of a training request or a request to add new words.
@@ -48,11 +45,11 @@ Both methods return the following information about a custom model:
 -   `created` is the date and time in Coordinated Universal Time (UTC) at which the custom model was created.
 -   `language` is the language of the custom model.
 -   `dialect` is the dialect of the language for the custom language model.
--   `owner` identifies the credentials of the owner of the custom model.
+-   `owner` identifies the credentials of the service instance that owns the custom model.
 -   `name` is the name of the custom model.
 -   `description` shows the description of the custom model, if one was provided at its creation.
 -   `base_model` indicates the name of the language model for which the custom model was created.
--   `versions` provides a list of the available versions of the custom model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model is upgraded. Otherwise, only a single version is shown.
+-   `versions` provides a list of the available versions of the custom model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model is upgraded. Otherwise, only a single version is shown. For more information, see [Listing version information for a custom model](/docs/services/speech-to-text-icp/custom-upgrade.html#upgradeList).
 
 The method also returns a `status` field that indicates the state of the custom model:
 
@@ -68,7 +65,7 @@ Additionally, the output includes a `progress` field that indicates the current 
 ### Example requests and responses
 {: #listExample}
 
-The following example includes the `language` query parameter to list all US English custom language models:
+The following example includes the `language` query parameter to list all US English custom language models that are owned by the service credentials:
 
 ```bash
 curl -X GET -u "apikey:{apikey}"
@@ -76,7 +73,7 @@ curl -X GET -u "apikey:{apikey}"
 ```
 {: pre}
 
-Two models exist. The first model is awaiting data or is being processed by the service. The second model is fully trained and ready for use.
+The service credentials own two such models. The first model is awaiting data or is being processed by the service. The second model is fully trained and ready for use.
 
 ```javascript
 {

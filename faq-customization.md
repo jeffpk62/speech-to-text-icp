@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-16"
+  years: 2015, 2019
+lastupdated: "2019-01-17"
 
 ---
 
@@ -23,13 +23,9 @@ lastupdated: "2018-09-16"
 # Customization
 {: #customization}
 
-1.  <span style="color:#003F69">What languages does the customization interface support?</span>
-
-    Language model customization is generally available for all languages. Acoustic model customization is available as beta functionality for all languages. For more information about the supported languages, see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
-
 1.  <span style="color:#003F69">How much effort is required to create and use a custom model?</span>
 
-    Creating a *custom language model* requires you to add corpora, words, or both to the custom model. The service can typically train any custom model in a matter of minutes. The level of effort that it takes to create a model depends on the corpora or words that you have available for the model.
+    Creating a *custom language model* requires you to add corpora, words, or grammars to the custom model. The service can typically train any custom model in a matter of minutes. The level of effort that it takes to create a model depends on the data that you have available for the model.
 
     Creating a *custom acoustic model* requires you to add audio resources (audio data) to the custom model. The length of time that it takes the service to train the custom model depends on how much audio data the model contains. In general, training takes twice the length of the cumulative audio. The level of effort that it takes to create a model depends on the audio data that you have available for the model. It also depends on whether you want to use transcriptions of the audio.
 
@@ -54,21 +50,6 @@ lastupdated: "2018-09-16"
 
     In general, it is better for the corpora to use the OOV words in different contexts and phrases, which improves how the service learns the words. However, if users speak the words in only a couple of contexts, then showing the words in other contexts does not improve the quality of the custom model. Speakers never use the words in those contexts. If speakers are likely to use the same phrase frequently, then repeating that phrase in the corpora can improve the quality of the model.
 
-1.  <span style="color:#003F69">A number of methods for language model customization are asynchronous. How do I check their results to know when they are finished?</span>
-
-    The following sections describe how to check the results of asynchronous operations for language model customization:
-    -   To check the status of a request to add a corpus to a custom language model with the `POST /v1/customizations/{customization_id}/corpora/{corpus_name}` method, see [Monitoring the add corpus request](/docs/services/speech-to-text-icp/language-create.html#monitorCorpus).
-    -   To check the status of a request to add words to a custom language model with the `POST /v1/customizations/{customization_ID}/words` method, see [Monitoring the add words request](/docs/services/speech-to-text-icp/language-create.html#monitorWords).
-    -   To check the status of a request to train a custom language model with the `POST /v1/customizations/{customization_id}/train` method, see [Monitoring the train model request](/docs/services/speech-to-text-icp/language-create.html#monitorTraining).
-
-1.  <span style="color:#003F69">I created a custom language model, but the service does not appear to be using any of the new words that it contains during recognition?</span>
-
-    Try the following steps:
-
-    -   Make sure that you are correctly passing the customization ID to the recognition request. For more information, see [Using a custom language model](/docs/services/speech-to-text-icp/language-use.html).
-    -   Make sure that the status of the custom model is `available`, meaning that it is fully trained and ready to use. For more information, see [Listing custom language models](/docs/services/speech-to-text-icp/language-models.html#listModels).
-    -   Check the pronunciations that were generated for the new words to make sure that they are correct. For more information, see [Validating a words resource](/docs/services/speech-to-text-icp/language-resource.html#validateModel).
-
 ## Acoustic model customization
 {: #amCustomization}
 
@@ -80,7 +61,7 @@ lastupdated: "2018-09-16"
 
 1.  <span style="color:#003F69">How much audio data is needed to build a custom acoustic model?</span>
 
-    You must add at least 10 minutes and no more than 50 hours of audio to a custom acoustic model. The quality of the audio makes a difference when you are determining how much to add. The better the model's audio reflects the characteristics of the audio that is to be recognized, the better the quality of the custom model. If the audio is of good quality, adding more audio can improve transcription accuracy. As a rough guideline, adding five to ten hours of audio can make a positive difference.
+    You must add at least 10 minutes and no more than 100 hours of audio to a custom acoustic model. The quality of the audio makes a difference when you are determining how much to add. The better the model's audio reflects the characteristics of the audio that is to be recognized, the better the quality of the custom model. If the audio is of good quality, adding more audio can improve transcription accuracy. As a rough guideline, adding five to ten hours of audio can make a positive difference.
 
 1.  <span style="color:#003F69">Do I need to transcribe the audio data that I add to a custom acoustic model?</span>
 
@@ -103,9 +84,3 @@ lastupdated: "2018-09-16"
     -   The custom language model contains words from the same domain as the audio data.
 
     If the audio contains many OOV words, it is better to use a custom language model during training, even if the custom language model merely adds a list of custom words. In general, a good custom acoustic model can improve the accuracy of transcription by as much as 40 percent.
-
-1.  <span style="color:#003F69">A number of methods for acoustic model customization are asynchronous. How do I check their results to know when they are finished?</span>
-
-    The following sections describe how to check the results of asynchronous operations for acoustic model customization:
-    -   To check the status of a request to add audio resources to a custom acoustic model with the `POST /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method, see [Monitoring the add audio request](/docs/services/speech-to-text-icp/acoustic-create.html#monitorAudio).
-    -   To check the status of a request to train a custom acoustic model with the `POST /v1/acoustic_customizations/{customization_id}/train` method, see [Monitoring the train model request](/docs/services/speech-to-text-icp/acoustic-create.html#monitorTraining).
