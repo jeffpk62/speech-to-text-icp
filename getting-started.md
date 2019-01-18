@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-12-15"
 
 ---
 
@@ -32,8 +32,8 @@ The {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Cus
 
 To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first complete the following steps:
 
-1.  Install and configure IBM&reg; Cloud Private.
-1.  Deploy the {{site.data.keyword.speechtotextshort}}: Customer Care service on your IBM Cloud Private installation.
+1.  Install and configure {{site.data.keyword.cloud}} Private.
+1.  Deploy the {{site.data.keyword.speechtotextshort}}: Customer Care service on your {{site.data.keyword.cloud_notm}} Private installation.
 1.  Learn the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 
     The examples that follow pass the value of the API key with the `-u` (`--user`) option of the `curl` command. When you enter a command, replace `{apikey}` with the API key for your cluster. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
@@ -44,8 +44,6 @@ To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first co
     ```
     {:pre}
 
-You are now ready to call methods of the service's interface.
-
 The tutorial uses the `curl` command to call methods of the service's HTTP interface. Install the version of curl for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
 {: note}
 
@@ -54,7 +52,7 @@ The tutorial uses the `curl` command to call methods of the service's HTTP inter
 
 Call the `POST /v1/recognize` method to request a basic transcript of a FLAC audio file with no additional request parameters.
 
-1.  Download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon" class="style-scope doc-content"></a>.
+1.  Download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon"></a>.
 1.  Issue the following command to call the service's `/v1/recognize` method for basic transcription with no parameters. The example uses the `Content-Type` header to indicate the type of the audio, `audio/flac`. The example uses the default language model, `en-US_BroadbandModel`, for transcription.
     -   Replace `{apikey}` with the value of the API key for your service cluster.
     -   Modify `{path_to_file}` to specify the location of the `audio-file.flac` file.
@@ -93,7 +91,7 @@ severe thunderstorms swept through colorado on sunday "
 
 Call the `POST /v1/recognize` method to transcribe the same FLAC audio file, but specify two transcription parameters.
 
-1.  If necessary, download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon" class="style-scope doc-content"></a>.
+1.  If necessary, download the sample audio file <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon"></a>.
 1.  Issue the following command to call the service's `/v1/recognize` method with two extra parameters. Set the `timestamps` parameter to `true` to indicate the beginning and end of each word in the audio stream. Set the `max_alternatives` parameter to `3` to receive the three most likely alternatives for the transcription. The example uses the `Content-Type` header to indicate the type of the audio, `audio/flac`, and the request uses the default model, `en-US_BroadbandModel`.
     -   Replace `{apikey}` with the value of the API key for your service cluster.
     -   Modify `{path_to_file}` to specify the location of the `audio-file.flac` file.

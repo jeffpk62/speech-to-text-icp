@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-16"
+  years: 2015, 2019
+lastupdated: "2019-01-03"
 
 ---
 
@@ -91,7 +91,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       If you do not specify a model, the service uses the
       <code>en-US_BroadbandModel</code> model by default. For more
       information, see
-      <a href="/docs/services/speech-to-text-icp/input.html#models">Languages
+      <a href="/docs/services/speech-to-text-icp/models.html">Languages
         and models</a>.
     </td>
   </tr>
@@ -147,7 +147,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       <code>customer_id={id}</code>, where <code>id</code> is a random
       or generic string that is to be associated with the data. You must
       URL-encode the argument to the parameter, for example,
-      `customer_id%3dmy_ID`. By default, no customer ID is associated
+      `customer_id%3dmy_customer_ID`. By default, no customer ID is associated
       with the data. For more information, see
       <a href="/docs/services/speech-to-text-icp/information-security.html">Information
       security</a>.
@@ -215,7 +215,7 @@ To initiate a recognition request, the client sends a JSON text message to the s
   </tr>
 </table>
 
-The message can also include optional parameters to specify other aspects of how the request is to be processed and the information that is to be returned. For more information, see [Input features](/docs/services/speech-to-text-icp/input.html) and [Output features](/docs/services/speech-to-text-icp/output.html). You can specify a language model, custom language model, and custom acoustic model only as query parameters of the WebSocket URL.
+The message can also include optional parameters to specify other aspects of how the request is to be processed and the information that is to be returned. For information about all input and output features, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html). You can specify a language model, custom language model, and custom acoustic model only as query parameters of the WebSocket URL.
 
 The following snippet of JavaScript code sends initialization parameters for the recognition request over the WebSocket connection. The calls are included in the client's `onOpen` function to ensure that they are sent only after the connection is established.
 
@@ -269,7 +269,7 @@ function onMessage(evt) {
 ## End a recognition request
 {: #WSstop}
 
-When it is done sending the audio data for a request to the service, the client *must* signal the end of the binary transmission to the service:
+When it is done sending the audio data for a request to the service, the client *must* signal the end of the binary audio transmission to the service in one of the following ways:
 
 -   By sending a JSON text message with the `action` parameter set to the value `stop`:
 
@@ -285,7 +285,9 @@ When it is done sending the audio data for a request to the service, the client 
     ```
     {: codeblock}
 
-After it returns the final result for the transcription to the client, the service returns another `{"state":"listening"}` message to the client. This message indicates that the service is ready to receive another recognition request. Before it sends another request, the client must signal the end of transmission for the previous request. Otherwise, the service returns no new results.
+The service does not send final results until it receives confirmation that the audio transmission is complete. If you fail to signal that the transmission is complete, the connection can time out without the service sending final results.
+
+To receive final results between multiple recognition requests, the client must signal the end of transmission for the previous request before it sends a subsequent request. After it returns the final results for the first request, the service returns another `{"state":"listening"}` message to the client. This message indicates that the service is ready to receive another request.
 
 ## Send additional requests and modify request parameters
 {: #WSmore}

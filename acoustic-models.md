@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018
-lastupdated: "2018-10-27"
+lastupdated: "2018-12-16"
 
 ---
 
@@ -23,21 +23,18 @@ lastupdated: "2018-10-27"
 # Managing custom acoustic models
 {: #manageAcousticModels}
 
-The customization interface offers the `POST /v1/acoustic_customizations` method for creating a custom acoustic model. For more information, see [Create a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#createModel).
+The customization interface includes the `POST /v1/acoustic_customizations` method for creating a custom acoustic model. The interface also includes the `POST /v1/acoustic_customizations/train` method for training a custom model on its latest audio resources. For more information, see the following documentation:
 {: shortdesc}
 
-The interface also offers the `POST /v1/acoustic_customizations/train` method for training a custom model on its latest audio resources. For more information, see [Train the custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#trainModel).
+-   [Create a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#createModel)
+-   [Train the custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#trainModel)
 
-In addition, the interface includes methods for
-
--   Listing information about custom acoustic models
--   Resetting a custom acoustic model to its initial state
--   Deleting a custom acoustic model
+In addition, the interface includes methods for listing information about custom acoustic models, resetting a custom model to its initial state, and deleting a custom model.
 
 ## Listing custom acoustic models
 {: #listModels}
 
-The customization interface provides two methods for listing information about custom acoustic models:
+The customization interface provides two methods for listing information about the custom acoustic models that are owned by the specified service credentials:
 
 -   The `GET /v1/acoustic_customizations` method lists information about all custom acoustic models or about all custom acoustic models for a specified language.
 -   The `GET /v1/acoustic_customizations/{customization_id}` method lists information about a specified custom acoustic model. Use this method to poll the service about the status of a training request.
@@ -47,11 +44,11 @@ Both methods return the following information about a custom acoustic model:
 -   `customization_id` identifies the custom model's Globally Unique Identifier (GUID). The GUID is used to identify the model in methods of the interface.
 -   `created` is the date and time in Coordinated Universal Time (UTC) at which the custom model was created.
 -   `language` is the language of the custom model.
--   `owner` identifies the credentials of the owner of the custom model.
+-   `owner` identifies the credentials of the service instance that owns the custom model.
 -   `name` is the name of the custom model.
 -   `description` shows the description of the custom model, if one was provided at its creation.
 -   `base_model_name` indicates the name of the language model for which the custom model was created.
--   `versions` provides a list of the available versions of the custom model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model is upgraded. Otherwise, only a single version is shown.
+-   `versions` provides a list of the available versions of the custom model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model is upgraded. Otherwise, only a single version is shown. For more information, see [Listing version information for a custom model](/docs/services/speech-to-text-icp/custom-upgrade.html#upgradeList).
 
 The methods also return a `status` field that indicates the state of the custom model:
 
@@ -67,7 +64,7 @@ Additionally, the output includes a `progress` field that indicates the current 
 ### Example requests and responses
 {: #listExample}
 
-The following example includes the `language` query parameter to list all US English custom acoustic models:
+The following example includes the `language` query parameter to list all US English custom acoustic models that are owned by the service credentials:
 
 ```bash
 curl -X GET -u "apikey:{apikey}"
@@ -75,7 +72,7 @@ curl -X GET -u "apikey:{apikey}"
 ```
 {: pre}
 
-Two models exist. The first model is awaiting data or is being processed by the service. The second model is fully trained and ready for use.
+Two such models are owned by the service credentials. The first model is awaiting data or is being processed by the service. The second model is fully trained and ready for use.
 
 ```javascript
 {

@@ -1,17 +1,17 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-17"
 
 ---
 
 {:shortdesc: .shortdesc}
 {:new_window: target="_blank"}
 {:tip: .tip}
+{:important: .important}
 {:note: .note}
 {:deprecated: .deprecated}
-{:important: .important}
 {:pre: .pre}
 {:codeblock: .codeblock}
 {:screen: .screen}
@@ -23,25 +23,23 @@ lastupdated: "2018-11-15"
 # Using a custom language model
 {: #languageUse}
 
-Once you create and train your custom language model, you can use it in speech recognition requests. You use the `language_customization_id` query parameter to specify the custom language model for a request, as shown in the following examples. You can also tell the service how much weight to give to words from the custom model. For more information, see [Using customization weight](#weight).
+Once you create and train your custom language model, you can use it in speech recognition requests. You use the `language_customization_id` query parameter to specify the custom language model for a request, as shown in the following examples. You can also tell the service how much weight to give to words from the custom model. For more information, see [Using customization weight](#weight). You must issue the request with service credentials for the instance of the service that owns the model.
 {: shortdesc}
 
-You can create multiple custom language models for the same or different domains. However, you can specify only one custom language model at a time with the `language_customization_id` parameter.
+You can create multiple custom language models for the same or different domains. However, you can specify only one custom language model at a time with the `language_customization_id` parameter. For examples that use a grammar with a custom language model, see [Using a grammar for speech recognition](/docs/services/speech-to-text-icp/grammar-use.html).
 
--   For the WebSocket interface, use the `/v1/recognize` method. The specified custom model is used for all requests that are sent over the connection.
+-   For the [WebSocket interface](/docs/services/speech-to-text-icp/websockets.html), use the `/v1/recognize` method. The specified custom model is used for all requests that are sent over the connection.
 
     ```javascript
     var token = {authentication-token};
     var wsURI = 'wss://{icp_cluster_host}/speech-to-text/api/v1/recognize'
       + '?watson-token=' + token
-      + '&model=en-US_NarrowbandModel'
+      + '&model=es-ES_BroadbandModel'
       + '&language_customization_id={customization_id}';
     var websocket = new WebSocket(wsURI);
     ```
     {: codeblock}
-
-    For more information, see [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html).
--   For the HTTP interface, use the `POST /v1/recognize` method. The specified custom model is used for that request.
+-   For the [synchronous HTTP interface](/docs/services/speech-to-text-icp/http.html), use the `POST /v1/recognize` method. The specified custom model is used for that request.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"
@@ -50,9 +48,7 @@ You can create multiple custom language models for the same or different domains
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?language_customization_id={customization_id}"
     ```
     {: pre}
-
-    For more information, see [The HTTP interface](/docs/services/speech-to-text-icp/http.html).
--   For the asynchronous HTTP interface, use the `POST /v1/recognitions` method. The specified custom model is used for that request.
+-   For the [asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html), use the `POST /v1/recognitions` method. The specified custom model is used for that request.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"
@@ -61,16 +57,21 @@ You can create multiple custom language models for the same or different domains
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognitions?language_customization_id={customization_id}"
     ```
     {: pre}
+-   For the [batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html), use the `POST /v1/batches` method. The specified custom model is used for all input files of the request.
 
-    For more information, see [The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html).
+    ```bash
+    curl -X POST -u "apikey:{apikey}"
+    -form input_credentials_file=@{path}my_cos_credentials.json
+    -form input_bucket_location=us-geo
+    -form input_bucket_name=my_cos_bucket
+    "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/batches?function=recognize&language_customization_id={customization_id}"
+    ```
+    {: pre}
 
 You can omit the language model from the request if the custom model is based on the default language model, `en-US_BroadbandModel`. Otherwise, you must use the `model` parameter to specify the base model, as shown for the WebSocket example. A custom model can be used only with the base model for which it is created.
 
 ## Using customization weight
 {: #weight}
-
-Customization weight is a beta feature that is available for all languages that are supported for language model customization.
-{: note}
 
 A custom language model is a combination of the custom model and the base model that it customizes. You can tell the service how much weight to give to words from the custom language model compared to words from the base model for speech recognition. The weight that is assigned to a custom model is referred to as its *customization weight*.
 
@@ -101,3 +102,12 @@ You specify a customization weight by using the `customization_weight` parameter
     {: pre}
 
     Setting a customization weight during speech recognition overrides a weight that was saved with the model during training.
+
+## Troubleshooting the use of custom language models
+{: #languageTroubleshoot}
+
+If you apply a custom language model to speech recognition but find that the service does not appear to be using words that the model contains, check for the following possible problems:
+
+-   Make sure that you are correctly passing the customization ID to the recognition request as shown in [Using a custom language model](#languageUse).
+-   Make sure that the status of the custom model is `available`, meaning that it is fully trained and ready to use. For more information, see [Listing custom language models](/docs/services/speech-to-text-icp/language-models.html#listModels).
+-   Check the pronunciations that were generated for the new words to make sure that they are correct. For more information, see [Validating a words resource](/docs/services/speech-to-text-icp/language-resource.html#validateModel).

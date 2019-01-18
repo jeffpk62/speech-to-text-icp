@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2018
-lastupdated: "2018-11-15"
+lastupdated: "2018-12-16"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-11-15"
 # Creating a custom acoustic model
 {: #acoustic}
 
-Follow these steps to create a custom acoustic model for {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care:
+Follow these steps to create a custom acoustic model for the {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care service:
 {: shortdesc}
 
 1.  [Create a custom acoustic model](#createModel). You can create multiple custom models for the same or different domains or environments. The process is the same for any model that you create. However, you can specify only a single custom acoustic model at a time with a recognition request.
@@ -37,7 +37,7 @@ Follow these steps to create a custom acoustic model for {{site.data.keyword.ibm
 
 The steps for creating a custom acoustic model are iterative. You can add or delete audio and train or retrain a model as often as needed. You must retrain a model for any changes to its audio to take effect. When you retrain a model, all audio data is used in the training (not just the new data). So the training time is commensurate with the total amount of audio that is contained in the model.
 
-Acoustic model customization is available as beta functionality for all languages; see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
+Acoustic model customization is available as beta functionality for all languages.
 {: note}
 
 ## Create a custom acoustic model
@@ -105,7 +105,7 @@ The example returns the customization ID of the new model. Each custom model is 
 ```
 {: codeblock}
 
-The new custom model is owned by the service instance whose credentials are used to create it.
+The new custom model is owned by the service instance whose credentials are used to create it. For more information, see [Ownership of custom models](/docs/services/speech-to-text-icp/custom.html#customOwner).
 
 ## Add audio to the custom acoustic model
 {: #addAudio}
@@ -148,7 +148,7 @@ The method also accepts an optional `allow_overwrite` query parameter overwrites
 
 The method is asynchronous. It can take several seconds to complete depending on the duration of the audio. For an archive file, the length of the operation depends on the duration of the audio files that are being processed. For more information about checking the status of a request to add an audio resource, see [Monitoring the add audio request](#monitorAudio).
 
-You can add any number of audio resources to a custom model by calling the method once for each audio or archive file. The addition of one audio resource must be fully complete before you can add another. You must add a minimum of 10 minutes and a maximum of 50 hours of audio that includes speech, not silence, to a custom model before you can train it. No audio- or archive-type resource can be larger than 100 MB. For more information about adding audio to a custom model, see [Guidelines for adding audio resources](/docs/services/speech-to-text-icp/acoustic-resource.html#audioGuidelines).
+You can add any number of audio resources to a custom model by calling the method once for each audio or archive file. The addition of one audio resource must be fully complete before you can add another. You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not silence, to a custom model before you can train it. No audio- or archive-type resource can be larger than 100 MB. For more information about adding audio to a custom model, see [Guidelines for adding audio resources](/docs/services/speech-to-text-icp/acoustic-resource.html#audioGuidelines).
 
 ### Monitoring the add audio request
 {: #monitorAudio}
@@ -273,7 +273,7 @@ Use a loop to check the status of the training once a minute until the model bec
 Training of a custom acoustic model fails to start if the service is handling another request for the custom model. A conflicting request could be another training request or a request to add audio resources to the model. Training can also fail to start for the following reasons:
 
 -   The custom model contains less than 10 minutes of audio data.
--   The custom model contains more than 50 hours of audio data.
+-   The custom model contains more than 100 hours of audio data.
 -   One or more of the custom model's audio resources is invalid.
 
 If the status of a custom model's training is `failed`, use the `GET /v1/acoustic_customizations/{customization_id}/audio` and `GET /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` methods to examine the model's audio resources and address any problems that you find. For more information, see [Listing audio resources for a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-audio.html#listAudio).

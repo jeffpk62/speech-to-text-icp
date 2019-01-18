@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-01"
 
 ---
 
@@ -23,18 +23,20 @@ lastupdated: "2018-11-15"
 # Making a recognition request
 {: #basic-request}
 
-To request speech recognition with {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care, you need to provide only the audio that is to be transcribed. The service offers the same basic transcription capabilities with each of its interfaces: the WebSocket interface, the synchronous HTTP interface, and the asynchronous HTTP interface.
+To request speech recognition with {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care, you need to provide only the audio that is to be transcribed. The service offers the same basic transcription capabilities with each of its interfaces.
 {: shortdesc}
 
-Pass a maximum of 100 MB and a minimum of 100 bytes of audio data with any request. The audio must be in one of the formats that the service supports. For most audio, the service can automatically detect the format; for others, you must specify the format with the `Content-Type` or equivalent parameter. For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+You can pass a maximum of 100 MB and a minimum of 100 bytes of audio data with any request. For the batch-processing interface, these limits apply to a single audio file. The service imposes no limits on the cumulative size of all audio files or on the number of files that you can submit for batch processing. However, excessive amounts of audio can greatly increase the processing time. For more information, see [Providing audio files](/docs/services/speech-to-text-icp/batch.html#batchAudio) for the batch-processing interface.
 
-The following sections show basic transcription requests, with no optional input or output parameters, for each of the service's interfaces:
+The audio must be in one of the formats that the service supports for the interface that you use. For most audio, the service can automatically detect the format; for others, you must specify the format with the `Content-Type` or equivalent parameter. For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
--   The examples submit a brief FLAC file named <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon" class="style-scope doc-content"></a>.
+The following sections show basic transcription requests for each of the service's interfaces:
+
+-   The examples submit a brief FLAC file named <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon"></a>.
 -   The examples use the default language model, `en-US_BroadbandModel`.
--   For clarity, the examples specify the audio format with all requests.
+-   For clarity, the examples specify the audio format with applicable requests.
 
-[Understanding recognition results](/docs/services/speech-to-text-icp/basic-response.html) describes the service's response for these examples.
+[Understanding recognition results](/docs/services/speech-to-text-icp/basic-response.html) describes the service's response for these examples. For more information about the interfaces and the functionality that they provide, see the detailed pages for the interfaces.
 
 ## Using the WebSocket interface
 {: #basicWebSocket}
@@ -63,10 +65,10 @@ websocket.send(JSON.stringify({'action': 'stop'}));
 You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
 {: important}
 
-## Using the HTTP interface
+## Using the synchronous HTTP interface
 {: #basicHTTP}
 
-[The HTTP interface](/docs/services/speech-to-text-icp/http.html) provides the simplest way to make a recognition request. You use the `POST /v1/recognize` method to make a request to the service. You pass the audio and all parameters with the single request.
+[The synchronous HTTP interface](/docs/services/speech-to-text-icp/http.html) provides the simplest way to make a recognition request. You use the `POST /v1/recognize` method to make a request to the service. You pass the audio and all parameters with the single request.
 
 The following `curl` example shows a basic HTTP recognition request:
 
@@ -81,7 +83,9 @@ curl -X POST -u "apikey:{apikey}"
 ## Using the asynchronous HTTP interface
 {: #basicAsyncHTTP}
 
-[The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html) provides a non-blocking interface for transcribing audio. You can use the interface with or without first registering a callback URL with the service. With a callback URL, the service sends callback notifications with job status and recognition results. The interface uses HMAC-SHA1 signatures based on a user-specified secret to provide authentication and data integrity for its notifications. Without a callback URL, you must poll the service for job status and results. With either approach, you use the `POST /v1/recognitions` method to make a recognition request.
+[The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html) provides a non-blocking interface for transcribing audio. You can use the interface with or without first registering a callback URL with the service. With a callback URL, the service sends callback notifications with job status and recognition results.
+
+The interface uses HMAC-SHA1 signatures based on a user-specified secret to provide authentication and data integrity for its notifications. Without a callback URL, you must poll the service for job status and results. With either approach, you use the `POST /v1/recognitions` method to make a recognition request.
 
 The following `curl` example shows a simple asynchronous HTTP recognition request. The request does not include a callback URL, so you must poll the service to get the job status and the resulting transcript.
 
@@ -90,5 +94,25 @@ curl -X POST -u "apikey:{apikey}"
 --header "Content-Type: audio/flac"
 --data-binary @audio-file.flac
 "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognitions"
+```
+{: pre}
+
+## Using the batch-processing HTTP interface
+{: #basicBatchHTTP}
+
+[The batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html) provides a means of processing many audio files with a single request. It supports many of the basic speech recognition capabilities and most of the audio formats that are supported by the other interfaces. In addition, it can also provide deeper speech analytics for the conversations and individual speakers of the audio files.
+
+You use the `POST /v1/batches` method to make a batch-processing request to the service. You provide the audio files that are to be processed by placing them in a bucket in a Cloud Object Storage (COS) server. The service also writes its results to a bucket in the COS server. You must have a minimum set of permissions on the COS buckets that you use.
+
+The service creates a batch-processing job and processes the input files in stages. The interface includes methods to get the status of batch jobs, to cancel a batch job, or to delete a batch job. The service also provides an Admin Console GUI to check the status of batch jobs.
+
+The following `curl` example shows an HTTP recognition request that includes speech analytics for the batch-processing interface. The request uses a single COS bucket for both input and output. The audio file was previously copied to the COS bucket. The service writes its results for the file to the same bucket.
+
+```bash
+curl -X POST -u "apikey:{apikey}"
+-form input_credentials_file=@{path}my_cos_credentials.json
+-form input_bucket_location=us-geo
+-form input_bucket_name=my_cos_bucket
+"https://{icp_cluster_host}{:port}/speech-to-text/api/v1/batches?function=recognize&speech_analytics=true"
 ```
 {: pre}

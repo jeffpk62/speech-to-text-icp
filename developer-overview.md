@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-11-15"
+  years: 2015, 2019
+lastupdated: "2019-01-07"
 
 ---
 
@@ -23,7 +23,7 @@ lastupdated: "2018-11-15"
 # Overview for developers
 {: #developerOverview}
 
-You can access the capabilities of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care by using a WebSocket interface and by using synchronous or asynchronous HTTP Representational State Transfer (REST) interfaces. You can also customize the service's language models to suit your domain and environment. Several Software Development Kits (SDKs) are available to simplify application development in various programming languages. The service returns all JSON response content in the UTF-8 character set.
+You can access the capabilities of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care by using a WebSocket interface and by using synchronous, asynchronous, or batch-processing HTTP Representational State Transfer (REST) interfaces. You can also customize the service's language models to suit your domain and environment. SDKs are available to simplify application development in many programming languages.
 {: shortdesc}
 
 ## Programming with the service
@@ -32,10 +32,11 @@ You can access the capabilities of {{site.data.keyword.ibmwatson}} {{site.data.k
 [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html) shows you how to request basic transcription with each of the service's programming interfaces:
 
 -   [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html) offers an efficient, low-latency, and high-throughput implementation over a full-duplex connection.
--   [The HTTP interface](/docs/services/speech-to-text-icp/http.html) provides a basic interface to transcribe audio with synchronous requests.
+-   [The synchronous HTTP interface](/docs/services/speech-to-text-icp/http.html) provides a basic interface to transcribe audio with blocking requests.
 -   [The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html) provides a non-blocking interface that lets you register a callback URL to receive notifications or to poll the service for job status and results.
+-   [The batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html) provides a means of transcribing multiple audio files with a single request. In addition to speech recognition, the interface provides [speech analytics](/docs/services/speech-to-text-icp/analytics.html) to learn detailed information about conversations and their individual speakers.
 
-The interfaces generally provide the same speech recognition capabilities, but you might specify the same parameter as a request header, a query parameter, or a parameter of a JSON object depending on the interface and method that you use.
+The interfaces provide similar speech recognition capabilities, but you might specify the same parameter as a request header, a query parameter, or a parameter of a JSON object depending on the interface that you use. The batch-processing interface requires a Cloud Object Storage (COS) server for passing audio files to the service and for obtaining results from the service. (Batch processing currently supports a limited set of speech recognition parameters.)
 
 -   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
 -   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
@@ -59,10 +60,11 @@ The WebSocket interface has a number of advantages over the HTTP interface:
 
 [The customization interface](/docs/services/speech-to-text-icp/custom.html) lets you create custom models to improve the service's speech recognition capabilities:
 
--   *Custom language models* let you define domain-specific words for a base model. Custom language models expand the service's base vocabulary with terminology specific to domains such as medicine and law.
--   *Custom acoustic models* let you adapt a base model for the acoustic characteristics of your environment and speakers. Custom acoustic models improve the service's ability to recognize speech for specific acoustic characteristics.
+-   [Custom language models](/docs/services/speech-to-text-icp/language-create.html) let you define domain-specific words for a base model. Custom language models expand the service's base vocabulary with terminology specific to domains such as medicine and law.
+-   [Custom acoustic models](/docs/services/speech-to-text-icp/acoustic-create.html) let you adapt a base model for the acoustic characteristics of your environment and speakers. Custom acoustic models improve the service's ability to recognize speech for specific acoustic characteristics.
+-   [Grammars](/docs/services/speech-to-text-icp/grammar.html) let you restrict the phrases that the service can recognize to those defined in the grammar's rules. By limiting the search space for valid strings, the service can deliver results faster and more accurately. Grammars are supported with custom language models.
 
-You can use a custom language model, a custom acoustic model, or both for speech recognition with any of the service's interfaces.
+You can use a custom language model, a custom acoustic model, or both for speech recognition with any of the service's interfaces. (The batch-processing interface does not currently support grammars.)
 
 ## CORS support
 {: #cors}
@@ -74,16 +76,7 @@ For instance, a web page that is loaded from a server in {{site.data.keyword.Blu
 ## Using Software Development Kits
 {: #sdks}
 
-SDKs are available for the {{site.data.keyword.speechtotextshort}}: Customer Care service to simplify the development of speech applications. {{site.data.keyword.watson}} SDKs are available for many popular programming languages and platforms.
+SDKs are available for the {{site.data.keyword.speechtotextshort}}: Customer Care service to simplify the development of speech applications. {{site.data.keyword.ibmwatson}} SDKs are available for many popular programming languages and platforms.
 
 -   For a complete list of SDKs and links to the SDKs on GitHub, see [Using SDKs](/docs/services/watson/getting-started-sdks.html).
--   For detailed information about all methods of the Node, Java, Python, and Ruby SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
-
-## Considerations for application development
-{: #consider}
-
-Converting speech to text is a difficult problem. Consider the following guidance when using {{site.data.keyword.speechtotextshort}}: Customer Care in your applications:
-
--   *Speech recognition can be very sensitive to input audio quality.* When you experiment with a demo application or build an application of your own that uses the service, try to ensure that the input audio quality is as good as possible. To obtain the best possible accuracy, use a close, speech-oriented microphone (such as a headset) whenever possible and adjust the microphone settings if necessary. Try to avoid using a laptop's built-in microphone.
--   *Choosing the correct model is important.* For most supported languages, the service supports two models: broadband and narrowband. {{site.data.keyword.IBM}} recommends that you use the broadband model for responsive, real-time applications and the narrowband model for offline decoding of telephone speech.
--   *Conversion of speech to text might not be perfect.* Tremendous progress has been made over the last several years. Today, speech recognition technology is successfully used in many domains and applications. However, in addition to audio quality, speech recognition systems are sensitive to nuances of human speech, such as regional accents and differences in pronunciation, and might not always transcribe audio input correctly.
+-   For detailed information about all methods of the Node, Java&trade;, Python, Ruby, and Go SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
