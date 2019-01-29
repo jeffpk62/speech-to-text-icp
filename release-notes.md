@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-01-17"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -35,7 +35,7 @@ The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.sp
     -   Call the WebSocket interface from outside of a browser. You can call the interface from any language that supports WebSockets. Refer to information in [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html) for guidance when working with another language.
 
         The {{site.data.keyword.watson}} SDKs provide the simplest way to call the WebSocket interface from another language. For information about using the WebSocket interface with the Node.js, Java, Python, and Ruby SDKs, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
-    -   Use the synchronous, asynchronous, or batch-processing HTTP interfaces to perform speech recognition.
+    -   Use the synchronous, asynchronous, or batch-processing HTTP interface to perform speech recognition.
 -   **[1.1.0]** When you request speech analytics with the batch-processing HTTP interface, the service can sometimes omit the `conversation_speech_analytics` results from an updated **.json** file. This is an infrequent issue that will be addressed in a future release.
 
 ## Version 1.1.0 (18 January 2019)
@@ -196,7 +196,7 @@ The service now supports smart formatting for Japanese speech recognition. Previ
 
 The initial release of the service.
 
-{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}, see [About {{site.data.keyword.speechtotextshort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
+{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premises version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}, see [About {{site.data.keyword.speechtotextshort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
 
 {{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.cloud_notm}} Private differs from the public {{site.data.keyword.speechtotextshort}} service in the following ways. You might find this information helpful if you are already familiar with the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}.
 

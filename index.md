@@ -2,7 +2,7 @@
 
 Copyright:
   years: 2015, 2019
-lastupdated: "2019-01-17"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -28,11 +28,11 @@ lastupdated: "2019-01-17"
 {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care provides speech recognition capabilities for your {{site.data.keyword.cloud}} Private solutions. The service leverages machine learning to combine knowledge of grammar, language structure, and the composition of audio and voice signals to accurately transcribe the human voice. It continuously updates and refines its transcription as it receives more speech.
 {: shortdesc}
 
-{{site.data.keyword.speechtotextshort}}: Customer Care is ideal for clients who need to extract high-quality speech transcripts from call center audio. Clients in industries such as financial services, healthcare, insurance, and telecommunication often need to develop cloud-native applications but are regulated or limited in their adoption of public cloud offerings. The service allows such clients to build on-premise applications for customer care, customer voice, agent assistance, and other solutions.
+{{site.data.keyword.speechtotextshort}}: Customer Care is ideal for clients who need to extract high-quality speech transcripts from call center audio. Clients in industries such as financial services, healthcare, insurance, and telecommunication often need to develop cloud-native applications but are regulated or limited in their adoption of public cloud offerings. The service allows such clients to build on-premises applications for customer care, customer voice, agent assistance, and other solutions.
 
 For information about installing and configuring {{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.cloud_notm}} Private, see [Installing and configuring the service](/docs/services/speech-to-text-icp/install-config.html).
 
-{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premise version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}, see [About {{site.data.keyword.speechtotextshort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
+{{site.data.keyword.speechtotextshort}}: Customer Care is an on-premises version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}, see [About {{site.data.keyword.speechtotextshort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
 {: note}
 
 ## Supported interfaces
