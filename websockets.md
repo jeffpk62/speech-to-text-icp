@@ -2,7 +2,7 @@
 
 copyright:
   years: 2015, 2019
-lastupdated: "2019-01-03"
+lastupdated: "2019-01-29"
 
 ---
 
@@ -69,12 +69,10 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       <br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
-      Passes a valid authentication token instead of passing service
-      credentials with the call. You pass a token only to establish an
-      authenticated connection with the service. Once you establish a
-      connection, you can keep it alive indefinitely. While the connection
-      remains open, you do not need to pass a token with subsequent calls.
-      <br/><br/>
+      Passes a valid authentication token to establish an authenticated
+      connection with the service. Once you establish a connection, you
+      can keep it alive indefinitely. While the connection remains open,
+      you remain authenticated to the service.<br/><br/>
       **Important:** You cannot use JavaScript to call the WebSocket interface
       from a browser. The `watson-token` parameter does not accept API keys.
       For more information about working around this limitation, see the
