@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2018
-lastupdated: "2018-09-15"
+  years: 2018, 2019
+lastupdated: "2019-02-04"
 
 ---
 
@@ -21,7 +21,7 @@ lastupdated: "2018-09-15"
 {:swift: .ph data-hd-programlang='swift'}
 
 # Basic usage
-{: #basic}
+{: #faq-basic}
 
 1.  <span style="color:#003F69">My audio data is larger than 100 MB, which is too large for the service to accept. Is there a way that I can process the data?</span>
 

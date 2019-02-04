@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2015, 2019
-lastupdated: "2019-01-01"
+  years: 2018, 2019
+lastupdated: "2019-02-04"
 
 ---
 
@@ -30,7 +30,7 @@ lastupdated: "2019-01-01"
 -   For an alphabetized list of all available speech recognition parameters, including their status (generally available or beta), supported languages, and supported interfaces, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
 
 ## Custom models
-{: #custom}
+{: #custom-input}
 
 Language and acoustic model customization are available at different levels of support (generally available or beta). For more information, see [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
 {: note}
@@ -77,7 +77,7 @@ For examples that use custom models with each of the service's interfaces, see
 -   [Using a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-use.html)
 
 ## Grammars
-{: #grammars}
+{: #grammars-input}
 
 The grammars feature is beta functionality for all languages. The batch-processing interfaces does not currently support grammars.
 {: note}
@@ -211,6 +211,6 @@ curl -X POST -u "apikey:{apikey}"
 {: pre}
 
 ## Information security
-{: #security}
+{: #security-input}
 
 *Information security* includes features to associate a customer ID with data that is passed to the service with a request. You associate a customer ID with the data by passing the `X-Watson-Metadata` header with the request. If necessary, you can then delete the data by using the `DELETE /v1/user_data` method. For more information, see [Information security](/docs/services/speech-to-text-icp/information-security.html).
