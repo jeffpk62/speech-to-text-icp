@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-05"
 
 ---
 
@@ -40,6 +40,7 @@ Also consider the following service-specific requirements:
 -   If you specify an invalid query parameter or JSON field as part of the input, the response includes a `warnings` field that describes the invalid argument. The request succeeds despite any warnings.
 
 ## acoustic_customization_id
+{: #summary-acoustic-customization-id}
 
 An optional customization ID for a custom acoustic model that is adapted for the acoustic characteristics of your environment and speakers. By default, no custom model is used. For more information, see [Custom models](/docs/services/speech-to-text-icp/input.html#custom-input).
 
@@ -92,6 +93,7 @@ An optional customization ID for a custom acoustic model that is adapted for the
 </table>
 
 ## base_model_version
+{: #summary-base-model-version}
 
 An optional version of a base model. The parameter is intended primarily for use with custom models that are updated for a new base model, but it can be used without a custom model. The default value depends on whether the parameter is used with or without a custom model. For more information, see [Base model version](/docs/services/speech-to-text-icp/input.html#version).
 
@@ -144,6 +146,7 @@ An optional version of a base model. The parameter is intended primarily for use
 </table>
 
 ## Content-Type
+{: #summary-content-type}
 
 An optional audio format (MIME type) that specifies the format of the audio data that you pass to the service. The service can automatically detect the format of most audio, so the parameter is optional for most formats. It is required for `audio/basic`, `audio/l16`, and `audio/mulaw`. (For the batch-processing interface, the header must be the value `multipart/form-data`.) For more information, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 
@@ -198,6 +201,7 @@ An optional audio format (MIME type) that specifies the format of the audio data
 </table>
 
 ## customization_weight
+{: #summary-customization-weight}
 
 An optional double between 0.0 and 1.0 that indicates the relative weight that the service gives to words from a custom language model versus words from the base vocabulary. The default is 0.3 unless a different weight was specified when the custom language model was trained. For more information, see [Custom models](/docs/services/speech-to-text-icp/input.html#custom-input).
 
@@ -250,6 +254,7 @@ An optional double between 0.0 and 1.0 that indicates the relative weight that t
 </table>
 
 ## grammar_name
+{: #summary-grammar-name}
 
 An optional string that identifies a grammar that is to be used for speech recognition. The service recognizes only strings that are defined by the grammar. You must specify both the name of the grammar and the customization ID of the custom language model for which the grammar is defined. For more information, see [Grammars](/docs/services/speech-to-text-icp/input.html#grammars-input).
 
@@ -302,6 +307,7 @@ An optional string that identifies a grammar that is to be used for speech recog
 </table>
 
 ## inactivity_timeout
+{: #summary-inactivity-timeout}
 
 An optional integer that specifies the number of seconds for the service's inactivity timeout; use `-1` to indicate infinity. The default is 30 seconds. For more information, see [Inactivity timeout](/docs/services/speech-to-text-icp/input.html#timeouts).
 
@@ -354,6 +360,7 @@ An optional integer that specifies the number of seconds for the service's inact
 </table>
 
 ## interim_results
+{: #summary-interim-results}
 
 An optional boolean that directs the service to return intermediate hypotheses that are likely to change before the final transcript. By default (`false`), interim results are not returned. For more information, see [Interim results](/docs/services/speech-to-text-icp/output.html#interim).
 
@@ -406,6 +413,7 @@ An optional boolean that directs the service to return intermediate hypotheses t
 </table>
 
 ## keywords
+{: #summary-keywords}
 
 An optional array of keyword strings that the service spots in the input audio. By default, keyword spotting is not performed. For more information, see [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
@@ -458,6 +466,7 @@ An optional array of keyword strings that the service spots in the input audio. 
 </table>
 
 ## keywords_threshold
+{: #summary-keywords-threshold}
 
 An optional double between 0.0 and 1.0 that indicates the minimum threshold for a positive keyword match. By default, keyword spotting is not performed. For more information, see [Keyword spotting](/docs/services/speech-to-text-icp/output.html#keyword_spotting).
 
@@ -510,6 +519,7 @@ An optional double between 0.0 and 1.0 that indicates the minimum threshold for 
 </table>
 
 ## language_customization_id
+{: #summary-language-customization-id}
 
 An optional customization ID for a custom language model that includes terminology from your domain. By default, no custom model is used. For more information, see [Custom models](/docs/services/speech-to-text-icp/input.html#custom-input).
 
@@ -562,6 +572,7 @@ An optional customization ID for a custom language model that includes terminolo
 </table>
 
 ## max_alternatives
+{: #summary-max-alternatives}
 
 An optional integer that specifies the maximum number of alternative hypotheses that the service returns. By default, the service returns a single final hypothesis. For more information, see [Maximum alternatives](/docs/services/speech-to-text-icp/output.html#max_alternatives).
 
@@ -614,6 +625,7 @@ An optional integer that specifies the maximum number of alternative hypotheses 
 </table>
 
 ## model
+{: #summary-model}
 
 An optional model that specifies the language in which the audio is spoken and the rate at which it was sampled: broadband or narrowband. By default, `en-US_BroadbandModel` is used. For more information, see [Languages and models](/docs/services/speech-to-text-icp/models.html).
 
@@ -666,6 +678,7 @@ An optional model that specifies the language in which the audio is spoken and t
 </table>
 
 ## profanity_filter
+{: #summary-profanity-filter}
 
 An optional boolean that indicates whether the service censors profanity from a transcript. By default (`true`), profanity is filtered from the transcript. For more information, see [Profanity filtering](/docs/services/speech-to-text-icp/output.html#profanity_filter).
 
@@ -718,6 +731,7 @@ An optional boolean that indicates whether the service censors profanity from a 
 </table>
 
 ## redaction
+{: #summary-redaction}
 
 An optional boolean that indicates whether the service redacts numeric data with three or more consecutive digits from a transcript. If you set the `redaction` parameter to `true`, the service automatically forces the `smart_formatting` parameter to be `true`. By default (`false`), numeric data is not redacted. For more information, see [Numeric redaction](/docs/services/speech-to-text-icp/output.html#redaction).
 
@@ -770,6 +784,7 @@ An optional boolean that indicates whether the service redacts numeric data with
 </table>
 
 ## smart_formatting
+{: #summary-smart-formatting}
 
 An optional boolean that indicates whether the service converts dates, times, numbers, currency, and similar values into more conventional representations in the final transcript. For US English, the feature also converts certain keyword phrases into punctuation symbols. By default (`false`), smart formatting is not performed. For more information, see [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting).
 
@@ -822,6 +837,7 @@ An optional boolean that indicates whether the service converts dates, times, nu
 </table>
 
 ## speaker_labels
+{: #summary-speaker-labels}
 
 An optional boolean that indicates whether the service identifies which individuals spoke which words in a multi-participant exchange. If you set the `speaker_labels` parameter to `true`, the service automatically forces the `timestamps` parameter to be `true`. By default (`false`), speaker labels are not returned. For more information, see [Speaker labels](/docs/services/speech-to-text-icp/output.html#speaker_labels).
 
@@ -875,6 +891,7 @@ An optional boolean that indicates whether the service identifies which individu
 </table>
 
 ## speech_analytics
+{: #summary-speech-analytics}
 
 An optional boolean that indicates whether the service is to produce speech analytics results for the input audio. The service further analyzes its speech recognition results to produce detailed information about the topics of overall conversation and the tone, sentiment, keywords, and topics of individual speakers. If you set the `speech_analytics` parameter to `true`, the service automatically forces the `speaker_labels` parameter to be `true`. By default (`false`), speech analytics are not returned. For more information, see [Speech analytics](/docs/services/speech-to-text-icp/analytics.html).
 
@@ -927,6 +944,7 @@ An optional boolean that indicates whether the service is to produce speech anal
 </table>
 
 ## timestamps
+{: #summary-timestamps}
 
 An optional boolean that indicates whether the service produces timestamps for the words of the transcript. By default (`false`), timestamps are not returned. For more information, see [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps).
 
@@ -980,6 +998,7 @@ An optional boolean that indicates whether the service produces timestamps for t
 </table>
 
 ## Transfer-Encoding
+{: #summary-transfer-encoding}
 
 An optional value of `chunked` that causes the audio to be streamed to the service. By default, audio is sent all at once as a one-shot delivery. For more information, see [Audio transmission](/docs/services/speech-to-text-icp/input.html#transmission).
 
@@ -1032,6 +1051,7 @@ An optional value of `chunked` that causes the audio to be streamed to the servi
 </table>
 
 ## watson-token
+{: #summary-watson-token}
 
 An optional authentication token that makes authenticated requests to the service without embedding your service credentials in every call. By default, service credentials must be passed with each request.
 
@@ -1087,6 +1107,7 @@ You cannot use JavaScript to call the WebSocket interface from a browser. The `w
 </table>
 
 ## word_alternatives_threshold
+{: #summary-word-alternatives-threshold}
 
 An optional double between 0.0 and 1.0 that specifies the threshold at which the service reports acoustically similar alternatives for words of the input audio. By default, word alternatives are not returned. For more information, see [Word alternatives](/docs/services/speech-to-text-icp/output.html#word_alternatives).
 
@@ -1139,6 +1160,7 @@ An optional double between 0.0 and 1.0 that specifies the threshold at which the
 </table>
 
 ## word_confidence
+{: #summary-word-confidence}
 
 An optional boolean that indicates whether the service provides confidence measures for the words of the transcript. By default (`false`), word confidence measures are not returned. For more information, see [Word confidence](/docs/services/speech-to-text-icp/output.html#word_confidence).
 
@@ -1191,6 +1213,7 @@ An optional boolean that indicates whether the service provides confidence measu
 </table>
 
 ## X-Watson-Metadata
+{: #summary-x-watson-metadata}
 
 An optional string that associates a customer ID with data that is passed for recognition requests. The parameter accepts the argument `customer_id={id}`. By default, no customer ID is associated with the data. For more information, see [Information security](/docs/services/speech-to-text-icp/information-security.html).
 
