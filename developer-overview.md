@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-02-28"
 
 ---
 
@@ -36,7 +36,9 @@ You can access the capabilities of {{site.data.keyword.ibmwatson}} {{site.data.k
 -   [The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html) provides a non-blocking interface that lets you register a callback URL to receive notifications or to poll the service for job status and results.
 -   [The batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html) provides a means of transcribing multiple audio files with a single request. In addition to speech recognition, the interface provides [speech analytics](/docs/services/speech-to-text-icp/analytics.html) to learn detailed information about conversations and their individual speakers.
 
-The interfaces provide similar speech recognition capabilities, but you might specify the same parameter as a request header, a query parameter, or a parameter of a JSON object depending on the interface that you use. The batch-processing interface requires a Cloud Object Storage (COS) server for passing audio files to the service and for obtaining results from the service. (Batch processing currently supports a limited set of speech recognition parameters.)
+The interfaces provide similar speech recognition capabilities, but you might specify the same parameter as a request header, a query parameter, or a parameter of a JSON object depending on the interface that you use. The batch-processing interface requires a Cloud Object Storage (COS) server for passing audio files to the service and for obtaining results from the service. Batch processing currently supports a limited set of speech recognition parameters.
+
+The WebSocket and synchronous HTTP interfaces accept a maximum of 100 MB of audio data with a single request. The batch-processing interface accepts a maximum of 100 MB of audio for any file of a request. The asynchronous HTTP interface accepts a maximum of 1 GB of audio data with a request.
 
 -   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
 -   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
@@ -79,4 +81,4 @@ For instance, a web page that is loaded from a server in {{site.data.keyword.Blu
 SDKs are available for the {{site.data.keyword.speechtotextshort}}: Customer Care service to simplify the development of speech applications. {{site.data.keyword.ibmwatson}} SDKs are available for many popular programming languages and platforms.
 
 -   For a complete list of SDKs and links to the SDKs on GitHub, see [Using SDKs](/docs/services/watson/getting-started-sdks.html).
--   For detailed information about all methods of the Node, Java&trade;, Python, Ruby, and Go SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
+-   For detailed information about all methods of the Node, Java&trade;, Python, Ruby, Swift, and Go SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
