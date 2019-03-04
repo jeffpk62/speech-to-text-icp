@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-02-04"
+lastupdated: "2019-03-04"
 
 ---
 
@@ -22,14 +22,6 @@ lastupdated: "2019-02-04"
 
 # Customization
 {: #faq-customization}
-
-1.  <span style="color:#003F69">How much effort is required to create and use a custom model?</span>
-
-    Creating a *custom language model* requires you to add corpora, words, or grammars to the custom model. The service can typically train any custom model in a matter of minutes. The level of effort that it takes to create a model depends on the data that you have available for the model.
-
-    Creating a *custom acoustic model* requires you to add audio resources (audio data) to the custom model. The length of time that it takes the service to train the custom model depends on how much audio data the model contains. In general, training takes twice the length of the cumulative audio. The level of effort that it takes to create a model depends on the audio data that you have available for the model. It also depends on whether you want to use transcriptions of the audio.
-
-    The customization interfaces for both types of model are similar and straightforward to use. Using either type of custom model with a recognition request is also straightforward: You specify the customization ID of the model with the request.
 
 ## Language model customization
 {: #lmCustomization}
