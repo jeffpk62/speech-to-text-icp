@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-01-17"
+lastupdated: "2019-03-07"
 
 ---
 
@@ -308,7 +308,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A custom acoustic model that is to be used for speech recognition.
       For more information, see
-      <a href="/docs/services/speech-to-text-icp/input.html#custom">Custom models</a>.
+      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
     </td>
   </tr>
   <tr>
@@ -317,7 +317,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A relative weight between 0.0 and 1.0 that the service is to give
       to words from a custom language model. For more information, see
-      <a href="/docs/services/speech-to-text-icp/input.html#custom">Custom models</a>.
+      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
     </td>
   </tr>
   <tr>
@@ -326,7 +326,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A custom language model that is to be used for speech recognition.
       For more information, see
-      <a href="/docs/services/speech-to-text-icp/input.html#custom">Custom models</a>.
+      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
     </td>
   </tr>
   <tr>
@@ -338,7 +338,7 @@ The batch-processing interface currently supports only a subset of the available
       batch-processing interface, so you can specify only
       `en-US_BroadbandModel` (the default), `en-US_NarrowbandModel`, or
       `en-US_ShortForm_NarrowbandModel`. For more information, see
-      <a href="/docs/services/speech-to-text-icp/models.html">Languages and models</a>.
+      [Languages and models](/docs/services/speech-to-text-icp/models.html).
     </td>
   </tr>
   <tr>
@@ -346,7 +346,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:center">Boolean</td>
     <td style="text-align:left">
       Censors profanity from US English transcripts. For more information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#profanity_filter">Profanity filtering</a>.
+      [Profanity filtering](/docs/services/speech-to-text-icp/output.html#profanity_filter).
     </td>
   </tr>
   <tr>
@@ -355,7 +355,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       Redacts numeric data from US English, Japanese, and Korean transcripts.
       For more information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#redaction">Numeric redaction</a>.
+      [Numeric redaction](/docs/services/speech-to-text-icp/output.html#redaction).
     </td>
   </tr>
   <tr>
@@ -365,7 +365,7 @@ The batch-processing interface currently supports only a subset of the available
       Converts dates, times, numbers, currency, and similar values into
       more conventional representations in US English, Japanese, and
       Spanish transcripts. For more information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#smart_formatting">Smart formatting</a>.
+      [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting).
     </td>
   </tr>
   <tr>
@@ -374,7 +374,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       Returns confidence scores for the words of the transcript.
       For more information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#word_confidence">Word confidence</a>.
+      [Word confidence](/docs/services/speech-to-text-icp/output.html#word_confidence).
     </td>
   </tr>
 </table>
@@ -394,7 +394,7 @@ The service always uses a value of `true` for the following parameters, regardle
     <td style="text-align:left">
       Produces timestamps (start and end times) for all words of the audio.
       For more information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#word_timestamps">Word timestamps</a>.
+      [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps).
     </td>
   </tr>
   <tr>
@@ -404,7 +404,7 @@ The service always uses a value of `true` for the following parameters, regardle
       Identifies which individuals spoke which words in a multi-participant
       exchange for US English, Japanese, and Spanish transcripts. For more
       information, see
-      <a href="/docs/services/speech-to-text-icp/output.html#speaker_labels">Speaker labels</a>.
+      [Speaker labels](/docs/services/speech-to-text-icp/output.html#speaker_labels).
     </td>
   </tr>
 </table>

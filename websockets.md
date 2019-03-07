@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-02-28"
+lastupdated: "2019-03-07"
 
 ---
 
@@ -89,8 +89,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       If you do not specify a model, the service uses the
       <code>en-US_BroadbandModel</code> model by default. For more
       information, see
-      <a href="/docs/services/speech-to-text-icp/models.html">Languages
-        and models</a>.
+      [Languages and models](/docs/services/speech-to-text-icp/models.html).
     </td>
   </tr>
   <tr>
@@ -102,9 +101,8 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       language model that is to be used for all requests that are sent
       over the connection. The base model of the custom language model
       must match the value of the <code>model</code> parameter. By
-      default, no custom language model is used. For more information,
-      see <a href="/docs/services/speech-to-text-icp/custom.html">The
-      customization interface</a>.
+      default, no custom language model is used. For more information, see
+      [The customization interface](/docs/services/speech-to-text-icp/custom.html).
     </td>
   </tr>
   <tr>
@@ -116,9 +114,8 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       acoustic model that is to be used for all requests that are sent
       over the connection. The base model of the custom acoustic model
       must match the value of the <code>model</code> parameter. By
-      default, no custom acoustic model is used. For more information,
-      see <a href="/docs/services/speech-to-text-icp/custom.html">The
-      customization interface</a>.
+      default, no custom acoustic model is used. For more information, see
+      [The customization interface](/docs/services/speech-to-text-icp/custom.html).
     </td>
   </tr>
   <tr>
@@ -131,8 +128,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       primarily for use with custom models that are upgraded for a new base
       model. The default value depends on whether the parameter is used
       with or without a custom model. For more information, see
-      <a href="/docs/services/speech-to-text-icp/input.html#version">Base model
-      version</a>.
+      [Base model version](/docs/services/speech-to-text-icp/input.html#version).
     </td>
   </tr>
   <tr>
@@ -147,8 +143,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       URL-encode the argument to the parameter, for example,
       `customer_id%3dmy_customer_ID`. By default, no customer ID is associated
       with the data. For more information, see
-      <a href="/docs/services/speech-to-text-icp/information-security.html">Information
-      security</a>.
+      [Information security](/docs/services/speech-to-text-icp/information-security.html).
     </td>
   </tr>
 </table>
@@ -189,13 +184,12 @@ To initiate a recognition request, the client sends a JSON text message to the s
         <li style="margin:10px 0px; line-height:120%;">
           <code>start</code> starts a recognition request or specifies
           new parameters for subsequent requests. For more information, see
-          <a href="#WSmore">Send additional requests and modify request
-            parameters</a>.
+          [Send additional requests and modify request parameters](#WSmore).
         </li>
         <li style="margin:10px 0px; line-height:120%;">
           <code>stop</code> signals that all audio for a request has
           been sent. For more information, see
-          <a href="#WSstop">End a recognition request</a>.
+          [End a recognition request](#WSstop).
         </li>
       </ul>
     </td>
