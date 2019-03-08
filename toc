@@ -85,7 +85,6 @@ Speech to Text: Customer Care
     {: .navgroup id="help"}
     {: .topicgroup}
     FAQs
-        faq-recognition.md
         faq-customization.md
 
     release-notes.md
