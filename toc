@@ -83,10 +83,6 @@ Speech to Text: Customer Care
     {: .navgroup-end}
 
     {: .navgroup id="help"}
-    {: .topicgroup}
-    FAQs
-        faq-customization.md
-
     release-notes.md
 
     {: .topicgroup}
