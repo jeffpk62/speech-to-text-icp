@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-12"
 
 subcollection: speech-to-text-icp
 
@@ -38,6 +38,13 @@ The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.sp
 
         The {{site.data.keyword.watson}} SDKs provide the simplest way to call the WebSocket interface from another language. For information about using the WebSocket interface with the Node.js, Java, Python, and Ruby SDKs, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
     -   Use the synchronous, asynchronous, or batch-processing HTTP interface to perform speech recognition.
+-   **[1.1.0]** When you use an {{site.data.keyword.cos_full}} server with the batch-processing interface, the service does not currently support the Identity and Access Management (IAM) credentials format. The service requires that you use credentials in the hash-based message authentication code (HMAC) format.
+
+    [{{site.data.keyword.cloud_notm}} Object Storage credentials format](/docs/services/speech-to-text-icp/batch.html#batchCOSCredentialsIBM) incorrectly describes the use of IAM credentials. You must use HMAC credentials instead. For more information about using HMAC credentials, see the following documentation:
+    -   [IAM vs HMAC ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials#iam-vs-hmac){: new_window}
+    -   [Using HMAC credentials ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/hmac?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials){: new_window}
+
+    The next release of the service will support the IAM credentials format as documented.
 -   **[1.1.0]** When you request speech analytics with the batch-processing HTTP interface, the service can sometimes omit the `conversation_speech_analytics` results from an updated **.json** file. This is an infrequent issue that will be addressed in a future release.
 
 ## Version 1.1.0 (18 January 2019)

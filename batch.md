@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-03-12"
 
 subcollection: speech-to-text-icp
 
@@ -128,6 +128,9 @@ For more information, see [Minio Docker Quickstart Guide ![External link icon](.
 
 #### {{site.data.keyword.cloud_notm}} Object Storage credentials format
 {: #batchCOSCredentialsIBM}
+
+The service does not currently support the Identity and Access Management (IAM) credentials format. You must use the hash-based message authentication code (HMAC) credentials format instead. For more information about using HMAC credentials, see [IAM vs HMAC ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials#iam-vs-hmac){: new_window} and [Using HMAC credentials ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/hmac?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials){: new_window}.
+{: important}
 
 The {{site.data.keyword.cos_full}} server uses the Identity and Access Management (IAM) credentials format.
 
