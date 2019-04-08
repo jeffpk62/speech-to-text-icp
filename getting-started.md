@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-04-08"
 
 subcollection: speech-to-text-icp
 
@@ -34,7 +34,7 @@ The {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Cus
 
 To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first complete the following steps:
 
-1.  Install and configure {{site.data.keyword.cloud}} Private.
+1.  Install and configure {{site.data.keyword.icpfull}}.
 1.  Deploy the {{site.data.keyword.speechtotextshort}}: Customer Care service on your {{site.data.keyword.cloud_notm}} Private installation.
 1.  Learn the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 
