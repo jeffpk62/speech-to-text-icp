@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-04-09"
 
 subcollection: speech-to-text-icp
 
@@ -71,10 +71,11 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       <br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
-      Passes a valid authentication token to establish an authenticated
-      connection with the service. Once you establish a connection, you
-      can keep it alive indefinitely. While the connection remains open,
-      you remain authenticated to the service.<br/><br/>
+      Passes a valid {{site.data.keyword.watson}} authentication token to
+      establish an authenticated connection with the service. Once you
+      establish a connection, you can keep it alive indefinitely. While
+      the connection remains open, you remain authenticated to the
+      service.<br/><br/>
       **Important:** You cannot use JavaScript to call the WebSocket interface
       from a browser. The `watson-token` parameter does not accept API keys.
       For more information about working around this limitation, see the
