@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-12"
+lastupdated: "2019-04-09"
 
 subcollection: speech-to-text-icp
 
@@ -25,7 +25,7 @@ subcollection: speech-to-text-icp
 # Release notes
 {: #release-notes}
 
-The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.cloud}} Private are available. Information includes new features and changes for each version of the product and any known limitations.
+The following versions of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.icpfull}} are available. Information includes new features and changes for each version of the product and any known limitations.
 {: shortdesc}
 
 ## Known limitations
@@ -207,9 +207,9 @@ The initial release of the service.
 
 {{site.data.keyword.speechtotextshort}}: Customer Care is an on-premises version of the public {{site.data.keyword.speechtotextfull}} service. For information about the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}, see [About {{site.data.keyword.speechtotextshort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/speech-to-text/index.html#about){: new_window}.
 
-{{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.cloud_notm}} Private differs from the public {{site.data.keyword.speechtotextshort}} service in the following ways. You might find this information helpful if you are already familiar with the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}.
+{{site.data.keyword.speechtotextshort}}: Customer Care on {{site.data.keyword.icpfull_notm}} differs from the public {{site.data.keyword.speechtotextshort}} service in the following ways. You might find this information helpful if you are already familiar with the {{site.data.keyword.speechtotextshort}} service on the public {{site.data.keyword.cloud_notm}}.
 
--   The endpoints for {{site.data.keyword.speechtotextshort}}: Customer Care are specific to your {{site.data.keyword.cloud_notm}} Private cluster. For more information, see [Making an authenticated HTTP request](/docs/services/speech-to-text-icp/making-requests.html#httpRequest) and [Making an authenticated WebSocket request](/docs/services/speech-to-text-icp/making-requests.html#websocketRequest).
+-   The endpoints for {{site.data.keyword.speechtotextshort}}: Customer Care are specific to your {{site.data.keyword.icpfull_notm}} cluster. For more information, see [Making an authenticated HTTP request](/docs/services/speech-to-text-icp/making-requests.html#httpRequest) and [Making an authenticated WebSocket request](/docs/services/speech-to-text-icp/making-requests.html#websocketRequest).
 -   You use a common API key for all authenticated requests to {{site.data.keyword.speechtotextshort}}: Customer Care. Each cluster includes a single service instance. This instance has one API key and owns all of the resources in that cluster. For more information, see [Obtaining an API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
 -   {{site.data.keyword.speechtotextshort}}: Customer Care supports only US English, Japanese, and Korean models. For all three languages, the service supports both both broadband and narrowband models, language model customization (GA), and acoustic model customization (beta). For more information, see [Languages and models](/docs/services/speech-to-text-icp/models.html) and [Language support for customization](/docs/services/speech-to-text-icp/custom.html#languageSupport).
 -   All custom language and custom acoustic models are owned by the single service instance for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Ownership of custom models](/docs/services/speech-to-text-icp/custom.html#customOwner).
