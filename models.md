@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-04-11"
 
 subcollection: speech-to-text-icp
 
@@ -119,7 +119,6 @@ Both methods return the following information about a model:
 -   `supported_features` describes the additional service features that are supported with the model:
     -   `custom_language_model` is a boolean that indicates whether you can create custom language models that are based on the model.
     -   `speaker_labels` indicates whether you can use the `speaker_labels` parameter with the model.
-    -   `speech_analytics` indicates whether you can use the `speech_analytics` parameter with the model.
 
 ### Example requests and responses
 {: #listExample}
@@ -142,8 +141,7 @@ curl -X GET -u "apikey:{apikey}"
       "rate": 16000,
       "supported_features": {
         "custom_language_model": true,
-        "speaker_labels": true,
-        "speech_analytics": true
+        "speaker_labels": true
       },
       "description": "US English broadband model."
     },
@@ -154,8 +152,7 @@ curl -X GET -u "apikey:{apikey}"
       "rate": 16000,
       "supported_features": {
         "custom_language_model": true,
-        "speaker_labels": false,
-        "speech_analytics": false
+        "speaker_labels": false
       },
       "description": "Korean broadband model."
     },
@@ -181,8 +178,7 @@ curl -X GET -u "apikey:{apikey}"
   "url": "https://{icp_cluster_host}/speech-to-text/api/v1/models/en-US_BroadbandModel",
   "supported_features": {
     "custom_language_model": true,
-    "speaker_labels": true,
-    "speech_analytics": true
+    "speaker_labels": true
   },
   "description": "US English broadband model."
 }
