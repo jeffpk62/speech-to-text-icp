@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-04-20"
 
 subcollection: speech-to-text-icp
 
@@ -148,6 +148,10 @@ A new numeric redaction feature is now available to mask numbers that have three
 
 -   The service now supports audio in the G.729 (`audio/g729`) format. The service supports only G.729 Annex D for narrowband audio. For more information about supported audio formats, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
 -   The maximum amount of audio that you can add to a custom acoustic model has increased from 50 hours to 100 hours.
+-   The maximum number of out-of-vocabulary (OOV) words that you can add to a custom language model has increase from 30 thousand to 90 thousand words.
+-   The training methods of the customization interface now include a `strict` query parameter that indicates whether training is to proceed if a custom model contains a mix of valid and invalid resources. By default, training fails if a custom model contains one or more invalid resources. Set the parameter to `false` to allow training to proceed as long as the model contains at least one valid resource. The service excludes invalid resources from the training.
+    -   For more information about using the `strict` parameter with the `POST /v1/customizations/{customization_id}/train` method, see [Train the custom language model](/docs/services/speech-to-text-icp/language-create.html#trainModel-language) and [Training failures](/docs/services/speech-to-text-icp/language-create.html#failedTraining-language).
+    -   For more information about using the `strict` parameter with the `POST /v1/acoustic_customizations/{customization_id}/train` method, see [Train the custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#trainModel-acoustic) and [Training failures](/docs/services/speech-to-text-icp/acoustic-create.html#failedTraining-acoustic).
 
 ## Version 1.0.4 (12 November 2018)
 {: #v104b}
