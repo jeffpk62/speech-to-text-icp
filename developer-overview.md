@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -31,20 +31,20 @@ You can access the capabilities of {{site.data.keyword.ibmwatson}} {{site.data.k
 ## Programming with the service
 {: #programming}
 
-[Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html) shows you how to request basic transcription with each of the service's programming interfaces:
+[Making a recognition request](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-basic-request) shows you how to request basic transcription with each of the service's programming interfaces:
 
--   [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html) offers an efficient, low-latency, and high-throughput implementation over a full-duplex connection.
--   [The synchronous HTTP interface](/docs/services/speech-to-text-icp/http.html) provides a basic interface to transcribe audio with blocking requests.
--   [The asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html) provides a non-blocking interface that lets you register a callback URL to receive notifications or to poll the service for job status and results.
--   [The batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html) provides a means of transcribing multiple audio files with a single request. In addition to speech recognition, the interface provides [speech analytics](/docs/services/speech-to-text-icp/analytics.html) to learn detailed information about conversations and their individual speakers.
+-   [The WebSocket interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-websockets) offers an efficient, low-latency, and high-throughput implementation over a full-duplex connection.
+-   [The synchronous HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-http) provides a basic interface to transcribe audio with blocking requests.
+-   [The asynchronous HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-async) provides a non-blocking interface that lets you register a callback URL to receive notifications or to poll the service for job status and results.
+-   [The batch-processing HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch) provides a means of transcribing multiple audio files with a single request. In addition to speech recognition, the interface provides [speech analytics](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-analytics) to learn detailed information about conversations and their individual speakers.
 
 The interfaces provide similar speech recognition capabilities, but you might specify the same parameter as a request header, a query parameter, or a parameter of a JSON object depending on the interface that you use. The batch-processing interface requires a Cloud Object Storage (COS) server for passing audio files to the service and for obtaining results from the service. Batch processing currently supports a limited set of speech recognition parameters.
 
 The WebSocket and synchronous HTTP interfaces accept a maximum of 100 MB of audio data with a single request. The batch-processing interface accepts a maximum of 100 MB of audio for any file of a request. The asynchronous HTTP interface accepts a maximum of 1 GB of audio data with a request.
 
--   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
--   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
--   For descriptions of all available speech recognition parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
+-   For information about making requests with each of the {{site.data.keyword.speechtotextshort}}: Customer Care interfaces, see [Making requests to the service](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-making-requests).
+-   For examples of basic speech recognition requests with each of the service's interfaces, see [Making a recognition request](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-basic-request).
+-   For descriptions of all available speech recognition parameters, see the [Parameter summary](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-summary).
 -   For descriptions of all methods and their parameters, along with examples, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
 ## Advantages of the WebSocket interface
@@ -62,11 +62,11 @@ The WebSocket interface has a number of advantages over the HTTP interface:
 ## Customizing the service
 {: #customizing}
 
-[The customization interface](/docs/services/speech-to-text-icp/custom.html) lets you create custom models to improve the service's speech recognition capabilities:
+[The customization interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-customization) lets you create custom models to improve the service's speech recognition capabilities:
 
--   [Custom language models](/docs/services/speech-to-text-icp/language-create.html) let you define domain-specific words for a base model. Custom language models expand the service's base vocabulary with terminology specific to domains such as medicine and law.
--   [Custom acoustic models](/docs/services/speech-to-text-icp/acoustic-create.html) let you adapt a base model for the acoustic characteristics of your environment and speakers. Custom acoustic models improve the service's ability to recognize speech for specific acoustic characteristics.
--   [Grammars](/docs/services/speech-to-text-icp/grammar.html) let you restrict the phrases that the service can recognize to those defined in the grammar's rules. By limiting the search space for valid strings, the service can deliver results faster and more accurately. Grammars are supported with custom language models.
+-   [Custom language models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-languageCreate) let you define domain-specific words for a base model. Custom language models expand the service's base vocabulary with terminology specific to domains such as medicine and law.
+-   [Custom acoustic models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-acoustic) let you adapt a base model for the acoustic characteristics of your environment and speakers. Custom acoustic models improve the service's ability to recognize speech for specific acoustic characteristics.
+-   [Grammars](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-grammars) let you restrict the phrases that the service can recognize to those defined in the grammar's rules. By limiting the search space for valid strings, the service can deliver results faster and more accurately. Grammars are supported with custom language models.
 
 You can use a custom language model, a custom acoustic model, or both for speech recognition with any of the service's interfaces. (The batch-processing interface does not currently support grammars.)
 
@@ -82,5 +82,5 @@ For instance, a web page that is loaded from a server in {{site.data.keyword.clo
 
 SDKs are available for the {{site.data.keyword.speechtotextshort}}: Customer Care service to simplify the development of speech applications. {{site.data.keyword.ibmwatson}} SDKs are available for many popular programming languages and platforms.
 
--   For a complete list of SDKs and links to the SDKs on GitHub, see [Using SDKs](/docs/services/watson/getting-started-sdks.html).
+-   For a complete list of SDKs and links to the SDKs on GitHub, see [Using SDKs](/docs/services/watson?topic=watson-using-sdks).
 -   For detailed information about all methods of the Node, Java&trade;, Python, Ruby, Swift, and Go SDKs for the {{site.data.keyword.speechtotextshort}}: Customer Care service, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.

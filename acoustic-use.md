@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -28,11 +28,11 @@ subcollection: speech-to-text-icp
 Once you create and train your custom acoustic model, you can use it in speech recognition requests. You use the `acoustic_customization_id` query parameter to specify the custom acoustic model for a request, as shown in the following examples. You must issue the request with service credentials for the instance of the service that owns the model.
 {: shortdesc}
 
-You can also specify a custom language model to be used with the request, which can increase transcription accuracy. For more information, see [Using custom language and custom acoustic models during speech recognition](/docs/services/speech-to-text-icp/acoustic-both.html#useBothRecognize).
+You can also specify a custom language model to be used with the request, which can increase transcription accuracy. For more information, see [Using custom language and custom acoustic models during speech recognition](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-useBoth#useBothRecognize).
 
 You can create multiple custom acoustic models for the same or different domains or environments. However, you can specify only one custom acoustic model at a time with the `acoustic_customization_id` parameter.
 
--   For the [WebSocket interface](/docs/services/speech-to-text-icp/websockets.html), use the `/v1/recognize` method. The specified custom model is used for all requests that are sent over the connection.
+-   For the [WebSocket interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-websockets), use the `/v1/recognize` method. The specified custom model is used for all requests that are sent over the connection.
 
     ```javascript
     var token = {authentication-token};
@@ -43,7 +43,7 @@ You can create multiple custom acoustic models for the same or different domains
     var websocket = new WebSocket(wsURI);
     ```
     {: codeblock}
--   For the [synchronous HTTP interface](/docs/services/speech-to-text-icp/http.html), use the `POST /v1/recognize` method. The specified custom model is used for that request.
+-   For the [synchronous HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-http), use the `POST /v1/recognize` method. The specified custom model is used for that request.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"
@@ -52,7 +52,7 @@ You can create multiple custom acoustic models for the same or different domains
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize?acoustic_customization_id={customization_id}"
     ```
     {: pre}
--   For the [asynchronous HTTP interface](/docs/services/speech-to-text-icp/async.html), use the `POST /v1/recognitions` method. The specified custom model is used for that request.
+-   For the [asynchronous HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-async), use the `POST /v1/recognitions` method. The specified custom model is used for that request.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"
@@ -61,7 +61,7 @@ You can create multiple custom acoustic models for the same or different domains
     "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognitions?acoustic_customization_id={customization_id}"
     ```
     {: pre}
--   For the [batch-processing HTTP interface](/docs/services/speech-to-text-icp/batch.html), use the `POST /v1/batches` method. The specified custom model is used for all input files of the request.
+-   For the [batch-processing HTTP interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch), use the `POST /v1/batches` method. The specified custom model is used for all input files of the request.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"

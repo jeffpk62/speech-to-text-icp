@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-08"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -62,7 +62,7 @@ In theory, you can send 44 kHz audio with a broadband or narrowband model, but t
 {: #samplingRateMore}
 
 -   For more information about sampling rates, see [en.wikipedia.org/wiki/Sampling ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://en.wikipedia.org/wiki/Sampling){: new_window}. Select *Sampling (signal processing)*.
--   For more information about the models that the service offers for each supported language, see [Languages and models](/docs/services/speech-to-text-icp/models.html).
+-   For more information about the models that the service offers for each supported language, see [Languages and models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-models).
 
 ### Bit rate
 {: #bitRate}
@@ -188,7 +188,7 @@ Table 1 provides a summary of the audio formats that the service supports.
     -   For others, the content type is required. These formats do not provide the information, such as the sampling rate, that the service needs to auto-detect their format.
 -   The final columns identify additional *Required parameters* and *Optional parameters* for each format. The following sections provide more information about these parameters.
 
-The batch-processing interface accepts audio files in multiple formats with a single request. You use the `Content-Type` header to specify `multipart/form-data`, not the content types of the audio files. However, the service accepts only audio from which it can derive the format and its characteristics. For more information, see [Supported audio formats](/docs/services/speech-to-text-icp/batch.html#batchAudioSupported) for the batch-processing interface.
+The batch-processing interface accepts audio files in multiple formats with a single request. You use the `Content-Type` header to specify `multipart/form-data`, not the content types of the audio files. However, the service accepts only audio from which it can derive the format and its characteristics. For more information, see [Supported audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch#batchAudioSupported) for the batch-processing interface.
 {: note}
 
 <table>
@@ -591,4 +591,4 @@ The following tips can help you improve the quality of speech recognition:
     -   Engine noise, working devices, street noise, and background conversations can significantly reduce recognition accuracy.
     -   Regional accents and differences in pronunciation can also reduce accuracy.
 
-    If your audio has these characteristics, consider using acoustic model customization to improve the accuracy of speech recognition. For more information, see [The customization interface](/docs/services/speech-to-text-icp/custom.html).
+    If your audio has these characteristics, consider using acoustic model customization to improve the accuracy of speech recognition. For more information, see [The customization interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-customization).

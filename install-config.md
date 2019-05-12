@@ -107,8 +107,11 @@ You must have cluster administrator or team administrator access to the systems 
 
         The response indicates version numbers similar to these:
 
+        ```bash
         Client: &version.Version{SemVer:"v2.9.1" ... }
         Server: &version.Version{SemVer:"v2.9.1+icp" ... }
+        ```
+        {: codeblock}
 
 ## Step 3: Add the Helm chart to the cloud repository
 {: #add-chart-to-icp}
