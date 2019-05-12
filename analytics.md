@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -37,23 +37,23 @@ To produce speech analytics, the {{site.data.keyword.speechtotextshort}}: Custom
 
 For more information about these additional {{site.data.keyword.watson}} services, see the following documentation:
 
--   [About {{site.data.keyword.toneanalyzershort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/tone-analyzer/index.html#about){: new_window}
--   [About {{site.data.keyword.nlushort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/natural-language-understanding/index.html#about){: new_window}
+-   [About {{site.data.keyword.toneanalyzershort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/tone-analyzer?topic=tone-analyzer-about#about){: new_window}
+-   [About {{site.data.keyword.nlushort}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/docs/services/natural-language-understanding?topic=natural-language-understanding-about#about){: new_window}
 
-Batch processing and speech analytics consume extra processing resources. Consider deploying more Virtual Processor Cores (VPCs) if you use these features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp/install-config.html). Batch processing and speech analytics are supported only for US English audio at this time.
+Batch processing and speech analytics consume extra processing resources. Consider deploying more Virtual Processor Cores (VPCs) if you use these features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-install). Batch processing and speech analytics are supported only for US English audio at this time.
 {: important}
 
 ## How batch-processing with speech analytics works
 {: #analyticsWorkflow}
 
-From an interface perspective, batch-processing works the same with or without speech analytics. The service scans and processes each audio file in the input bucket. It populates the output bucket with at least one new **.json** or **.notice** file for each input file. For more information, see [How batch-processing works](/docs/services/speech-to-text-icp/batch.html#batchWorkflow).
+From an interface perspective, batch-processing works the same with or without speech analytics. The service scans and processes each audio file in the input bucket. It populates the output bucket with at least one new **.json** or **.notice** file for each input file. For more information, see [How batch-processing works](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch#batchWorkflow).
 
 You enable speech analytics by setting the `speech_analytics` query parameter of the `POST /v1/batches` method to `true`. This causes the service to perform additional processing of the initial speech recognition results:
 
 -   The service scans and updates the **.json** file for each input audio file. It inserts speech analytics results for the complete transcript of the conversation from the input file and for each individual speaker turn from the conversation. It updates each **.json** file in place in the directory of the output bucket in which it exists. For more information, see [Additions to JSON results](#analyticsJSONResults).
 -   The service produces two additional output files: **Conversation.zip** and **Speaker.zip**. These files contain cumulative conversation- and speaker-level results derived from the **.json** files for all input audio files. The service writes the **.zip** files to the root directory of the output bucket. For more information, see [Conversation results](#analyticsConversationResults) and [Speaker results](#analyticsSpeakerResults).
 
-Otherwise, all descriptions and methods of the batch-processing interface apply just as they do without speech analytics. You can use the API to initiate, check the status of, cancel, or delete a batch-processing request. You can use the Admin Console GUI to check the status of all requests. For more information, see the batch-processing [Usage model](/docs/services/speech-to-text-icp/batch.html#batchUsage).
+Otherwise, all descriptions and methods of the batch-processing interface apply just as they do without speech analytics. You can use the API to initiate, check the status of, cancel, or delete a batch-processing request. You can use the Admin Console GUI to check the status of all requests. For more information, see the batch-processing [Usage model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch#batchUsage).
 
 ## Additions to JSON results
 {: #analyticsJSONResults}
@@ -175,7 +175,7 @@ These speaker-level fields have the same meaning as the corresponding conversati
 ### Example additions to output file
 {: #analyticsJSONExample}
 
-The following example is identical to the example in the previous chapter ([Example output file](/docs/services/speech-to-text-icp/batch.html#batchResultsExample)). It submits the same simple brief file, <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon"></a>, and uses the same COS bucket for both input and output. However, this example sets the `speech_analytics` query parameter to `true`.
+The following example is identical to the example in [Example output file](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-batch#batchResultsExample). It submits the same simple brief file, <a target="_blank" href="https://watson-developer-cloud.github.io/doc-tutorial-downloads/speech-to-text/audio-file.flac" download="audio-file.flac">audio-file.flac <img src="../../icons/launch-glyph.svg" alt="External link icon" title="External link icon"></a>, and uses the same COS bucket for both input and output. However, this example sets the `speech_analytics` query parameter to `true`.
 
 ```bash
 curl -X POST -u "apikey:{apikey}"

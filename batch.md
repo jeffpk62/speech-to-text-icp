@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-03-12"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -30,11 +30,11 @@ The batch-processing HTTP interface of {{site.data.keyword.ibmwatson}} {{site.da
 
 You can use the batch-processing interface for speech recognition just as you would the service's WebSocket and other HTTP interfaces. The batch-processing interface accepts many of the parameters that are available with the other interfaces. The following sections describe how to use the interface for speech recognition.
 
-You can also use the interface to obtain speech analytics for the conversations and speakers from audio files. To produce speech analytics, the service further analyzes its speech recognition results to generate detailed information about the topics of overall conversation and the tone, sentiment, keywords, and topics of individual speakers. For more information, see [Speech analytics](/docs/services/speech-to-text-icp/analytics.html).
+You can also use the interface to obtain speech analytics for the conversations and speakers from audio files. To produce speech analytics, the service further analyzes its speech recognition results to generate detailed information about the topics of overall conversation and the tone, sentiment, keywords, and topics of individual speakers. For more information, see [Speech analytics](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-analytics).
 
 For more information about the individual methods of the interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
-Batch processing and speech analytics consume extra processing resources. Consider deploying more Virtual Processor Cores (VPCs) if you use these features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp/install-config.html). Batch processing and speech analytics are supported only for US English audio at this time.
+Batch processing and speech analytics consume extra processing resources. Consider deploying more Virtual Processor Cores (VPCs) if you use these features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-install). Batch processing and speech analytics are supported only for US English audio at this time.
 {: important}
 
 ## How batch-processing works
@@ -85,7 +85,7 @@ The {{site.data.keyword.speechtotextshort}}: Customer Care service supports the 
 For example, you can use either of the following COS servers:
 
 -   The Minio Cloud Object Storage server that comes with {{site.data.keyword.cloud}} Private. For more information, see [Minio ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/minio.html){: new_window} in the {{site.data.keyword.cloud_notm}} Private documentation and [Minio Private Cloud Storage ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://minio.io/){: new_window}.
--   The {{site.data.keyword.cos_full}} server. For more information, see [About {{site.data.keyword.cos_full}} ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html){: new_window}.
+-   The {{site.data.keyword.cos_full}} server. For more information, see [About {{site.data.keyword.cos_full}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).
 
 ### COS credentials
 {: #batchCOSCredentials}
@@ -129,7 +129,7 @@ For more information, see [Minio Docker Quickstart Guide ![External link icon](.
 #### {{site.data.keyword.cloud_notm}} Object Storage credentials format
 {: #batchCOSCredentialsIBM}
 
-The service does not currently support the Identity and Access Management (IAM) credentials format. You must use the hash-based message authentication code (HMAC) credentials format instead. For more information about using HMAC credentials, see [IAM vs HMAC ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials#iam-vs-hmac){: new_window} and [Using HMAC credentials ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/hmac?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials){: new_window}.
+The service does not currently support the Identity and Access Management (IAM) credentials format. You must use the hash-based message authentication code (HMAC) credentials format instead. For more information about using HMAC credentials, see [Service credentials](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials).
 {: important}
 
 The {{site.data.keyword.cos_full}} server uses the Identity and Access Management (IAM) credentials format.
@@ -174,7 +174,7 @@ The following is an example of a credentials file for an {{site.data.keyword.cos
 ```
 {: codeblock}
 
-For more information, see [Service credentials ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/iam/service-credentials.html#service-credentials){: new_window} and [Select regions and endpoints ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/services/cloud-object-storage/basics/endpoints.html#select-regions-and-endpoints){: new_window} in the {{site.data.keyword.cos_full}} documentation.
+For more information, see [Service credentials](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) and [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) in the {{site.data.keyword.cos_full}} documentation.
 
 ## Providing audio files
 {: #batchAudio}
@@ -183,7 +183,7 @@ Once you have an input bucket, the next step is to populate the bucket with the 
 
 If you specify different input and output buckets, the service duplicates the directory structure of the input bucket when it writes its results to the output bucket. If the input files are organized into a hierarchy of directories, the service organizes the output files into the same directory structure. If you use the same bucket for input and output, the service writes each output file to the same directory as its input file.
 
-Each audio file can have a maximum of 100 MB and a minimum of 100 bytes of audio data. The service imposes no limits on the cumulative size of all audio files or on the number of files that you can submit for batch processing. However, submitting large amounts of audio can greatly increase the processing time, and using speech analytics consumes additional processing resources. {{site.data.keyword.IBM}} recommends that you install more VPCs to use the batch-processing and speech analytics features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp/install-config.html).
+Each audio file can have a maximum of 100 MB and a minimum of 100 bytes of audio data. The service imposes no limits on the cumulative size of all audio files or on the number of files that you can submit for batch processing. However, submitting large amounts of audio can greatly increase the processing time, and using speech analytics consumes additional processing resources. {{site.data.keyword.IBM}} recommends that you install more VPCs to use the batch-processing and speech analytics features. For more information, see [Installing and configuring the service](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-install).
 
 ### Supported audio formats
 {: #batchAudioSupported}
@@ -208,7 +208,7 @@ You cannot submit input audio files with the following formats because they requ
 -   `audio/l16`
 -   `audio/mulaw`
 
-For more information about all audio formats that the service supports, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+For more information about all audio formats that the service supports, see [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats).
 
 ## Creating a batch job
 {: #batchCreate}
@@ -313,7 +313,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A custom acoustic model that is to be used for speech recognition.
       For more information, see
-      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
+      [Custom models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#custom-input).
     </td>
   </tr>
   <tr>
@@ -322,7 +322,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A relative weight between 0.0 and 1.0 that the service is to give
       to words from a custom language model. For more information, see
-      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
+      [Custom models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#custom-input).
     </td>
   </tr>
   <tr>
@@ -331,7 +331,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       A custom language model that is to be used for speech recognition.
       For more information, see
-      [Custom models](/docs/services/speech-to-text-icp/input.html#custom).
+      [Custom models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#custom-input).
     </td>
   </tr>
   <tr>
@@ -343,7 +343,7 @@ The batch-processing interface currently supports only a subset of the available
       batch-processing interface, so you can specify only
       `en-US_BroadbandModel` (the default), `en-US_NarrowbandModel`, or
       `en-US_ShortForm_NarrowbandModel`. For more information, see
-      [Languages and models](/docs/services/speech-to-text-icp/models.html).
+      [Languages and models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-models).
     </td>
   </tr>
   <tr>
@@ -351,7 +351,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:center">Boolean</td>
     <td style="text-align:left">
       Censors profanity from US English transcripts. For more information, see
-      [Profanity filtering](/docs/services/speech-to-text-icp/output.html#profanity_filter).
+      [Profanity filtering](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#profanity_filter).
     </td>
   </tr>
   <tr>
@@ -360,7 +360,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       Redacts numeric data from US English, Japanese, and Korean transcripts.
       For more information, see
-      [Numeric redaction](/docs/services/speech-to-text-icp/output.html#redaction).
+      [Numeric redaction](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#redaction).
     </td>
   </tr>
   <tr>
@@ -370,7 +370,7 @@ The batch-processing interface currently supports only a subset of the available
       Converts dates, times, numbers, currency, and similar values into
       more conventional representations in US English, Japanese, and
       Spanish transcripts. For more information, see
-      [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting).
+      [Smart formatting](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#smart_formatting).
     </td>
   </tr>
   <tr>
@@ -379,7 +379,7 @@ The batch-processing interface currently supports only a subset of the available
     <td style="text-align:left">
       Returns confidence scores for the words of the transcript.
       For more information, see
-      [Word confidence](/docs/services/speech-to-text-icp/output.html#word_confidence).
+      [Word confidence](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#word_confidence).
     </td>
   </tr>
 </table>
@@ -399,7 +399,7 @@ The service always uses a value of `true` for the following parameters, regardle
     <td style="text-align:left">
       Produces timestamps (start and end times) for all words of the audio.
       For more information, see
-      [Word timestamps](/docs/services/speech-to-text-icp/output.html#word_timestamps).
+      [Word timestamps](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#word_timestamps).
     </td>
   </tr>
   <tr>
@@ -409,12 +409,12 @@ The service always uses a value of `true` for the following parameters, regardle
       Identifies which individuals spoke which words in a multi-participant
       exchange for US English, Japanese, and Spanish transcripts. For more
       information, see
-      [Speaker labels](/docs/services/speech-to-text-icp/output.html#speaker_labels).
+      [Speaker labels](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#speaker_labels).
     </td>
   </tr>
 </table>
 
-The service uses the default values for all other speech recognition parameters, regardless of whether you include them with a request. For more information about all speech recognition parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
+The service uses the default values for all other speech recognition parameters, regardless of whether you include them with a request. For more information about all speech recognition parameters, see the [Parameter summary](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-summary).
 
 ### Example batch-processing requests
 {: #batchCreateExamples}
@@ -610,7 +610,7 @@ When you use the batch-processing interface for speech recognition alone, withou
 -   Because the interface supports only a subset of the parameters that are available with the service's other speech recognition interfaces, the scope of the output is more limited. For example, when you use the batch-processing interface, you cannot direct the service to use a grammar or to spot keywords in the audio.
 -   Because the interface always sets the `timestamps` and `speaker_labels` parameters to `true`, the results always include the start and end time of each word of the audio and always identify which individuals spoke which words. The interface also inserts a copy of the appropriate speaker labels object into each element of the timestamps information.
 
-The differences noted for speech recognition parameters in the last two bullets will be addressed in a future release. Otherwise, the results are the same as those for any transcription request. The service returns all JSON response content in the UTF-8 character set. For more information, see [Understanding recognition results](/docs/services/speech-to-text-icp/basic-response.html).
+The differences noted for speech recognition parameters in the last two bullets will be addressed in a future release. Otherwise, the results are the same as those for any transcription request. The service returns all JSON response content in the UTF-8 character set. For more information, see [Understanding recognition results](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-basic-response).
 
 ### Example output file
 {: #batchResultsExample}
