@@ -166,7 +166,7 @@ websocket.onerror = function(evt) { onError(evt) };
 ```
 {: codeblock}
 
-The client can open multiple concurrent WebSocket connections to the service. The number of concurrent connections is limited only by the capacity of the service, which should pose no problems for most users.
+The client can open multiple concurrent WebSocket connections to the service. The number of concurrent connections is limited only by the capacity of the service, which generally poses no problems for users.
 
 ## Initiate a recognition request
 {: #WSstart}
