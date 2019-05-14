@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-12"
+lastupdated: "2019-05-14"
 
 subcollection: speech-to-text-icp
 
@@ -166,6 +166,8 @@ websocket.onerror = function(evt) { onError(evt) };
 ```
 {: codeblock}
 
+The client can open multiple concurrent WebSocket connections to the service. The number of concurrent connections is limited only by the capacity of the service, which should pose no problems for most users.
+
 ## Initiate a recognition request
 {: #WSstart}
 
@@ -242,7 +244,7 @@ After it sends the initial `start` message, the client can begin sending audio d
 
 The client must send the audio as binary data. The client can send a maximum of 100 MB of audio data with a single utterance (per `send` request). It must send at least 100 bytes of audio for any request. The client can send multiple utterances over a single WebSocket connection. For information about using compression to maximize the amount of audio that you can pass to the service with a request, see [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats).
 
-The WebSocket interface imposes a maximum frame size of 4 MB. The client can set the maximum frame size to less than 4 MB. If it is not practical to set the frame size, the client can set the maximum message size to less than 4 MB and send the audio data as a sequence of messages.
+The WebSocket interface imposes a maximum frame size of 4 MB. The client can set the maximum frame size to less than 4 MB. If it is not practical to set the frame size, the client can set the maximum message size to less than 4 MB and send the audio data as a sequence of messages. For more information about WebSocket frames, see [IETF RFC 6455 ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455){: new_window}.
 
 The following snippet of JavaScript code sends audio data to the service as a binary message (blob):
 
@@ -306,12 +308,16 @@ websocket.send(JSON.stringify(message));
 ## Keep a connection alive
 {: #WSkeep}
 
-The service terminates the session and closes the connection if an inactivity or session timeout is reached:
+The service terminates the session and closes the connection if an inactivity or session timeout occurs:
 
--   An *inactivity timeout* occurs if audio is being sent by the client but the service detects no speech. The inactivity timeout is 30 seconds by default. You can use the `inactivity_timeout` parameter to specify a different value, including `-1` to set the timeout to infinity.
--   A *session timeout* occurs if the service receives no data from the client or sends no interim results for 30 seconds. You cannot change the length of this timeout, but you can extend the session by sending the service any audio data, including just silence, before the timeout occurs. You must also set the `inactivity_timeout` to `-1`. You are charged for the duration of any data that you send to the service, including the silence that you send to extend a session.
+-   An *inactivity timeout* occurs if audio is being sent by the client but the service detects no speech. The inactivity timeout is 30 seconds by default. You can use the `inactivity_timeout` parameter to specify a different value, including `-1` to set the timeout to infinity. For more information, see [Inactivity timeout](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#timeouts-inactivity).
+-   A *session timeout* occurs if the service receives no data from the client or sends no interim results for 30 seconds. You cannot change the length of this timeout, but you can extend the session by sending the service any audio data, including just silence, before the timeout occurs. You must also set the `inactivity_timeout` to `-1`. You are charged for the duration of any data that you send to the service, including the silence that you send to extend a session. For more information, see [Session timeout](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#timeouts-session).
 
-For more information, see [Timeouts](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#timeouts).
+WebSocket clients and servers can also exchange *ping-pong frames* to avoid read timeouts by periodically exchanging small amounts of data. Many WebSocket stacks exchange ping-pong frames, but some do not. To determine whether your implementation uses ping-pong frames, check its list of features. You cannot programmatically determine or manage ping-pong frames.
+
+If your WebSocket stack does not implement ping-pong frames and your are sending long audio files, your connection can experience a read timeout. To avoid such timeouts, continuously stream audio to the service or request interim results from the service. Either approach can ensure that the lack of ping-pong frames does not cause your connection to close.
+
+For more information about ping-pong frames, see [Section 5.5.2 Ping ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455#section-5.5.2){: new_window} and [Section 5.5.3 Pong ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455#section-5.5.3){: new_window} of IETF RFC 6455.
 
 ## Close a connection
 {: #WSclose}
