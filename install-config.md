@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-31"
 
 subcollection: speech-to-text-icp
 
@@ -31,9 +31,9 @@ subcollection: speech-to-text-icp
 ## Software requirements
 {: #prereqs}
 
-- {{site.data.keyword.icpfull_notm}} 3.1.0
-- Kubernetes 1.10.0
-- Helm 2.7.3
+- {{site.data.keyword.icpfull_notm}} 3.1.0 or later
+- Kubernetes 1.12.0 or later
+- Helm 2.9.1 or later
 
 ## System requirements
 {: #system-requirements}
@@ -65,11 +65,11 @@ For more details about required resources and how to scale from the development 
 
 2.  Download the appropriate package for your environment.
 
-    {{site.data.keyword.speechtotextshort}}: Customer Care includes {{site.data.keyword.icpfull_notm}} Foundation version 3.1.0.
+    {{site.data.keyword.speechtotextshort}}: Customer Care includes {{site.data.keyword.icpfull_notm}} Foundation version 3.1.2.
 
-    If you have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up in your environment already, you can download the archive for {{site.data.keyword.speechtotextshort}}: Customer Care alone.
+    If you have {{site.data.keyword.icpfull_notm}} version 3.1.2 set up in your environment already, you can download the archive for {{site.data.keyword.speechtotextshort}}: Customer Care alone.
 
-    If you do not have {{site.data.keyword.icpfull_notm}} or have a later major version of {{site.data.keyword.icpfull_notm}} set up in your organization (4.x, for example), you must install version 3.1.0. To get the {{site.data.keyword.icpfull_notm}} 3.1.0 archive included, choose the e-assembly that includes {{site.data.keyword.icpfull_notm}}.
+    If you do not have {{site.data.keyword.icpfull_notm}} or have a later major version of {{site.data.keyword.icpfull_notm}} set up in your organization (4.x, for example), you must install version 3.1.2. To get the {{site.data.keyword.icpfull_notm}} 3.1.2 archive included, choose the e-assembly that includes {{site.data.keyword.icpfull_notm}}.
 
 The Passport Advantage Archive (PPA) file for {{site.data.keyword.speechtotextshort}}: Customer Care contains a Helm chart and images. Helm is the Kubernetes native package management system that is used for application management inside an {{site.data.keyword.icpfull_notm}} cluster.
 
@@ -78,13 +78,13 @@ The Passport Advantage Archive (PPA) file for {{site.data.keyword.speechtotextsh
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.0 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/install_containers.html).
-2.  If you haven't done so, install the IBM Cloud Private command-line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/install_cli.html).
-3.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_images/configuring_docker_cli.html).
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.2 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install_containers.html).
+2.  If you have not yet done so, install the IBM Cloud Private command-line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/install_cli.html).
+3.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_images/configuring_docker_cli.html).
 4.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
 5.  Ensure that you have a stable network connection between your computer and the cluster.
-6.  Install the Kubernetes command-line tool, kubectl, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/manage_cluster/cfc_cli.html).
-7.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need an IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the kube-system namespace.
+6.  Install the Kubernetes command-line tool, `kubectl`, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_cli.html).
+7.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need an IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the `kube-system` namespace.
 8.  Set up the Helm command-line interface.
 
     See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
@@ -142,7 +142,7 @@ You must have cluster administrator or team administrator access to the systems 
     ```bash
     cloudctl catalog load-archive --archive {path_to_PPA_archive} --registry {icp_url}:8500
     ```
-    {: pre}
+    {: codeblock}
 
 
 ## Step 4: Install the service
@@ -156,9 +156,9 @@ You must have cluster administrator or team administrator access to the systems 
 ### 4.1 Create a namespace
 {: #create-namespace}
 
-First, you need to create the Kubernetes namespace where {{site.data.keyword.speechtotextshort}}: Customer Care will be installed. You can create a namespace from the {{site.data.keyword.icpfull_notm}} Console by clicking on the `Manage` menu and then choosing `Namespaces` followed by `Create Namespace`. You can also use `kubectl` on the command-line: `kubectl create -f <namespace-file>`.
+First, you need to create the Kubernetes namespace where {{site.data.keyword.speechtotextshort}}: Customer Care will be installed. You can create a namespace from the {{site.data.keyword.icpfull_notm}} Console by clicking on the `Manage` menu and then choosing `Namespaces` followed by `Create Namespace`. You can also use `kubectl` on the command line by running `kubectl create -f {namespace_file}`, where `{namespace_file}` is a file containing the namespace specification.
 
-The following example namespace file can be used to create the namespace `speech-services`.
+The following example namespace file can be used to create a namespace called `speech-services`.
 
 ```yaml
 apiVersion: v1
@@ -176,7 +176,7 @@ By default, Minio Object Storage (which is used for binary storage) is included 
 #### Using the default Minio installation
 {: #use-default-minio-installation}
 
-The default Minio service needs a persistent volume for storing data. Create a storage class named `local-storage` by copying the following YAML code to a file and running `kubectl apply -f <file>`:
+The default Minio service needs a persistent volume for storing data. Create a storage class named `local-storage` by copying the following YAML code to a file and running `kubectl apply -f {file}`:
 
 ```yaml
 kind: StorageClass
@@ -188,7 +188,7 @@ volumeBindingMode: WaitForFirstConsumer
 ```
 {: codeblock}
 
-Create a persistent volume by using the previously created storage class. Copy the following YAML code to a file and run `kubectl apply -f <file>`:
+Create a persistent volume by using the previously created storage class. Copy the following YAML code to a file and run `kubectl apply -f {file}`:
 
 ```yaml
 apiVersion: v1
@@ -212,9 +212,9 @@ Note that the storage size, `storage:`, must be at least the same size that you 
 
 Before you install {{site.data.keyword.speechtotextshort}}: Customer Care, you need to provide a secret object that is used by Minio itself and by other service components that interact with Minio. This secret contains the security keys to access Minio.
 
-The secret must contain the items `accesskey` (5 - 20 characters) and `secretkey` (8 - 40 characters) in base64 encoding. Therefore, before creating the secret, you need to perform the base64 enconding.
+The secret must contain the items `accesskey` (5 - 20 characters) and `secretkey` (8 - 40 characters) in base64 encoding. Therefore, before creating the secret, you need to perform the base64 encoding.
 
-The following commands encode the accesskey and secretkey in base64. For security reasons, you are highly encouraged to create an accesskey and a secretkey that are different from the sample keys (`admin` and `admin1234`) that are shown in these examples.
+The following commands encode the `accesskey` and `secretkey` in base64. For security reasons, you are highly encouraged to create an `accesskey` and a `secretkey` that are different from the sample keys (`admin` and `admin1234`) that are shown in these examples.
 {: important}
 
 ```bash
@@ -240,9 +240,9 @@ data:
 ```
 {: codeblock}
 
-You can create this secret object through the ICP Console by clicking on the configuration and the `Secrets` menu. You can also use the `kubectl` command-line tool: `kubectl create -f <secrets-file>`.
+You can create this secret object through the ICP Console by clicking on the configuration and the `Secrets` menu. You can also use the `kubectl` command-line tool by running `kubectl create -f {secrets_file}`, where `{secrets_file}` is the file that specifies the secret object in the format described by the example.
 
-In the configuration page of the Minio Chart, before installation, you also need to configure the following:
+In the configuration page of the Minio chart, before installation, you also need to configure the following:
 
 -   Check the `Use the Default Minio Installation` option [`global.datastore.minio.enabled=true`].
 -   Pass the name of the secret object that contains the keys (for example, `minio` from the previous example) in the following fields:
@@ -261,10 +261,10 @@ Optionally, you can choose to set Minio server mode to `distributed` if you need
 If you want to use your own installation of Minio instead of the default installation, you need to set the following parameters at configuration time:
 
 -   Disable the default Minio installation on the configuration page by unchecking `Global Settings | Use the Default Minio Installation`. This change corresponds to the value [`global.datastores.minio.enabled=false`].
--   Provide the endpoint for your Minio instance in `Global Settings | User Installed Minio Endpoint`. The endpoint must be in the following format: `http://<services>.<namespace>:<port>`, where
-    -   `service` is the Minio Kubernetes service that was created during the Minio installation.
-    -   `namespace` is the namespace into which Minio was installed, which can be different from the namespace in which {{site.data.keyword.speechtotextshort}}: Customer Care is installed.
-    -   `port` is the port at which Minio is listening (the default is `9000`). For example: `http://my-minio-ibm-minio-objectstorage.default:9000`.
+-   Provide the endpoint for your Minio instance in `Global Settings | User Installed Minio Endpoint`. The endpoint must be in the following format: `http://{service}.{namespace}:{port}`, where:
+    -   `{service}` is the Minio Kubernetes service that was created during the Minio installation.
+    -   `{namespace}` is the namespace into which Minio was installed, which can be different from the namespace in which {{site.data.keyword.speechtotextshort}}: Customer Care is installed.
+    -   `{port}` is the port on which Minio is listening. The default is `9000`. For example: `http://my-minio-ibm-minio-objectstorage.default:9000`.
 
 Provide Minio with sufficient storage space for the {{site.data.keyword.speechtotextshort}}: Customer Care service installation itself in addition to other objects that you want to store in Minio. See the [Storage size calculation guidelines](#storage-guidelines) section for detailed information about the space that is needed for the {{site.data.keyword.speechtotextshort}}: Customer Care service.
 
@@ -279,7 +279,7 @@ Object storage is used for storing binary data from the following sources:
 -   Customization data (audio files and training snapshots)
 
     The storage required for customization data depends on how many hours of audio you use for training your custom models. On average, one hour of audio data needs `0.5 GB` of storage space. You can have multiple customizations, so you must factor in additional space.
--   Audio files from recognition jobs that are processed asynchronously, in case they need to be queued
+-   Audio files from recognition jobs that are processed asynchronously, in case they need to be queued.
 
     The storage required for asynchronous jobs depends on the use case. If you plan to submit large batches of audio files, expect the service to queue some jobs temporarily. This means that some audio files will live temporarily in binary storage. The amount of storage required for this purpose will not exceed the size of the largest batch of jobs that you plan to submit in parallel.
 
@@ -296,7 +296,7 @@ The default storage size, `100 GB`, is a minimal starting point and should be en
 
 You must create the following secret object before installation. The object contains the username and password that will be used to access the Postgres datastore that is included in the chart. Before creating the secret, you need to produce a base64 encoding of the following file `postgres-secrets.properties`.
 
-While the username needs to be set to `stolon`, for security reasons you are strongly encouraged to create a password that is different from the one that is used in the example (`stolon`).
+The username needs to be set to `stolon`. For security reasons you are strongly encouraged to create a password that is different from the one that is used in the example (`stolon`).
 {: important}
 
 ```
@@ -324,7 +324,7 @@ data:
 ```
 {: codeblock}
 
-To create this secret object, use the {{site.data.keyword.icpfull_notm}} Console or the command `kubectl create -f <secrets-file>`.
+To create this secret object, use the {{site.data.keyword.icpfull_notm}} Console or the command `kubectl create -f {secrets-file}`.
 
 #### Share the user credentials with the Postgres chart
 {: #share-credentials-with-postgres}
@@ -386,7 +386,7 @@ Installing the Helm chart deploys a single Speech to Text: Customer Care solutio
 Optionally, you can install the chart from the CLI instead of from the catalog with the following command.
 
 ```bash
-$ helm install --tls --name {my-release} -f {my-values.yaml} ibm-watson-speech-prod
+helm install --tls --name {my-release} -f {my-values.yaml} ibm-watson-speech-prod
 ```
 {: codeblock}
 
@@ -413,7 +413,7 @@ The following sections explain the configuration settings for {{site.data.keywor
 
 You can perform an installation that includes only a subset of the language models in the catalog. Installing all of the models in the catalog substantially increases the memory requirements. Therefore, it is strongly recommended that you install only those languages that you will use.
 
-You can select the languages to be installed by checking/unchecking each of the models in `Global settings | <model-name> Model` options. By default, the dynamic resource calculation feature is enabled; it automatically computes the exact amount of memory that is required for the selected models.
+You can select the languages to be installed by checking/unchecking each of the models in `Global settings | {model_name} Model` options. By default, the dynamic resource calculation feature is enabled; it automatically computes the exact amount of memory that is required for the selected models.
 
 #### Storage of customer data (STT Runtime and AMC Patcher)
 {: #storage-of-customer-data}
@@ -466,14 +466,16 @@ The following options apply to a Speech to Text: Customer Care runtime configura
 To uninstall and delete the `my-release` deployment, run the following command:
 
 ```bash
-$ helm delete --tls my-release
+helm delete --tls my-release
 ```
+{: codeblock}
 
 To irrevocably uninstall and delete the `my-release` deployment, run the following command:
 
 ```bash
-$ helm delete --purge --tls my-release
+helm delete --purge --tls my-release
 ```
+{: codeblock}
 
 If you omit the `--purge` option, Helm deletes all resources for the deployment but retains the record with the release name. This allows you to roll back the deletion. If you include the `--purge` option, Helm removes all records for the deployment so that the name can be used for another installation.
 
@@ -483,7 +485,7 @@ If you omit the `--purge` option, Helm deletes all resources for the deployment 
 ### Resources required by the standard installation
 {: #standard-install-requirements}
 
-While the default installation of the {{site.data.keyword.speechtotextshort}}: Customer Care solution comes with the **development configuration**, you can obtain the **production configuration** by scaling up the number of pods/replicas of the deployment objects after installing the solution. You can learn the list of deployments (Kubernetes `Deployment` objects) by running the command `kubectl get deployment`. You must then scale up the number of pods on each of these deployment objects to match the number of pods in the production configuration, as shown in the following table. You can do this by using the following command: `kubectl scale --replicas=<n> deployment <deployment-object>`, where `<n>` is the desired number of replicas for the given deployment (`<deployment-name>`).
+While the default installation of the {{site.data.keyword.speechtotextshort}}: Customer Care solution comes with the **development configuration**, you can obtain the **production configuration** by scaling up the number of pods/replicas of the deployment objects after installing the solution. You can learn the list of deployments (Kubernetes `Deployment` objects) by running the command `kubectl get deployment`. You must then scale up the number of pods on each of these deployment objects to match the number of pods in the production configuration, as shown in the following table. You can do this by using the following command: `kubectl scale --replicas={n} deployment {deployment_object}`, where `{n}` is the desired number of replicas for the deployment specified by `{deployment_name}`.
 
 | Deployment              | # pods dev config | # pods prod config |
 |-------------------------|-------------------|--------------------|
