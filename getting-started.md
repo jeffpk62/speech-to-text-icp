@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -34,9 +34,9 @@ The {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Cus
 
 To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first complete the following steps:
 
-1.  Install and configure {{site.data.keyword.cloud}} Private.
+1.  Install and configure {{site.data.keyword.icpfull}}.
 1.  Deploy the {{site.data.keyword.speechtotextshort}}: Customer Care service on your {{site.data.keyword.cloud_notm}} Private installation.
-1.  Learn the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp/making-requests.html#apiKey).
+1.  Learn the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-making-requests#apiKey).
 
     The examples that follow pass the value of the API key with the `-u` (`--user`) option of the `curl` command. When you enter a command, replace `{apikey}` with the API key for your cluster. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
 
@@ -145,7 +145,7 @@ of severe thunderstorms swept through colorado on sunday "
 
 ## Next steps
 
--   Learn more about the interfaces and SDKs that are available for making speech recognition requests in the [Overview for developers](/docs/services/speech-to-text-icp/developer-overview.html).
--   Learn about making requests to the service in [Making requests to the service](/docs/services/speech-to-text-icp/making-requests.html).
--   See basic speech recognition requests for each of the service's interfaces in [Making a recognition request](/docs/services/speech-to-text-icp/basic-request.html).
+-   Learn more about the interfaces and SDKs that are available for making speech recognition requests in the [Overview for developers](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-developerOverview).
+-   Learn about making requests to the service in [Making requests to the service](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-making-requests).
+-   See basic speech recognition requests for each of the service's interfaces in [Making a recognition request](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-basic-request).
 -   Find detailed information about all methods of the service's interfaces in the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.

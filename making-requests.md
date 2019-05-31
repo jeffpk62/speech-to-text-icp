@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -54,9 +54,11 @@ You can learn the API key for your cluster by using either of the following appr
 
 -   *From a browser,* access the following URL:
 
-    **https://{icp_cluster_host}:443/console/configuration/secrets/kube-system/speech-to-text-serviceid-secret**
+    ```
+    https://{icp_cluster_host}:443/console/configuration/secrets/kube-system/speech-to-text-serviceid-secret
+    ```
 
-     On the page that is displayed, click the **unlock** icon under **api_key**. The API key is shown in the **Data** column in the field labeled **api_key**.
+    On the page that is displayed, click the **unlock** icon under **api_key**. The API key is shown in the **Data** column in the field labeled **api_key**.
 
 ## Making an authenticated HTTP request
 {: #httpRequest}
@@ -79,14 +81,12 @@ The components provide the following information. The `{}` (braces) indicate var
 
 Many methods have longer names and include path parameters that you must specify as part of the request. Most examples also include request headers, query parameters, and other values. Substitute literal values for any variables that are enclosed in braces. Enter all other elements of an example exactly as shown.
 
-You can also log in to your {{site.data.keyword.cloud_notm}} Private cluster by using the {{site.data.keyword.cloud_notm}} Private command-line interface and issue commands from there. For more information, see [Using the {{site.data.keyword.cloud_notm}} Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
-
 During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with `curl` commands to bypass the tool's verification of SSL certificates.
 
 Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
 {: note}
 
-You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the {{site.data.keyword.cloud_notm}} Private command-line interface and issue commands from there. For more information, see  [Using the {{site.data.keyword.cloud_notm}} Private command-line interface](/docs/services/speech-to-text-icp/install-config.html#usingCLI).
+You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the {{site.data.keyword.icpfull_notm}} command-line interface and issue commands from there.
 {: note}
 
 ## Making an authenticated WebSocket request
@@ -99,7 +99,7 @@ wss://{icp_cluster_host}/speech-to-text/api/v1/recognize
 ```
 {: pre}
 
-The `{icp_cluster_host}` is required to specify the name or IP address of the host on which the cluster is deployed. For information about making authenticated requests to the WebSocket interface, see [The WebSocket interface](/docs/services/speech-to-text-icp/websockets.html).
+The `{icp_cluster_host}` is required to specify the name or IP address of the host on which the cluster is deployed. For information about making authenticated requests to the WebSocket interface, see [The WebSocket interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-websockets).
 
-You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. See the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes for information about working around this limitation.
+You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. See the [Known limitations](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-release-notes#limitations) in the release notes for information about working around this limitation.
 {: important}

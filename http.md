@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -31,12 +31,12 @@ The synchronous HTTP interface of {{site.data.keyword.ibmwatson}} {{site.data.ke
 -   The first sends all of the audio in a single stream via the body of the request. You specify the parameters of the operation as request headers and query parameters. For more information, see [Making a basic HTTP request](#HTTP-basic).
 -   The second sends the audio as a multipart request. You specify the parameters of the request as a combination of request headers, query parameters, and JSON metadata. For more information, see [Making a multipart HTTP request](#HTTP-multi).
 
-Submit a maximum of 100 MB and a minimum of 100 bytes of audio data with a single request. For information about audio formats and about using compression to maximize the amount of audio that you can send with a request, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html). For information about all methods of the HTTP interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
+Submit a maximum of 100 MB and a minimum of 100 bytes of audio data with a single request. For information about audio formats and about using compression to maximize the amount of audio that you can send with a request, see [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats). For information about all methods of the HTTP interface, see the [API reference ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://{DomainName}/apidocs/speech-to-text-icp){: new_window}.
 
 ## Making a basic HTTP request
 {: #HTTP-basic}
 
-The HTTP `POST /v1/recognize` method provides a simple means of transcribing audio. You pass all audio via the body of the request and specify the parameters as request headers and query parameters. If your data consists of multiple audio files, the recommended means of submitting the audio is by sending multiple requests, one for each audio file. You can submit the requests in a loop, optionally with parallelism to improve performance.
+The HTTP `POST /v1/recognize` method provides a simple means of transcribing audio. You pass all audio via the body of the request and specify the parameters as request headers and query parameters.
 
 The following `curl` example sends a recognition request for a single FLAC file named `audio-file.flac`. The request omits the `model` query parameter to use the default language model, `en-US_BroadbandModel`.
 
@@ -70,13 +70,16 @@ The example returns the following transcript for the audio:
 
 The `POST /v1/recognize` method returns results only after it processes all of the audio for a request. The method is appropriate for batch processing but not for live speech recognition. Use the WebSocket interface to transcribe live audio.
 
+If your data consists of multiple audio files, the recommended means of submitting the audio is by sending multiple requests, one for each audio file. You can submit the requests in a loop, optionally with parallelism to improve performance. You can also use multipart speech recognition to pass multiple audio files with a single request.
+
 ## Making a multipart HTTP request
 {: #HTTP-multi}
 
 The `POST /v1/recognize` method also supports multipart requests. You pass all audio data as multipart form data. You specify some parameters as request headers and query parameters, but you pass JSON metadata as form data to control most aspects of the transcription.
 
-Multipart speech recognition is intended for two use cases:
+Multipart speech recognition is intended for the following use cases:
 
+-   To pass multiple audio files with a single speech recognition request.
 -   With browsers for which JavaScript is disabled. Multipart requests based on form data do not require the use of JavaScript.
 -   When the parameters of a recognition request are greater than 8 KB, which is the limit imposed by most HTTP servers and proxies. For example, spotting a very large number of keywords can increase the size of a request beyond this limit. Multipart requests use form data to avoid this constraint.
 
@@ -189,7 +192,7 @@ You specify the following parameters of multipart speech recognition as request 
   </tr>
 </table>
 
-For more information about the query parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
+For more information about the query parameters, see the [Parameter summary](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-summary).
 
 ### JSON metadata for multipart requests
 {: #multipartJSON}
@@ -217,7 +220,7 @@ Only the following two parameters are specific to multipart requests:
 -   The `part_content_type` field is *optional* for most audio formats. It is required for the `audio/basic`, `audio/l16`, and `audio/mulaw` formats. It specifies the format of the audio in the following parts of the request. All audio files must be in the same format.
 -   The `data_parts_count` field is *optional*. You can specify the number of audio files that are sent with the request. The service applies end-of-stream detection to the last (and possibly the only) data part. If you omit the parameter, the service determines the number of parts from the request.
 
-All other parameters of the metadata are optional. For descriptions of all available parameters, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html).
+All other parameters of the metadata are optional. For descriptions of all available parameters, see the [Parameter summary](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-summary).
 
 ### Example multipart request
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-10"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -25,17 +25,19 @@ subcollection: speech-to-text-icp
 # Working with corpora and custom words
 {: #corporaWords}
 
-The recommended means of populating a custom language model with words is to add one or more corpora to the model. When you add a corpus, the service analyzes the file and automatically adds any new words that it finds to the custom model. Adding a corpus to a custom model allows the service to extract domain-specific words in context, which helps ensure better transcription results. For more information, see [Working with Corpora](#workingCorpora).
+You can populate a custom language model with words by adding corpora or grammars to the model, or by adding custom words directly:
 {: shortdesc}
 
-You can also add individual custom words to a model directly. The service adds words to the model just as it does words that it discovers from corpora. When you add a word directly, you can specify multiple pronunciations and indicate how the word is to be displayed. You can also update existing words to modify or augment the definitions that were extracted from corpora and grammars. For more information, see [Working with custom words](#workingWords).
+-   **Corpora:** The recommended means of populating a custom language model with words is to add one or more corpora to the model. When you add a corpus, the service analyzes the file and automatically adds any new words that it finds to the custom model. Adding a corpus to a custom model allows the service to extract domain-specific words in context, which helps ensure better transcription results. For more information, see [Working with Corpora](#workingCorpora).
+-   **Grammars:** You can add grammars to a custom model to limit speech recognition to the words or phrases that are recognized by a grammar. When you add a grammar to a model, the service automatically adds any new words that it finds to the model, just as it does with corpora. For more information, see [Using grammars with custom language models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-grammars).
+-   **Individual words:** You can also add individual custom words to a model directly. The service adds the words to the model just as it does words that it discovers from corpora or grammars. When you add a word directly, you can specify multiple pronunciations and indicate how the word is to be displayed. You can also update existing words to modify or augment the definitions that were extracted from corpora or grammars. For more information, see [Working with custom words](#workingWords).
+
+Regardless of how you add them, the service stores all words that you add to a custom language model in the model's words resource.
 
 ## The words resource
 {: #wordsResource}
 
-The service stores each word that you add to a custom language model in the model's *words resource*. The words resources includes all words that you add from corpora, from grammars, or directly.
-
-The purpose of the words resource is to define words that are not already present in the service's base vocabulary. The definitions tell the service how to transcribe these *out-of-vocabulary (OOV) words*. You can add a maximum of 30 thousand OOV words to the words resource from all sources.
+The *words resource* includes all words that you add from corpora, from grammars, or directly. Its purpose is to define the pronunciation and spelling of words that are not already present in the service's base vocabulary. The definitions tell the service how to transcribe these *out-of-vocabulary (OOV) words*.
 
 The words resource contains the following information about each OOV word. The service creates the definitions for words that are extracted from corpora and grammars. You specify the characteristics for words that you add or modify directly.
 
@@ -48,14 +50,21 @@ The words resource contains the following information about each OOV word. The s
     You can use the `display_as` field to specify a different spelling for the word. For more information, see [Using the display_as field](#displayAs).
 -   `source`: How the word was added to the words resource. If the service extracted the word from a corpus or grammar, the field lists the name of that resource. Because the service can encounter the same word in multiple resources, the field can list multiple corpus or grammar names. The field includes the string `user` if you add or modify the word directly.
 
-When you update a model's words resource, you must train the model for the changes to take effect during transcription. For more information, see [Train the custom language model](/docs/services/speech-to-text-icp/language-create.html#trainModel-language).
+When you update a model's words resource in any way, you must train the model for the changes to take effect during transcription. For more information, see [Train the custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-languageCreate#trainModel-language).
 
-### How much data is needed to build a custom language model?
+## How much data do I need?
 {: #wordsResourceAmount}
 
-It is not possible to provide an exact figure on the amount of data that is needed for a custom model. Many factors contribute to the answer. Adding OOV words in context from a corpus and adding custom words directly can both improve the quality of a custom language model.
+Many factors contribute to the amount of data that you need for an effective custom language model. It is not possible to provide the exact number of words that you need to add for any custom model or application.
 
-Adding OOV words from a corpus that uses the words in the context in which they are used in audio can improve transcription accuracy. But depending on the use case, even adding a few custom words directly to a model can make a positive difference.
+Depending on the use case, even adding a few words directly to a custom model can improve the model's quality. But adding OOV words from a corpus that shows the words in the context in which they are used in audio can greatly improve transcription accuracy. For more information, see [Working with corpora](#workingCorpora).
+
+The service limits the number of words that you can add to a custom language model:
+
+-   You can add a maximum of 90 thousand OOV words to the words resource of a custom model. This figure includes OOV words from all sources (corpora, grammars, and individual custom words that you add directly).
+-   You can add a maximum of 10 million total words to a custom model from all sources. This figure includes all words, both OOV words and words that are already part of the service's base vocabulary, that are included in corpora or grammars. For corpora, the service uses these additional words to learn the context in which OOV words can appear, which is why corpora are a more effective means of improving recognition accuracy.
+
+A large words resource can increase the latency of speech recognition, but the exact effect is difficult to quantify or predict. As with the amount of data that is needed to produce an effective custom model, the performance impact of a large words resource depends on many factors. Test your custom model with different amounts of data to determine the performance of your models and data.
 
 ## Working with corpora
 {: #workingCorpora}
@@ -96,15 +105,25 @@ Follow these guidelines to prepare a corpus text file:
 
 -   Provide a plain text file that is encoded in UTF-8 if it contains non-ASCII characters. The service assumes UTF-8 encoding if it encounters such characters.
 
-    Make sure that you know the character encoding that is used in the text files of your corpora. The service preserves the encoding that it finds in the text files. You must use that encoding when working with the words in the custom language model. For more information, see [Character encoding](#charEncoding).
+    Make sure that you know the character encoding of your corpus text files. The service preserves the encoding that it finds in the text files. You must use that encoding when working with the words in the custom language model. For more information, see [Character encoding](#charEncoding).
     {: important}
--   Include each sentence of the corpus on its own line, and terminate each line with a carriage return. Including multiple sentences on the same line can degrade accuracy.
 -   Use consistent capitalization for words in the corpus. The words resource is case-sensitive. Mix upper- and lowercase letters and use capitalization only when intended.
+-   Include each sentence of the corpus on its own line, and terminate each line with a carriage return. Including multiple sentences on the same line can degrade accuracy.
+-   Add personal names as discrete units on separate lines. Do not add the words of a name on separate lines or as individual custom words, and do not include multiple names on the same line of the corpus. The following example shows the correct way to improve recognition accuracy for three names:
+
+    ```
+    Gakuto Kutara
+    Sebastian Leifson
+    Malcolm Ingersol
+    ```
+    {: codeblock}
+
+    Include additional contextual information where available, for example, `Doctor Sebastian Leifson` or `President Malcolm Ingersol`. As with all words, duplicating the names multiple times and, if possible, in different contexts can improve recognition accuracy.
 -   Beware of typographical errors. The service assumes that typographical errors are new words. Unless you correct them before you train the model, the service adds them to the model's vocabulary. Remember the adage *Garbage in, garbage out!*
 
-More sentences result in better accuracy. But the service does limit a model to a maximum of 10 million total words from all sources combined. And it imposes a limit of 30 thousand new (OOV) words, including words that the service extracts from corpora and grammars and words that you add directly.
+More sentences result in better accuracy. But the service does limit a model to a maximum of 10 million total words and 90 thousand OOV words from all sources combined.
 
-### What happens when you add a corpus file
+### What happens when I add a corpus file?
 {: #parseCorpus}
 
 When you add a corpus file, the service analyzes the file's contents. It extracts any new (OOV) words that it finds and adds each OOV word to the custom model's words resource. To distill the most meaning from the content, the service tokenizes and parses the data that it reads from a corpus file. The following sections describe how the service parses a corpus file for each supported language.
@@ -119,14 +138,14 @@ The following descriptions apply to US English, French, and Spanish.
     -   *For French,* `500` becomes `cinq cents`, and `0,15` becomes <code>z&eacute;ro quinze</code>.
     -   *For Spanish,* `500` becomes `quinientos`, and `0,15` becomes `cero coma quince`.
 -   Converts tokens that include certain symbols to meaningful string representations, for example:
-    -   Converts a `$` (dollar sign) followed by a number:
+    -   Converts a `$` (dollar sign) and a number:
         -   *For English,* `$100` becomes `one hundred dollars`.
         -   *For French,* `$100` becomes `cent dollar`.
-        -   *For Spanish,* `$100` becomes <code>cien d&oacute;lares</code> (or `cien pesos` if the dialect is `es-LA`).
-    -   Converts a <code>&euro;</code> (euro sign) followed by a number:
+        -   *For Spanish,* `$100`  and `100$` become <code>cien d&oacute;lares</code> (or `cien pesos` if the dialect is `es-LA`).
+    -   Converts a <code>&euro;</code> (euro sign) and a number:
         -   *For English,* <code>&euro;100</code> becomes `one hundred euros`.
         -   *For French,* <code>&euro;100</code> becomes `cent euros`.
-        -   *For Spanish,* <code>&euro;100</code> becomes `cien euros`.
+        -   *For Spanish,* <code>&euro;100</code> and <code>100&euro;</code> become `cien euros`.
     -   Converts a `%` (percent sign) preceded by a number:
         -   *For English,* `100%` becomes `one hundred percent`.
         -   *For French,* `100%` becomes `cent pourcent`.
@@ -180,15 +199,15 @@ You must use that encoding when working with the individual words in the custom 
 
 For example, the following table shows what looks like the same letter in two different encodings, ASCII and UTF-8. You can pass the ASCII character on a URL as `z`. You must pass the UTF-8 character as `%EF%BD%9A`.
 
-<table>
+<table style="width:75%">
   <caption>Table 1. Character encoding examples</caption>
   <tr>
-    <th style="text-align:left">Letter</th>
-    <th style="text-align:center">Encoding</th>
-    <th style="text-align:center">Value</th>
+    <th style="width:15%; text-align:center">Letter</th>
+    <th style="width:40%; text-align:center">Encoding</th>
+    <th style="width:45%; text-align:center">Value</th>
   </tr>
   <tr>
-    <td style="text-align:left; width:30%">
+    <td style="text-align:center">
       `z`
     </td>
     <td style="text-align:center">
@@ -199,7 +218,7 @@ For example, the following table shows what looks like the same letter in two di
     </td>
   </tr>
   <tr>
-    <td style="text-align:left; width:30%">
+    <td style="text-align:center">
       <code>&#xff5a;</code>
     </td>
     <td style="text-align:center">
@@ -312,9 +331,9 @@ If you use the `smart_formatting` or `redaction` parameters with a recognition r
 
 For instance, suppose that you add the custom word `one` with a `display_as` field of `one`. Smart formatting changes the word `one` to the number `1`, and the display-as value is not applied. To work around this issue, you could add a custom word for the number `1` and apply the same `display_as` field to that word.
 
-For more information about working with these features, see [Smart formatting](/docs/services/speech-to-text-icp/output.html#smart_formatting) and [Numeric redaction](/docs/services/speech-to-text-icp/output.html#redaction).
+For more information about working with these features, see [Smart formatting](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#smart_formatting) and [Numeric redaction](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-output#redaction).
 
-### What happens when you add or modify a custom word
+### What happens when I add or modify a custom word?
 {: #parseWord}
 
 How the service responds to a request to add or modify a custom word depends on what values you provide and whether the word exists in the service's base vocabulary.
@@ -445,8 +464,8 @@ Especially when you add a corpus to a custom language model or add multiple cust
 
 To validate and, if necessary, correct a word for a custom model, regardless of how it was added to the words resource, use the following methods:
 
--   List all of the words from a custom model by using the `GET /v1/customizations/{customization_id}/words` method or query an individual word with the `GET /v1/customizations/{customization_id}/words/{word_name}` method. For more information, see [Listing words from a custom language model](/docs/services/speech-to-text-icp/language-words.html#listWords).
+-   List all of the words from a custom model by using the `GET /v1/customizations/{customization_id}/words` method or query an individual word with the `GET /v1/customizations/{customization_id}/words/{word_name}` method. For more information, see [Listing words from a custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageWords#listWords).
 -   Modify words in a custom model to correct errors or to add sounds-like or display-as values by using the `POST /v1/customizations/{customization_id}/words` or `PUT /v1/customizations/{customization_id}/words/{word_name}` method. For more information, see [Working with custom words](#workingWords).
--   Delete extraneous words that are introduced in error (for example, by typographical or other mistakes in a corpus) by using the `DELETE /v1/customizations/{customization_id}/words/{word_name}` method. For more information, see [Deleting a word from a custom language model](/docs/services/speech-to-text-icp/language-words.html#deleteWord).
-    -   If the word was extracted from a corpus, you can instead update the corpus text file to correct the error and then reload the file by using the `allow_overwrite` parameter of the `POST /v1/customizations/{customization_id}/corpora/{corpus_name}` method. For more information, see [Add a corpus to the custom language model](/docs/services/speech-to-text-icp/language-create.html#addCorpus).
-    -   If the word was extracted from a grammar, you can update the grammar file to correct the error and then reload the file by using the `allow_overwrite` parameter of the `POST /v1/customizations/{customization_id}/grammars/{grammar_name}` method. For more information, see [Add a grammar to the custom language model](/docs/services/speech-to-text-icp/grammar-add.html#addGrammar).
+-   Delete extraneous words that are introduced in error (for example, by typographical or other mistakes in a corpus) by using the `DELETE /v1/customizations/{customization_id}/words/{word_name}` method. For more information, see [Deleting a word from a custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageWords#deleteWord).
+    -   If the word was extracted from a corpus, you can instead update the corpus text file to correct the error and then reload the file by using the `allow_overwrite` parameter of the `POST /v1/customizations/{customization_id}/corpora/{corpus_name}` method. For more information, see [Add a corpus to the custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-languageCreate#addCorpus).
+    -   If the word was extracted from a grammar, you can update the grammar file to correct the error and then reload the file by using the `allow_overwrite` parameter of the `POST /v1/customizations/{customization_id}/grammars/{grammar_name}` method. For more information, see [Add a grammar to the custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-grammarAdd#addGrammar).

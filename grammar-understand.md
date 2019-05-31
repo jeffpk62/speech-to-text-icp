@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -28,7 +28,7 @@ subcollection: speech-to-text-icp
 The following examples introduce the {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care service's support for grammars. The examples create two simple ABNF grammars and show possible results when they are used for speech recognition. The examples illustrate the importance of examining the confidence score that the service includes with a transcript.
 {: shortdesc}
 
-The examples provide only the results of speech recognition requests. For examples that show how to pass a grammar for speech recognition, see [Using a grammar for speech recognition](/docs/services/speech-to-text-icp/grammar-use.html). The examples are also very basic. For examples of more complex grammars, see [Example grammars](/docs/services/speech-to-text-icp/grammar-examples.html).
+The examples provide only the results of speech recognition requests. For examples that show how to pass a grammar for speech recognition, see [Using a grammar for speech recognition](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-grammarUse). The examples are also very basic. For examples of more complex grammars, see [Example grammars](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-grammarExamples).
 
 ## Single-phrase matches: The yesno grammar
 {: #yesnoGrammar}

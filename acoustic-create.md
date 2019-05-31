@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-20"
+lastupdated: "2019-05-16"
 
 subcollection: speech-to-text-icp
 
@@ -32,10 +32,10 @@ Follow these steps to create a custom acoustic model for the {{site.data.keyword
 1.  [Add audio to the custom acoustic model](#addAudio). The service accepts the same audio file formats for acoustic modeling that it accepts for speech recognition. It also accepts archive files that contain multiple audio files. Archive files are the preferred means of adding audio resources. You can repeat the method to add more audio or archive files to a custom model.
 1.  [Train the custom acoustic model](#trainModel-acoustic). Once you add audio resources to the custom model, you must train the model. Training prepares the custom acoustic model for use in speech recognition. Training can take a significant amount of time. The length of the training depends on the amount of audio data that the model contains.
 
-    You can specify a helper custom language model during training of your custom acoustic model. A custom language model that includes transcriptions of your audio files or OOV words from the domain of your audio files can improve the quality of the custom acoustic model. For more information, see [Training a custom acoustic model with a custom language model](/docs/services/speech-to-text-icp/acoustic-both.html#useBothTrain).
-1.  After you train your custom model, you can use it with recognition requests. If the audio passed for transcription has acoustic qualities that are similar to the audio of the custom model, the results reflect the service's enhanced understanding. For more information, see [Using a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-use.html).
+    You can specify a helper custom language model during training of your custom acoustic model. A custom language model that includes transcriptions of your audio files or OOV words from the domain of your audio files can improve the quality of the custom acoustic model. For more information, see [Training a custom acoustic model with a custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-useBoth#useBothTrain).
+1.  After you train your custom model, you can use it with recognition requests. If the audio passed for transcription has acoustic qualities that are similar to the audio of the custom model, the results reflect the service's enhanced understanding. For more information, see [Using a custom acoustic model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-acousticUse).
 
-    You can pass both a custom acoustic model and a custom language model in the same recognition request to further improve recognition accuracy. For more information, see [Using custom language and custom acoustic models during speech recognition](/docs/services/speech-to-text-icp/acoustic-both.html#useBothRecognize).
+    You can pass both a custom acoustic model and a custom language model in the same recognition request to further improve recognition accuracy. For more information, see [Using custom language and custom acoustic models during speech recognition](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-useBoth#useBothRecognize).
 
 The steps for creating a custom acoustic model are iterative. You can add or delete audio and train or retrain a model as often as needed. You must retrain a model for any changes to its audio to take effect. When you retrain a model, all audio data is used in the training (not just the new data). So the training time is commensurate with the total amount of audio that is contained in the model.
 
@@ -107,21 +107,21 @@ The example returns the customization ID of the new model. Each custom model is 
 ```
 {: codeblock}
 
-The new custom model is owned by the service instance whose credentials are used to create it. For more information, see [Ownership of custom models](/docs/services/speech-to-text-icp/custom.html#customOwner).
+The new custom model is owned by the service instance whose credentials are used to create it. For more information, see [Ownership of custom models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-customization#customOwner).
 
 ## Add audio to the custom acoustic model
 {: #addAudio}
 
 Once you create your custom acoustic model, the next step is to add audio resources to it. You use the `POST /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method to add an audio resource to a custom model. You can add
 
--   An individual audio file in any format that is supported for speech recognition (see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html)).
+-   An individual audio file in any format that is supported for speech recognition. For more information, see [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats).
 -   An archive file (a **.zip** or **.tar.gz** file) that includes multiple audio files. Gathering multiple audio files into a single archive file and loading that single file is significantly more efficient than adding audio files individually.
 
-You pass the audio resource as the body of the request and assign the resource an `audio_name`. For more information, see [Working with audio resources](/docs/services/speech-to-text-icp/acoustic-resource.html).
+You pass the audio resource as the body of the request and assign the resource an `audio_name`. For more information, see [Working with audio resources](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audioResources).
 
 The following examples show the addition of both audio- and archive-type resources:
 
--   This example adds an audio-type resource to the custom acoustic model with the specified `customization_id`. The `Content-Type` header identifies the type of the audio as `audio/wav`. The audio file, **audio1.wav**, is passed as the body of the request, and the resource is given the named `audio1`.
+-   This example adds an audio-type resource to the custom acoustic model with the specified `customization_id`. The `Content-Type` header identifies the type of the audio as `audio/wav`. The audio file, **audio1.wav**, is passed as the body of the request, and the resource is given the name `audio1`.
 
     ```bash
     curl -X POST -u "apikey:{apikey}"
@@ -146,7 +146,7 @@ The method also accepts an optional `allow_overwrite` query parameter to overwri
 
 The method is asynchronous. It can take several seconds to complete depending on the duration of the audio. For an archive file, the length of the operation depends on the duration of the audio files. For more information about checking the status of a request to add an audio resource, see [Monitoring the add audio request](#monitorAudio).
 
-You can add any number of audio resources to a custom model by calling the method once for each audio or archive file. The addition of one audio resource must be fully complete before you can add another. You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not silence, to a custom model before you can train it. No audio- or archive-type resource can be larger than 100 MB. For more information, see [Guidelines for adding audio resources](/docs/services/speech-to-text-icp/acoustic-resource.html#audioGuidelines).
+You can add any number of audio resources to a custom model by calling the method once for each audio or archive file. The addition of one audio resource must be fully complete before you can add another. You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not silence, to a custom model before you can train it. No audio- or archive-type resource can be larger than 100 MB. For more information, see [Guidelines for adding audio resources](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audioResources#audioGuidelines).
 
 ### Monitoring the add audio request
 {: #monitorAudio}
@@ -207,7 +207,7 @@ The content of the response and location of the `status` field depend on the typ
     ```
     {: codeblock}
 
-Use a loop to check the status of the audio resource every few seconds until it becomes `ok`. For more information about other fields that are returned by the method, see [Listing audio resources for a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-audio.html#listAudio).
+Use a loop to check the status of the audio resource every few seconds until it becomes `ok`. For more information about other fields that are returned by the method, see [Listing audio resources for a custom acoustic model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageAudio#listAudio).
 
 ## Train the custom acoustic model
 {: #trainModel-acoustic}
@@ -222,9 +222,12 @@ curl -X POST -u "apikey:{apikey}"
 ```
 {: pre}
 
-The method also accepts an optional `custom_language_model_id` query parameter to specify a separately created custom language model that is to be used during training. You can train with a custom language model that contains transcriptions of your audio files or that contains corpora or OOV words that are relevant to the contents of the audio files. Both of the custom models must be based on the same version of the same base model for training to succeed. For more information, see [Training a custom acoustic model with a custom language model](/docs/services/speech-to-text-icp/acoustic-both.html#useBothTrain).
+The method is asynchronous. Training can take on the order of minutes or hours to complete, depending on the amount of audio data that the custom acoustic model contains and the current load on the service. A general guideline is that training a custom acoustic model takes approximately two to four times the length of its audio data. The range of time depends on the model that is being trained and the nature of the audio, such as whether the audio is clean or noisy. For example, it can take between 4 and 8 hours to train a model that contains 2 hours of audio. For more information about checking the status of a training operation, see [Monitoring the train model request](#monitorTraining-acoustic).
 
-The training method is asynchronous. Training can take on the order of minutes or hours to complete, depending on the amount of audio data that the custom acoustic model contains and the current load on the service. A general guideline is that training a custom acoustic model takes approximately two to four times the length of its audio data. The range of time depends on the model that is being trained and the nature of the audio, such as whether the audio is clean or noisy. For example, it can take between 4 and 8 hours to train a model that contains 2 hours of audio. For more information about checking the status of a training operation, see [Monitoring the train model request](#monitorTraining-acoustic).
+The method includes the following optional query parameters:
+
+-   The `custom_language_model_id` parameter specifies a separately created custom language model that is to be used during training. You can train with a custom language model that contains transcriptions of your audio files or that contains corpora or OOV words that are relevant to the contents of the audio files. The custom acoustic and custom language models must be based on the same version of the same base model for training to succeed. For more information, see [Training a custom acoustic model with a custom language model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-useBoth#useBothTrain).
+-   The `strict` parameter indicates whether training is to proceed if the custom model contains a mix of valid and invalid audio resources. By default, training fails if the model contains one or more invalid resources. Set the parameter to `false` to allow training to proceed as long as the model contains at least one valid resource. The service excludes invalid resources from the training. For more information, see [Training failures](#failedTraining-acoustic).
 
 ### Monitoring the train model request
 {: #monitorTraining-acoustic}
@@ -256,23 +259,34 @@ curl -X GET -u "apikey:{apikey}"
 
 The response includes `status` and `progress` fields that report the current state of the model. The meaning of the `progress` field depends on the model's status. The `status` field can have one of the following values:
 
--   `pending` indicates that the model was created but is waiting either for training data to be added or for the service to finish analyzing data that was added. The `progress` field is `0`.
--   `ready` indicates that the model is ready to be trained. The `progress` field is `0`.
+-   `pending` indicates that the model was created but is waiting either for valid training data to be added or for the service to finish analyzing data that was added. The `progress` field is `0`.
+-   `ready` indicates that the model contains valid data and is ready to be trained. The `progress` field is `0`.
+
+    If the model contains a mix of valid and invalid audio resources, training of the model fails unless you set the `strict` query parameter to `false`. For more information, see [Training failures](#failedTraining-acoustic).
 -   `training` indicates that the model is being trained. The `progress` field changes from `0` to `100` when training is complete. <!-- The `progress` field indicates the progress of the training as a percentage complete. -->
 -   `available` indicates that the model is trained and ready to use. The `progress` field is `100`.
 -   `upgrading` indicates that the model is being upgraded. The `progress` field is `0`.
--   `failed` indicates that training of the model failed. The `progress` field is `0`.
+-   `failed` indicates that training of the model failed. The `progress` field is `0`. For more information, see [Training failures](#failedTraining-acoustic).
 
-Use a loop to check the status of the training once a minute until the model becomes `available`. For more information about other fields that are returned by the method, see [Listing custom acoustic models](/docs/services/speech-to-text-icp/acoustic-models.html#listModels-acoustic).
+Use a loop to check the status of the training once a minute until the model becomes `available`. For more information about other fields that are returned by the method, see [Listing custom acoustic models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageAcousticModels#listModels-acoustic).
 
 ### Training failures
 {: #failedTraining-acoustic}
 
-Training of a custom acoustic model fails to start if the service is handling another request for the custom model. A conflicting request could be another training request or a request to add audio resources to the model. Training can also fail to start for the following reasons:
+Training fails to start if the service is handling another request for the custom acoustic model. A conflicting request could be another training request or a request to add audio resources to the model. The service returns a status code of 409.
+
+Training also fails to start for the following reasons:
 
 -   The custom model contains less than 10 minutes of audio data.
 -   The custom model contains more than 100 hours of audio data.
 -   One or more of the custom model's audio resources is invalid.
 -   You passed an incompatible custom language model with the `custom_language_model_id` query parameter. Both custom models must be based on the same version of the same base model.
 
-If the status of a custom model's training is `failed`, use the `GET /v1/acoustic_customizations/{customization_id}/audio` and `GET /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` methods to examine the model's audio resources and address any problems that you find. For more information, see [Listing audio resources for a custom acoustic model](/docs/services/speech-to-text-icp/acoustic-audio.html#listAudio).
+The service returns a status code of 400 and sets the custom model's status to `failed`. Take one of the following actions:
+
+-   Use the `GET /v1/acoustic_customizations/{customization_id}/audio` and `GET /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` methods to examine the model's audio resources. For more information, see [Listing audio resources for a custom acoustic model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageAudio#listAudio).
+
+    For each invalid audio resource, do one of the following:
+    -   Correct the audio resource and use the `allow_overwrite` parameter of the `POST /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method to add the corrected audio to the model. For more information, see [Add audio to the custom acoustic model](#addAudio).
+    -   Use the `DELETE /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method to delete the audio resource from the model. For more information, see [Deleting an audio resource from a custom acoustic model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-manageAudio#deleteAudio).
+-   Set the `strict` parameter of the `POST /v1/acoustic_customizations/{customization_id}/train` method to `false` to exclude invalid audio resources from the training. The model must contain at least one valid audio resource for training to succeed. The `strict` parameter is useful for training a custom model that contains a mix of valid and invalid audio resources.

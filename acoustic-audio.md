@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-12"
 
 subcollection: speech-to-text-icp
 
@@ -25,7 +25,7 @@ subcollection: speech-to-text-icp
 # Managing audio resources
 {: #manageAudio}
 
-The customization interface includes the `POST /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method, which is used to add an audio resource to a custom acoustic model. For more information, see [Add audio to the custom acoustic model](/docs/services/speech-to-text-icp/acoustic-create.html#addAudio)). The interface also includes the following methods for listing and deleting audio resources for a custom acoustic model.
+The customization interface includes the `POST /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method, which is used to add an audio resource to a custom acoustic model. For more information, see [Add audio to the custom acoustic model](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-acoustic#addAudio). The interface also includes the following methods for listing and deleting audio resources for a custom acoustic model.
 {: shortdesc}
 
 ## Listing audio resources for a custom acoustic model
@@ -169,14 +169,14 @@ curl -X GET -u "apikey:{apikey}"
 {: codeblock}
 
 ## Deleting an audio resource from a custom acoustic model
-{: #deleteAudio-audio}
+{: #deleteAudio}
 
 Use the `DELETE /v1/acoustic_customizations/{customization_id}/audio/{audio_name}` method to remove an existing audio resource from a custom acoustic model. When you delete an archive-type audio resource, the service removes the entire archive of files. The current interface does not allow deletion of individual files from an archive resource.
 
 Removing an audio resource does not affect the custom model until you train the model on its updated data by using the `POST /v1/acoustic_customizations/{customization_id}/train` method. If you successfully trained the model on the resource, until you retrain the model, the existing audio data continues to be used for speech recognition.
 
 ### Example request
-{: #deleteExample}
+{: #deleteExample-audio}
 
 The following method deletes the audio resource that is named `audio3` from the custom model with the specified customization ID:
 

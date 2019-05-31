@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-03-07"
+lastupdated: "2019-05-14"
 
 subcollection: speech-to-text-icp
 
@@ -25,7 +25,7 @@ subcollection: speech-to-text-icp
 # The WebSocket interface
 {: #websockets}
 
-You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations) in the release notes.
+You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. For more information about working around this limitation, see the [Known limitations](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-release-notes#limitations) in the release notes.
 {: important}
 
 The WebSocket interface of {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care is the most natural way for a client to interact with the service. To use the WebSocket interface for speech recognition, you first use the `/v1/recognize` method to establish a persistent connection with the service. You then send text and binary messages over the connection to initiate and manage the recognition requests.
@@ -71,14 +71,15 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       <br/><em>Optional</em></td>
     <td style="text-align:center">String</td>
     <td style="text-align:left">
-      Passes a valid authentication token to establish an authenticated
-      connection with the service. Once you establish a connection, you
-      can keep it alive indefinitely. While the connection remains open,
-      you remain authenticated to the service.<br/><br/>
+      Passes a valid {{site.data.keyword.watson}} authentication token to
+      establish an authenticated connection with the service. Once you
+      establish a connection, you can keep it alive indefinitely. While
+      the connection remains open, you remain authenticated to the
+      service.<br/><br/>
       **Important:** You cannot use JavaScript to call the WebSocket interface
       from a browser. The `watson-token` parameter does not accept API keys.
       For more information about working around this limitation, see the
-      [Known limitations](/docs/services/speech-to-text-icp/release-notes.html#limitations)
+      [Known limitations](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-release-notes#limitations)
       in the release notes.
     </td>
   </tr>
@@ -91,7 +92,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       If you do not specify a model, the service uses the
       <code>en-US_BroadbandModel</code> model by default. For more
       information, see
-      [Languages and models](/docs/services/speech-to-text-icp/models.html).
+      [Languages and models](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-models).
     </td>
   </tr>
   <tr>
@@ -104,7 +105,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       over the connection. The base model of the custom language model
       must match the value of the <code>model</code> parameter. By
       default, no custom language model is used. For more information, see
-      [The customization interface](/docs/services/speech-to-text-icp/custom.html).
+      [The customization interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-customization).
     </td>
   </tr>
   <tr>
@@ -117,7 +118,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       over the connection. The base model of the custom acoustic model
       must match the value of the <code>model</code> parameter. By
       default, no custom acoustic model is used. For more information, see
-      [The customization interface](/docs/services/speech-to-text-icp/custom.html).
+      [The customization interface](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-customization).
     </td>
   </tr>
   <tr>
@@ -130,7 +131,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       primarily for use with custom models that are upgraded for a new base
       model. The default value depends on whether the parameter is used
       with or without a custom model. For more information, see
-      [Base model version](/docs/services/speech-to-text-icp/input.html#version).
+      [Base model version](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#version).
     </td>
   </tr>
   <tr>
@@ -145,7 +146,7 @@ where `{icp_cluster_host}` specifies the name or IP address of the host on which
       URL-encode the argument to the parameter, for example,
       `customer_id%3dmy_customer_ID`. By default, no customer ID is associated
       with the data. For more information, see
-      [Information security](/docs/services/speech-to-text-icp/information-security.html).
+      [Information security](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-information-security).
     </td>
   </tr>
 </table>
@@ -164,6 +165,8 @@ websocket.onmessage = function(evt) { onMessage(evt) };
 websocket.onerror = function(evt) { onError(evt) };
 ```
 {: codeblock}
+
+The client can open multiple concurrent WebSocket connections to the service. The number of concurrent connections is limited only by the capacity of the service, which generally poses no problems for users.
 
 ## Initiate a recognition request
 {: #WSstart}
@@ -203,12 +206,12 @@ To initiate a recognition request, the client sends a JSON text message to the s
       Identifies the format (MIME type) of the audio data for the request.
       The parameter is required only for the `audio/basic`, `audio/l16`,
       and `audio/mulaw` formats. For more information, see
-      [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+      [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats).
     </td>
   </tr>
 </table>
 
-The message can also include optional parameters to specify other aspects of how the request is to be processed and the information that is to be returned. For information about all input and output features, see the [Parameter summary](/docs/services/speech-to-text-icp/summary.html). You can specify a language model, custom language model, and custom acoustic model only as query parameters of the WebSocket URL.
+The message can also include optional parameters to specify other aspects of how the request is to be processed and the information that is to be returned. For information about all input and output features, see the [Parameter summary](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-summary). You can specify a language model, custom language model, and custom acoustic model only as query parameters of the WebSocket URL.
 
 The following snippet of JavaScript code sends initialization parameters for the recognition request over the WebSocket connection. The calls are included in the client's `onOpen` function to ensure that they are sent only after the connection is established.
 
@@ -239,9 +242,9 @@ If the client specifies an invalid query parameter or JSON field for the recogni
 
 After it sends the initial `start` message, the client can begin sending audio data to the service. The client does not need to wait for the service to respond to the `start` message with the `listening` message. The service returns the results of the transcription asynchronously in the same format as it returns results for the HTTP interfaces.
 
-The client must send the audio as binary data. The client can send a maximum of 100 MB of audio data with a single utterance (per `send` request). It must send at least 100 bytes of audio for any request. The client can send multiple utterances over a single WebSocket connection. For information about using compression to maximize the amount of audio that you can pass to the service with a request, see [Audio formats](/docs/services/speech-to-text-icp/audio-formats.html).
+The client must send the audio as binary data. The client can send a maximum of 100 MB of audio data with a single utterance (per `send` request). It must send at least 100 bytes of audio for any request. The client can send multiple utterances over a single WebSocket connection. For information about using compression to maximize the amount of audio that you can pass to the service with a request, see [Audio formats](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-audio-formats).
 
-The WebSocket interface imposes a maximum frame size of 4 MB. The client can set the maximum frame size to less than 4 MB. If it is not practical to set the frame size, the client can set the maximum message size to less than 4 MB and send the audio data as a sequence of messages.
+The WebSocket interface imposes a maximum frame size of 4 MB. The client can set the maximum frame size to less than 4 MB. If it is not practical to set the frame size, the client can set the maximum message size to less than 4 MB and send the audio data as a sequence of messages. For more information about WebSocket frames, see [IETF RFC 6455 ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455){: new_window}.
 
 The following snippet of JavaScript code sends audio data to the service as a binary message (blob):
 
@@ -305,12 +308,16 @@ websocket.send(JSON.stringify(message));
 ## Keep a connection alive
 {: #WSkeep}
 
-The service terminates the session and closes the connection if an inactivity or session timeout is reached:
+The service terminates the session and closes the connection if an inactivity or session timeout occurs:
 
--   An *inactivity timeout* occurs if audio is being sent by the client but the service detects no speech. The inactivity timeout is 30 seconds by default. You can use the `inactivity_timeout` parameter to specify a different value, including `-1` to set the timeout to infinity.
--   A *session timeout* occurs if the service receives no data from the client or sends no interim results for 30 seconds. You cannot change the length of this timeout, but you can extend the session by sending the service any audio data, including just silence, before the timeout occurs. You must also set the `inactivity_timeout` to `-1`. You are charged for the duration of any data that you send to the service, including the silence that you send to extend a session.
+-   An *inactivity timeout* occurs if audio is being sent by the client but the service detects no speech. The inactivity timeout is 30 seconds by default. You can use the `inactivity_timeout` parameter to specify a different value, including `-1` to set the timeout to infinity. For more information, see [Inactivity timeout](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#timeouts-inactivity).
+-   A *session timeout* occurs if the service receives no data from the client or sends no interim results for 30 seconds. You cannot change the length of this timeout, but you can extend the session by sending the service any audio data, including just silence, before the timeout occurs. You must also set the `inactivity_timeout` to `-1`. You are charged for the duration of any data that you send to the service, including the silence that you send to extend a session. For more information, see [Session timeout](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-input#timeouts-session).
 
-For more information, see [Timeouts](/docs/services/speech-to-text-icp/input.html#timeouts).
+WebSocket clients and servers can also exchange *ping-pong frames* to avoid read timeouts by periodically exchanging small amounts of data. Many WebSocket stacks exchange ping-pong frames, but some do not. To determine whether your implementation uses ping-pong frames, check its list of features. You cannot programmatically determine or manage ping-pong frames.
+
+If your WebSocket stack does not implement ping-pong frames and your are sending long audio files, your connection can experience a read timeout. To avoid such timeouts, continuously stream audio to the service or request interim results from the service. Either approach can ensure that the lack of ping-pong frames does not cause your connection to close.
+
+For more information about ping-pong frames, see [Section 5.5.2 Ping ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455#section-5.5.2){: new_window} and [Section 5.5.3 Pong ![External link icon](../../icons/launch-glyph.svg "External link icon")](http://tools.ietf.org/html/rfc6455#section-5.5.3){: new_window} of IETF RFC 6455.
 
 ## Close a connection
 {: #WSclose}

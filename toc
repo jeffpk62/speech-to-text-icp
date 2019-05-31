@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="speech-to-text-icp" audience="service" arm="350" href="/docs/services/speech-to-text-icp/getting-started.html" path="services/speech-to-text-icp"}
+{: .toc subcollection="speech-to-text-icp" audience="service" arm="350" href="/docs/services/speech-to-text-icp?topic=speech-to-text-icp-gettingStarted" path="services/speech-to-text-icp"}
 Speech to Text: Customer Care
 
     {: .navgroup id="learn"}
