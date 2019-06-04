@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-06-04"
 
 subcollection: speech-to-text-icp
 
@@ -78,16 +78,16 @@ The Passport Advantage Archive (PPA) file for {{site.data.keyword.speechtotextsh
 
 You must have cluster administrator or team administrator access to the systems in your cluster.
 
-1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.2 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install_containers.html).
-2.  If you have not yet done so, install the IBM Cloud Private command-line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/install_cli.html).
-3.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_images/configuring_docker_cli.html).
-4.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user) in the Docker documentation.
+1.  If you do not have {{site.data.keyword.icpfull_notm}} version 3.1.2 set up, install it. See [Installing a standard IBM Cloud Private environment ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/installing/install_containers.html){: new_window}.
+2.  If you have not yet done so, install the IBM Cloud Private command-line interface and log in to your cluster. See [Installing the IBM Cloud Private CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/install_cli.html){: new_window}.
+3.  Configure authentication from your computer to the Docker private image registry host and log in to the private registry. See [Configuring authentication for the Docker CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_images/configuring_docker_cli.html){: new_window}.
+4.  If you are not a root user, ensure that your account is part of the `docker` group. See [Post-installation steps ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user){: new_window} in the Docker documentation.
 5.  Ensure that you have a stable network connection between your computer and the cluster.
-6.  Install the Kubernetes command-line tool, `kubectl`, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_cli.html).
+6.  Install the Kubernetes command-line tool, `kubectl`, and configure access to your cluster. See [Accessing your cluster from the kubectl CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.2/manage_cluster/cfc_cli.html){: new_window}.
 7.  Obtain access to the boot node and the cluster administrator account, or request that someone with that access level create your certificate. If you cannot access the cluster administrator account, you need an IBM Cloud Private account that is assigned to the operator or administrator role for a team and can access the `kube-system` namespace.
 8.  Set up the Helm command-line interface.
 
-    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html) for details.
+    See [Setting up the Helm CLI ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/app_center/create_helm_cli.html){: new_window} for details.
 
     1.  Initialize the Helm command-line interface.
 
@@ -124,7 +124,7 @@ You must have cluster administrator or team administrator access to the systems 
     ```
     {: codeblock}
 
-    Where {icp_url} is the certificate authority (CA) domain. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html).
+    Where {icp_url} is the certificate authority (CA) domain. See [Specifying your own certificate authority (CA) for {{site.data.keyword.icpfull_notm}} services ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/installing/create_ca_cert.html){: new_window}.
 
 2.  Before you load the archive into your cluster, you need to run the following commands. Replace `{path_to_PPA_archive}` with the path to the PPA archive that you downloaded in [Step 1](#download-artifacts).
 
