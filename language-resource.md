@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-12"
+lastupdated: "2019-06-06"
 
 subcollection: speech-to-text-icp
 
@@ -135,12 +135,12 @@ The following descriptions apply to US English, French, and Spanish.
 
 -   Converts numbers to their equivalent words, for example:
     -   *For English,* `500` becomes `five hundred`, and `0.15` becomes `zero point fifteen`.
-    -   *For French,* `500` becomes `cinq cents`, and `0,15` becomes <code>z&eacute;ro quinze</code>.
+    -   *For French,* `500` becomes `cinq cents`, and `0,15` becomes <code>z&eacute;ro virgule quinze</code>.
     -   *For Spanish,* `500` becomes `quinientos`, and `0,15` becomes `cero coma quince`.
 -   Converts tokens that include certain symbols to meaningful string representations, for example:
     -   Converts a `$` (dollar sign) and a number:
         -   *For English,* `$100` becomes `one hundred dollars`.
-        -   *For French,* `$100` becomes `cent dollar`.
+        -   *For French,* `$100` becomes `cent dollars`.
         -   *For Spanish,* `$100`  and `100$` become <code>cien d&oacute;lares</code> (or `cien pesos` if the dialect is `es-LA`).
     -   Converts a <code>&euro;</code> (euro sign) and a number:
         -   *For English,* <code>&euro;100</code> becomes `one hundred euros`.
@@ -148,7 +148,7 @@ The following descriptions apply to US English, French, and Spanish.
         -   *For Spanish,* <code>&euro;100</code> and <code>100&euro;</code> become `cien euros`.
     -   Converts a `%` (percent sign) preceded by a number:
         -   *For English,* `100%` becomes `one hundred percent`.
-        -   *For French,* `100%` becomes `cent pourcent`.
+        -   *For French,* `100%` becomes `cent pour cent`.
         -   *For Spanish,* `100%` becomes `cien por ciento`.
 
     This list is not exhaustive. The service makes similar adjustments for other characters as needed.
