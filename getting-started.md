@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-12"
+lastupdated: "2019-06-10"
 
 subcollection: speech-to-text-icp
 
@@ -58,6 +58,9 @@ Call the `POST /v1/recognize` method to request a basic transcript of a FLAC aud
 1.  Issue the following command to call the service's `/v1/recognize` method for basic transcription with no parameters. The example uses the `Content-Type` header to indicate the type of the audio, `audio/flac`. The example uses the default language model, `en-US_BroadbandModel`, for transcription.
     -   Replace `{apikey}` with the value of the API key for your service cluster.
     -   Modify `{path_to_file}` to specify the location of the `audio-file.flac` file.
+
+    *Windows users,* replace the backslash (`\`) at the end of each line with a caret (`^`). Make sure there are no trailing spaces.
+    {: tip}
 
     ```bash
     curl -X POST -u "apikey:{apikey}" \
