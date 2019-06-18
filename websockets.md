@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-14"
+lastupdated: "2019-06-16"
 
 subcollection: speech-to-text-icp
 
@@ -159,6 +159,7 @@ var wsURI = 'wss://{icp_cluster_host}/speech-to-text/api/v1/recognize'
   + '?watson-token=' + token
   + '&model=en-US_NarrowbandModel';
 var websocket = new WebSocket(wsURI);
+
 websocket.onopen = function(evt) { onOpen(evt) };
 websocket.onclose = function(evt) { onClose(evt) };
 websocket.onmessage = function(evt) { onMessage(evt) };

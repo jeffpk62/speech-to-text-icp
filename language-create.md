@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-12"
+lastupdated: "2019-06-18"
 
 subcollection: speech-to-text-icp
 
@@ -152,9 +152,10 @@ You use the `POST /v1/customizations/{customization_id}/corpora/{corpus_name}` m
 -   Specify the customization ID of the custom model with the `customization_id` path parameter.
 -   Specify a name for the corpus with the `corpus_name` path parameter. Use a localized name that matches the language of the custom model and reflects the contents of the corpus.
     -   Include a maximum of 128 characters in the name.
-    -   Do not include spaces, `/` (slashes), or `\` (backslashes) in the name.
-    -   Do not use the name of a corpus that has already been added to the custom model.
+    -   Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes, colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is strongly discouraged.)
+    -   Do not use the name of a corpus or grammar that has already been added to the custom model.
     -   Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified by the user.
+    -   Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
 -   Pass the corpus text file as the body of the request.
 
 You can add a maximum of 90 thousand OOV words and 10 million total words from all sources combined. This includes words from corpora and grammars, and words that you add directly. For more information, see [How much data do I need?](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-corporaWords#wordsResourceAmount)
