@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-05-12"
+lastupdated: "2019-06-27"
 
 subcollection: speech-to-text-icp
 
@@ -81,12 +81,11 @@ The components provide the following information. The `{}` (braces) indicate var
 
 Many methods have longer names and include path parameters that you must specify as part of the request. Most examples also include request headers, query parameters, and other values. Substitute literal values for any variables that are enclosed in braces. Enter all other elements of an example exactly as shown.
 
-During installation of {{site.data.keyword.speechtotextshort}}: Customer Care, you can opt to use a self-signed certificate rather than an SSL certificate that has been validated by a certificate authority. If you use a self-signed certificate, you need to configure your client to trust self-signed certificates. For example, you can use the `-k` (`--insecure`) option with `curl` commands to bypass the tool's verification of SSL certificates.
+{{site.data.keyword.speechtotextshort}}: Customer Care installs a self-signed certificate by default. This certificate cannot be successfully verified by default. You can either disable SSL verification for requests to the service or add the self-signed certificate to the truststore for your user agent. For example, to make secure requests with `curl`, add the certificate to the truststore for `curl`; to make secure requests from your browser, add the certificate to the truststore for the browser.
 
-Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
-{: note}
+*Disabling SSL verification is not recommended because it compromises the security of your connections and data.* For more information about disabling SSL verification for calls to the service, see *Disabling SSL verification* in the [API reference](https://{DomainName}/apidocs/speech-to-text-icp#disabling-ssl){: external}. The information includes examples for `curl` and for all of the SDKs.
 
-You can also log into your {{site.data.keyword.speechtotextshort}}: Customer Care cluster by using the {{site.data.keyword.icpfull_notm}} command-line interface and issue commands from there.
+Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol.
 {: note}
 
 ## Making an authenticated WebSocket request
