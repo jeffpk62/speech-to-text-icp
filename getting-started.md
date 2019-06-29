@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-06-22"
 
 subcollection: speech-to-text-icp
 
@@ -38,16 +38,22 @@ To use {{site.data.keyword.speechtotextshort}}: Customer Care, you must first co
 1.  Deploy the {{site.data.keyword.speechtotextshort}}: Customer Care service on your {{site.data.keyword.cloud_notm}} Private installation.
 1.  Learn the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster. For more information, see [Obtaining your API key](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-making-requests#apiKey).
 
-    The examples that follow pass the value of the API key with the `-u` (`--user`) option of the `curl` command. When you enter a command, replace `{apikey}` with the API key for your cluster. Omit the braces, which indicate a variable value, from the command. An actual value resembles the following example:
+### Using the curl examples
+{: #getting-started-curl}
+
+This tutorial uses the `curl` command to call methods of the service's HTTP interface. Make sure that you have the `curl` command installed on your system.
+
+1.  To test whether `curl` is installed, run the following command on the command line. If the output lists the `curl` version that supports Secure Sockets Layer (SSL), you are set for the tutorial.
 
     ```bash
-    curl -X POST -u "apikey:icp-L_HALhLVIksh1b73l97LSs6R_3gLo4xkujAaxm7i"
-    . . .
+    curl -V
     ```
-    {:pre}
+    {: pre}
 
-The tutorial uses the `curl` command to call methods of the service's HTTP interface. Install the version of curl for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol. Make sure to include the installed binary file on your `PATH` environment variable.
-{: note}
+1.  If necessary, install the version of `curl` with SSL enabled for your operating system from [curl.haxx.se](https://curl.haxx.se/){: external}.
+
+Omit the braces from the examples. They indicate variable values.
+{: tip}
 
 ## Step 1: Transcribe audio with no options
 {: #transcribe}
