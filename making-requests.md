@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-06-27"
+lastupdated: "2019-06-29"
 
 subcollection: speech-to-text-icp
 
@@ -32,7 +32,7 @@ subcollection: speech-to-text-icp
 -   *The batch-processing HTTP interface*, which provides methods for submitting multiple audio files for speech recognition. The interface includes speech analytics to learn detailed information about conversations and their individual speakers. The service accepts requests over the SSL or TLS protocol.
 -   *The WebSocket interface*, which offers only speech recognition. The service accepts requests over the WebSocket Secure protocol. All URLs begin with the `wss` protocol specification.
 
-Regardless of the interface that you use, you must use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster to make a secure request to the service.
+Regardless of the interface that you use, you must use the API key for your {{site.data.keyword.speechtotextshort}}: Customer Care cluster to make a secure request to the service. If you use a self-signed certificate, you need to disable SSL verification for requests to the service.
 
 ## Obtaining your API key
 {: #apiKey}
@@ -41,24 +41,35 @@ The {{site.data.keyword.speechtotextshort}}: Customer Care service uses API keys
 
 You must use the API key for your service instance to make a secure, authenticated request to the service. You authenticate a request by passing the API key with the request. The key always begins with the string `icp-`.
 
-You can learn the API key for your cluster by using either of the following approaches:
+Use the following steps to learn your API key:
 
--   *From a shell,* issue the following command:
+1.  Enter the following `kubectl` command:
 
     ```bash
-    API_KEY_$(kubectl -n speech-services get secret \
-    speech-to-text-serviceid-secret \
-    -o go-template='{{ index .data "api_key" | base64decode }}')
+    kubectl get secrets speech-to-text-serviceid-secret -o yaml
     ```
     {: pre}
 
--   *From a browser,* access the following URL:
+    The output includes an `api_key` field that includes the base64 version of your API key.
+1.  Decode the base64 version of the API key by entering the following command:
 
+    ```bash
+    echo "{base64_api_key}" | base64 -D
     ```
-    https://{icp_cluster_host}:443/console/configuration/secrets/kube-system/speech-to-text-serviceid-secret
-    ```
+    {: pre}
 
-    On the page that is displayed, click the **unlock** icon under **api_key**. The API key is shown in the **Data** column in the field labeled **api_key**.
+    The command returns the API key as a string that begins with the characters `icp-`.
+1.  Include the API key in `curl` requests to the service by passing the `-u` option of the `curl` command. For example, the following command performs basic speech recognition for a file named `audio-flac.flac`.
+
+    ```bash
+    curl -X POST -u "apikey:{apikey}" \
+    --header "Content-Type: audio/flac" \
+    --data-binary @{path_to_file}audio-file.flac \
+    "https://{icp_cluster_host}{:port}/speech-to-text/api/v1/recognize"
+    ```
+    {: pre}
+
+    For more information, see the [Getting started tutorial](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-gettingStarted#transcribe) and the following section.
 
 ## Making an authenticated HTTP request
 {: #httpRequest}
@@ -81,11 +92,7 @@ The components provide the following information. The `{}` (braces) indicate var
 
 Many methods have longer names and include path parameters that you must specify as part of the request. Most examples also include request headers, query parameters, and other values. Substitute literal values for any variables that are enclosed in braces. Enter all other elements of an example exactly as shown.
 
-{{site.data.keyword.speechtotextshort}}: Customer Care installs a self-signed certificate by default. This certificate cannot be successfully verified by default. You can either disable SSL verification for requests to the service or add the self-signed certificate to the truststore for your user agent. For example, to make secure requests with `curl`, add the certificate to the truststore for `curl`; to make secure requests from your browser, add the certificate to the truststore for the browser.
-
-*Disabling SSL verification is not recommended because it compromises the security of your connections and data.* For more information about disabling SSL verification for calls to the service, see *Disabling SSL verification* in the [API reference](https://{DomainName}/apidocs/speech-to-text-icp#disabling-ssl){: external}. The information includes examples for `curl` and for all of the SDKs.
-
-Install the version of the `curl` command for your operating system from [curl.haxx.se ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/){: new_window}. Install the version that supports the Secure Sockets Layer (SSL) protocol.
+The examples in this documentation use the `curl` command to call the service's HTTP interfaces. For more information, see [Using the curl examples](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-gettingStarted#getting-started-curl).
 {: note}
 
 ## Making an authenticated WebSocket request
@@ -102,3 +109,23 @@ The `{icp_cluster_host}` is required to specify the name or IP address of the ho
 
 You cannot use JavaScript to call the WebSocket interface from a browser. The `watson-token` parameter that is available with the `/v1/recognize` method does not accept API keys. See the [Known limitations](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-release-notes#limitations) in the release notes for information about working around this limitation.
 {: important}
+
+## Disabling SSL verification
+{: #SSLverification}
+
+All Watson services use SSL (or TLS) for secure connections and communications between the client and server. The connection is verified against the local certificate store to ensure authentication, integrity, and confidentiality.
+
+{{site.data.keyword.speechtotextshort}}: Customer Care installs a self-signed certificate. This certificate cannot be successfully verified by default. You can do one of the following to successfully connect to a service instance:
+
+-   Add the self-signed certificate to the truststore for your user agent.
+
+    For example, to make secure requests with `curl`, add the certificate to the truststore for `curl`. To make secure requests from your browser, add the certificate to the truststore for the browser.
+-   Disable SSL verification.
+
+    Disabling SSL verification compromises the security of the connection and data. It is highly discouraged. Disable SSL only if absolutely necessary, and take steps to enable SSL as soon as possible.
+    {: important}
+
+    -   To disable SSL verification for a `curl` request, use the `--insecure` (`-k`) option with the request. This option directs the command to bypass the tool's verification of SSL certificates.
+    -   To disable SSL verification for a WebSocket request, use the appropriate approach for your client library or use one of the {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}} SDKs.
+
+For more information about disabling SSL verification for calls to the service, see *Disabling SSL verification* in the [API reference](https://{DomainName}/apidocs/speech-to-text-icp#disabling-ssl){: external}. The information includes examples for `curl` and for all of the SDKs.
