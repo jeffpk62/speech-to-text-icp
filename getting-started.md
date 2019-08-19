@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-06-22"
+lastupdated: "2019-08-19"
 
 subcollection: speech-to-text-icp
 
@@ -23,7 +23,7 @@ subcollection: speech-to-text-icp
 {:swift: .ph data-hd-programlang='swift'}
 {:download: .download}
 
-# Getting started tutorial
+# Getting started with Speech to Text
 {: #gettingStarted}
 
 The {{site.data.keyword.ibmwatson}} {{site.data.keyword.speechtotextshort}}: Customer Care service transcribes audio to text to enable speech transcription capabilities for applications. This curl-based tutorial can help you get started quickly with the service. The examples show you how to call the service's `POST /v1/recognize` method to request a transcript.
