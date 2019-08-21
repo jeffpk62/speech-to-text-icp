@@ -2,7 +2,7 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-08-21"
 
 subcollection: speech-to-text-icp
 
@@ -44,7 +44,7 @@ In addition to the general [Hardware requirements and recommendations](https://w
 -   A minimum of three worker nodes are needed for high availability.
 -   The resources required for the installation, in terms of CPUs and memory, depend on the configuration that you select. There are two typical installation configurations:
     -   The **development configuration**, which is the configuration that is used in the default installation, has a minimal footprint and is meant for development purposes and as a proof of concept. It can only handle several concurrent recognition sessions.
-    -   The **production configuration** is a highly available solution that is intended to run production workloads. The total capacity of the production-grade installation is 50 concurrent {{site.data.keyword.speechtotextshort}} sessions; for example, 50 concurrent WebSocket connections that are streaming audio (50 Virtual Processor Cores, or VPCs). This figure corresponds roughly to a total of about 1 million minutes of audio per month assuming the cluster is used at 100% capacity. If you install the [Speech Analytics](analytics.html) feature, you can process batches of audio files at a rate of 30 concurrent sessions, meaning that a maximum of 30 audio files can be processed concurrently (30 VPCs).
+    -   The **production configuration** is a highly available solution that is intended to run production workloads. The total capacity of the production-grade installation is 50 concurrent {{site.data.keyword.speechtotextshort}} sessions; for example, 50 concurrent WebSocket connections that are streaming audio (50 Virtual Processor Cores, or VPCs). This figure corresponds roughly to a total of about 1 million minutes of audio per month assuming the cluster is used at 100% capacity. If you install the [Speech analytics](/docs/services/speech-to-text-icp?topic=speech-to-text-icp-analytics) feature, you can process batches of audio files at a rate of 30 concurrent sessions, meaning that a maximum of 30 audio files can be processed concurrently (30 VPCs).
 
 The total resource requirements of the {{site.data.keyword.speechtotextshort}}: Customer Care solution with Speech Analytics are:
 
