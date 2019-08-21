@@ -2,7 +2,9 @@
 
 copyright:
   years: 2018, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-21"
+
+keywords: speech to text,IBM cloud private,getting started,tutorial,transcribe audio,speech recognition
 
 subcollection: speech-to-text-icp
 
